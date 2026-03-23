@@ -34,12 +34,9 @@ jobs:
           mkdir -p dist
           cp index.html dist/
           cp room.html dist/
-          cp admin.html dist/
           cp styles.css dist/
-          cp admin.css dist/
           cp script.js dist/
           cp room-detail.js dist/
-          cp admin.js dist/
           cp site-data.js dist/
           cp site-state.override.js dist/
           cp favicon.svg dist/

@@ -482,22 +482,27 @@
     return ['Tumu'].concat(categories.filter(function (category, index) { return categories.indexOf(category) === index; }));
   }
 
-  function roomMatchesGallery(item, roomId) {
+  function roomMatchesGallery(item, room) {
+    var roomId = room && room.id ? room.id : String(room || '');
+    var roomName = room && room.name ? String(room.name).toLowerCase() : roomId;
+    var roomShort = room && room.short ? String(room.short).toLowerCase() : roomId;
     var text = [item.title, item.category, item.alt].join(' ').toLowerCase();
     if (Array.isArray(item.roomIds) && item.roomIds.indexOf(roomId) >= 0) return true;
-    if (text.indexOf(roomId) >= 0) return true;
-    if (roomId === 'standart' && text.indexOf('oda') >= 0 && text.indexOf('deluxe') < 0 && text.indexOf('suit') < 0) return true;
+    if (roomId && text.indexOf(roomId) >= 0) return true;
+    if (roomShort && text.indexOf(roomShort) >= 0) return true;
+    if (roomName && text.indexOf(roomName) >= 0) return true;
     return false;
   }
 
   function getRoomGallery(state, roomId) {
     var items = getGalleryItems(state);
-    var roomItems = items.filter(function (item) { return roomMatchesGallery(item, roomId); });
+    var room = getRoomByKey(state, roomId) || { id: roomId, name: roomId, short: roomId };
+    var roomItems = items.filter(function (item) { return roomMatchesGallery(item, room); });
     var ambientItems = items.filter(function (item) {
-      return !roomMatchesGallery(item, roomId) && ['Dis Mekan', 'Mekan', 'Deneyim'].indexOf(item.category) >= 0;
-    }).slice(0, 3);
+      return !roomMatchesGallery(item, room) && ['Dis Mekan', 'Mekan', 'Deneyim'].indexOf(item.category) >= 0;
+    }).slice(0, 2);
     var combined = roomItems.concat(ambientItems);
-    return combined.length ? combined : items.slice(0, 5);
+    return combined.length ? combined : items.slice(0, 4);
   }
 
   function getAvailabilityLabel(status) {
