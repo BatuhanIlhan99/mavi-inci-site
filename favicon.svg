@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">Mavi Inci Park Otel</title>
+  <desc id="desc">Mavi Inci Park Otel icin monogram favicon</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#173b4b" />
+      <stop offset="55%" stop-color="#2f6e88" />
+      <stop offset="100%" stop-color="#dcc198" />
+    </linearGradient>
+  </defs>
+  <rect width="96" height="96" rx="26" fill="url(#bg)" />
+  <path d="M22 68V28h10l16 23 16-23h10v40H63V47L48 68 33 47v21H22Z" fill="#f8f3ea" />
+  <circle cx="76" cy="20" r="5" fill="#f2e3c6" />
+</svg>
