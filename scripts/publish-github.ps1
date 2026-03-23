@@ -25,7 +25,12 @@ if (!$owner) {
 }
 
 $visibility = if ($Private) { '--private' } else { '--public' }
-$remote = (& $git -C $root remote get-url origin 2>$null)
+$remote = ''
+try {
+  $remote = (& $git -C $root remote get-url origin 2>$null)
+} catch {
+  $remote = ''
+}
 
 if (!$remote) {
   & $gh repo create "$owner/$RepoName" $visibility --source $root --remote origin --push
