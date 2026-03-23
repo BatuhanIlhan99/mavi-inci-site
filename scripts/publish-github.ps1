@@ -8,6 +8,7 @@ $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 $git = 'C:\Users\batu\Desktop\codex\tools\git\cmd\git.exe'
 $gh = 'C:\Users\batu\Desktop\codex\tools\gh\bin\gh.exe'
+$env:PATH = ((Split-Path -Parent $gh) + ';' + (Split-Path -Parent $git) + ';' + $env:PATH)
 
 if (!(Test-Path $git)) {
   throw "Git bulunamadi: $git"
