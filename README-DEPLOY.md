@@ -13,6 +13,15 @@ Bu proje artik GitHub Pages icin otomatik deploy akisina sahiptir.
 Workflow dosyasi:
 
 - `.github/workflows/deploy-pages.yml`
+- `scripts/publish-github.ps1`
+
+## Bu makinede tek komutla yayin
+
+GitHub girisi acildiktan sonra asagidaki komut repo olusturma, `origin` baglama, ilk push ve Pages'i `workflow` moduna alma isini birlikte yapar:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File ".\scripts\publish-github.ps1"
+```
 
 ## Canliya atmadan once
 
