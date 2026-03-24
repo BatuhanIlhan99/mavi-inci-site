@@ -221,7 +221,7 @@
 
   function initializeRevealAnimations() {
     var targets = Array.prototype.slice.call(document.querySelectorAll(
-      '.section-header, .hero-copy > *, .hero-aside, .hero-collector-card, .detail-card, .story-card, .value-prop, .room-card, .feature-card, .editorial-card, .booking-shell, .booking-sidebar > *, .gallery-card, .review-card, .faq-item, .comparison-spotlight, .comparison-table-shell, .package-card, .seasonal-card, .seasonal-promo-card, .seasonal-note, .page-hero-copy > *, .page-hero-aside, .stay-preview-card, .arrival-card, .destination-card'
+      '.section-header, .hero-copy > *, .hero-aside, .hero-collector-card, .hero-spotlight-card, .detail-card, .story-card, .value-prop, .room-card, .feature-card, .editorial-card, .booking-shell, .booking-sidebar > *, .gallery-card, .review-card, .faq-item, .comparison-spotlight, .comparison-table-shell, .package-card, .seasonal-card, .seasonal-promo-card, .seasonal-note, .page-hero-copy > *, .page-hero-aside, .stay-preview-card, .arrival-card, .destination-card'
     ));
 
     targets.forEach(function (target, index) {
