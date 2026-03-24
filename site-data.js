@@ -34,7 +34,7 @@
       cancellationWindow: 3,
       showOnlyAvailable: false
     },
-    roomCatalogVersion: '2026-03-23-mavi-inci-blue-v1',
+    roomCatalogVersion: '2026-03-24-etstur-photo-sync-v1',
     roomTypes: [
       {
         id: 'standart',
@@ -148,16 +148,35 @@
       }
     ],
     gallery: [
-      { id: 'g1', title: 'Sahil Terasi', category: 'Dis Mekan', alt: 'Sahil terasi', src: '', color: 'linear-gradient(135deg, #3d7b95 0%, #e4cfad 100%)', roomIds: [] },
-      { id: 'g2', title: 'Lobi ve Lounge', category: 'Mekan', alt: 'Lobi ve lounge', src: '', color: 'linear-gradient(135deg, #d7e4ea 0%, #f2e7d7 100%)', roomIds: [] },
-      { id: 'g3', title: 'Standart Oda Atmosferi', category: 'Oda', alt: 'Standart oda detaylari', src: '', color: 'linear-gradient(135deg, #d5ecf7 0%, #ffffff 100%)', roomIds: ['standart'] },
-      { id: 'g4', title: 'Standart Buyuk Oda', category: 'Oda', alt: 'Standart buyuk oda detaylari', src: '', color: 'linear-gradient(135deg, #cfe6f3 0%, #eef8fc 100%)', roomIds: ['standart-buyuk'] },
-      { id: 'g5', title: 'Deniz Manzarali Delux', category: 'Oda', alt: 'Deniz manzarali delux oda', src: '', color: 'linear-gradient(135deg, #9fd0e7 0%, #f6fcff 100%)', roomIds: ['deniz-manzarali-delux'] },
-      { id: 'g6', title: 'Gun Batimi', category: 'Deneyim', alt: 'Gun batimi', src: '', color: 'linear-gradient(135deg, #f1d7b6 0%, #1d5265 100%)', roomIds: [] },
-      { id: 'g7', title: 'Sabah Kahvaltisi', category: 'Deneyim', alt: 'Kahvalti sunumu', src: '', color: 'linear-gradient(135deg, #f4e3c8 0%, #7ba3b7 100%)', roomIds: [] },
-      { id: 'g8', title: 'Sultan Keyfi Detayi', category: 'Oda', alt: 'Sultan keyfi oda detaylari', src: '', color: 'linear-gradient(135deg, #7fb9d6 0%, #f7fdff 100%)', roomIds: ['sultan-keyfi'] },
-      { id: 'g9', title: 'Tek Kisilik Oda', category: 'Oda', alt: 'Tek kisilik oda detaylari', src: '', color: 'linear-gradient(135deg, #d9eef8 0%, #f8fdff 100%)', roomIds: ['tek-kisilik'] },
-      { id: 'g10', title: 'Mavi Beyaz Oda Detayi', category: 'Oda', alt: 'Mavi beyaz oda detaylari', src: '', color: 'linear-gradient(135deg, #c3e1f1 0%, #ffffff 100%)', roomIds: ['standart', 'standart-buyuk', 'sultan-keyfi'] }
+      { id: 'g1', title: 'Otel Genel Gorunumu', category: 'Dis Mekan', alt: 'Mavi Inci Park Otel genel gorunumu', src: 'https://images.odamax.com/imgproxy/img/1024x768/odamax/image/upload/bzd8dfdyuoea56cewetw.jpg', color: 'linear-gradient(135deg, #3d7b95 0%, #e4cfad 100%)', roomIds: [] },
+      { id: 'g2', title: 'Otel Atmosferi', category: 'Mekan', alt: 'Mavi Inci Park Otel genel atmosferi', src: 'https://images.odamax.com/imgproxy/img/1024x768/odamax/image/upload/kaf6z55lc69o6xmzzbzb.jpg', color: 'linear-gradient(135deg, #d7e4ea 0%, #f2e7d7 100%)', roomIds: [] },
+      { id: 'g3', title: 'Standart Oda 01', category: 'Standart Oda', alt: 'Standart oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/uwyiobsrkxitpi1hm5zt.jpg', color: 'linear-gradient(135deg, #d5ecf7 0%, #ffffff 100%)', roomIds: ['standart'] },
+      { id: 'g4', title: 'Standart Oda 02', category: 'Standart Oda', alt: 'Standart oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/bhh68swged32ilt0bxvb.jpg', color: 'linear-gradient(135deg, #cfe6f3 0%, #eef8fc 100%)', roomIds: ['standart'] },
+      { id: 'g5', title: 'Standart Oda 03', category: 'Standart Oda', alt: 'Standart oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/bq91sznaoirgyqrmhihq.jpg', color: 'linear-gradient(135deg, #9fd0e7 0%, #f6fcff 100%)', roomIds: ['standart'] },
+      { id: 'g6', title: 'Standart Oda 04', category: 'Standart Oda', alt: 'Standart oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/oucenwedy8qodmhnxikf.jpg', color: 'linear-gradient(135deg, #f1d7b6 0%, #1d5265 100%)', roomIds: ['standart'] },
+      { id: 'g7', title: 'Standart Oda 05', category: 'Standart Oda', alt: 'Standart oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/hspjrq1wpdutattmlgni.jpg', color: 'linear-gradient(135deg, #f4e3c8 0%, #7ba3b7 100%)', roomIds: ['standart'] },
+      { id: 'g8', title: 'Standart Buyuk Oda 01', category: 'Standart Buyuk Oda', alt: 'Standart buyuk oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/uwyiobsrkxitpi1hm5zt.jpg', color: 'linear-gradient(135deg, #7fb9d6 0%, #f7fdff 100%)', roomIds: ['standart-buyuk'] },
+      { id: 'g9', title: 'Standart Buyuk Oda 02', category: 'Standart Buyuk Oda', alt: 'Standart buyuk oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/bhh68swged32ilt0bxvb.jpg', color: 'linear-gradient(135deg, #d9eef8 0%, #f8fdff 100%)', roomIds: ['standart-buyuk'] },
+      { id: 'g10', title: 'Standart Buyuk Oda 03', category: 'Standart Buyuk Oda', alt: 'Standart buyuk oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/bq91sznaoirgyqrmhihq.jpg', color: 'linear-gradient(135deg, #c3e1f1 0%, #ffffff 100%)', roomIds: ['standart-buyuk'] },
+      { id: 'g11', title: 'Standart Buyuk Oda 04', category: 'Standart Buyuk Oda', alt: 'Standart buyuk oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/oucenwedy8qodmhnxikf.jpg', color: 'linear-gradient(135deg, #dfeff6 0%, #ffffff 100%)', roomIds: ['standart-buyuk'] },
+      { id: 'g12', title: 'Standart Buyuk Oda 05', category: 'Standart Buyuk Oda', alt: 'Standart buyuk oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/hspjrq1wpdutattmlgni.jpg', color: 'linear-gradient(135deg, #d8edf5 0%, #f7fbfd 100%)', roomIds: ['standart-buyuk'] },
+      { id: 'g13', title: 'Tek Kisilik Oda 01', category: 'Tek Kisilik Oda', alt: 'Tek kisilik oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/cebd2dz7djzagexlkobq.jpg', color: 'linear-gradient(135deg, #dcecf4 0%, #ffffff 100%)', roomIds: ['tek-kisilik'] },
+      { id: 'g14', title: 'Tek Kisilik Oda 02', category: 'Tek Kisilik Oda', alt: 'Tek kisilik oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/kjxyumi1mnntf1bgdsbm.jpg', color: 'linear-gradient(135deg, #d2e8f0 0%, #f9fcff 100%)', roomIds: ['tek-kisilik'] },
+      { id: 'g15', title: 'Tek Kisilik Oda 03', category: 'Tek Kisilik Oda', alt: 'Tek kisilik oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/rbhth2frpyywgrtc7kf0.jpg', color: 'linear-gradient(135deg, #d9edf6 0%, #ffffff 100%)', roomIds: ['tek-kisilik'] },
+      { id: 'g16', title: 'Tek Kisilik Oda 04', category: 'Tek Kisilik Oda', alt: 'Tek kisilik oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/or7clrjpnw8biwwclewi.jpg', color: 'linear-gradient(135deg, #e5f1f6 0%, #ffffff 100%)', roomIds: ['tek-kisilik'] },
+      { id: 'g17', title: 'Deniz Manzarali Delux 01', category: 'Deniz Manzarali Delux', alt: 'Deniz manzarali delux oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/mxdifodi0sq0zfnd4bel.jpg', color: 'linear-gradient(135deg, #b3dcef 0%, #f7fdff 100%)', roomIds: ['deniz-manzarali-delux'] },
+      { id: 'g18', title: 'Deniz Manzarali Delux 02', category: 'Deniz Manzarali Delux', alt: 'Deniz manzarali delux oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/bs5epedbocccjqvyltay.jpg', color: 'linear-gradient(135deg, #c4e7f3 0%, #fbfdff 100%)', roomIds: ['deniz-manzarali-delux'] },
+      { id: 'g19', title: 'Deniz Manzarali Delux 03', category: 'Deniz Manzarali Delux', alt: 'Deniz manzarali delux oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/cuqp5auyyuiqlahyvxg0.jpg', color: 'linear-gradient(135deg, #a8d8ec 0%, #f7fcff 100%)', roomIds: ['deniz-manzarali-delux'] },
+      { id: 'g20', title: 'Deniz Manzarali Delux 04', category: 'Deniz Manzarali Delux', alt: 'Deniz manzarali delux oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/fkq5vmzck9mkdpborpmj.jpg', color: 'linear-gradient(135deg, #d9eef8 0%, #ffffff 100%)', roomIds: ['deniz-manzarali-delux'] },
+      { id: 'g21', title: 'Deniz Manzarali Delux 05', category: 'Deniz Manzarali Delux', alt: 'Deniz manzarali delux oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/bu30brpmuyec2ruwomoy.jpg', color: 'linear-gradient(135deg, #c8e7f5 0%, #ffffff 100%)', roomIds: ['deniz-manzarali-delux'] },
+      { id: 'g22', title: 'Sultan Keyfi 01', category: 'Sultan Keyfi', alt: 'Sultan keyfi oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/fhzngvktdfsxpzzdm9qg.jpg', color: 'linear-gradient(135deg, #7fb9d6 0%, #f7fdff 100%)', roomIds: ['sultan-keyfi'] },
+      { id: 'g23', title: 'Sultan Keyfi 02', category: 'Sultan Keyfi', alt: 'Sultan keyfi oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/lsy5egi8h0sk6hcax3ja.jpg', color: 'linear-gradient(135deg, #8bc4de 0%, #f7fdff 100%)', roomIds: ['sultan-keyfi'] },
+      { id: 'g24', title: 'Sultan Keyfi 03', category: 'Sultan Keyfi', alt: 'Sultan keyfi oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/xutylg9z5jgne6cm8ohr.jpg', color: 'linear-gradient(135deg, #8fd1e6 0%, #fbfeff 100%)', roomIds: ['sultan-keyfi'] },
+      { id: 'g25', title: 'Sultan Keyfi 04', category: 'Sultan Keyfi', alt: 'Sultan keyfi oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/wsdqc1lvusgatjghfsq5.jpg', color: 'linear-gradient(135deg, #a1d9eb 0%, #fcfeff 100%)', roomIds: ['sultan-keyfi'] },
+      { id: 'g26', title: 'Sultan Keyfi 05', category: 'Sultan Keyfi', alt: 'Sultan keyfi oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/va3dbkkfbsxbnx5scnpr.jpg', color: 'linear-gradient(135deg, #96d1e5 0%, #fbfdff 100%)', roomIds: ['sultan-keyfi'] },
+      { id: 'g27', title: 'Sultan Keyfi 06', category: 'Sultan Keyfi', alt: 'Sultan keyfi oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/bk1pbsokida1c9ibetpj.jpg', color: 'linear-gradient(135deg, #b5e0ef 0%, #ffffff 100%)', roomIds: ['sultan-keyfi'] },
+      { id: 'g28', title: 'Sultan Keyfi 07', category: 'Sultan Keyfi', alt: 'Sultan keyfi oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/hlivxkwibkcdqf6q1vbi.jpg', color: 'linear-gradient(135deg, #c4e7f4 0%, #ffffff 100%)', roomIds: ['sultan-keyfi'] },
+      { id: 'g29', title: 'Sultan Keyfi 08', category: 'Sultan Keyfi', alt: 'Sultan keyfi oda detaylari', src: 'https://images.odamax.com/imgproxy/img/800x600/odamax/image/upload/k7r4ia5tx2xw8yazeu7l.jpg', color: 'linear-gradient(135deg, #d2edf8 0%, #ffffff 100%)', roomIds: ['sultan-keyfi'] }
     ],
     promotions: [
       { id: 'p1', title: 'Erken Rezervasyon Ayricaligi', code: 'MAVI20', discount: 20, status: 'active', note: 'Web sitesine ozel, secili tarihlerde aninda indirim.' },
@@ -360,6 +379,14 @@
     return incomingIds === fallbackIds;
   }
 
+  function upgradeGallerySource(src) {
+    var value = String(src || '');
+    if (value.indexOf('images.odamax.com/imgproxy/img/800x600/') >= 0) {
+      return value.replace('images.odamax.com/imgproxy/img/800x600/', 'images.odamax.com/imgproxy/img/1024x768/');
+    }
+    return value;
+  }
+
   function normalizeGallery(items) {
     var fallback = clone(fallbackState.gallery);
     var incoming = Array.isArray(items) ? clone(items) : [];
@@ -375,7 +402,7 @@
         title: item.title || 'Galeri Ogesi',
         category: item.category || 'Galeri',
         alt: item.alt || item.title || 'Galeri',
-        src: item.src || '',
+        src: upgradeGallerySource(item.src || ''),
         color: item.color || 'linear-gradient(135deg, #4c8ca9 0%, #e4cfad 100%)',
         roomIds: Array.isArray(item.roomIds) ? item.roomIds : []
       }, item);
