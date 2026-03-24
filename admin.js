@@ -5,13 +5,13 @@
   const LOGIN_KEY = 'mavi-inci-admin-session-v1';
 
   const defaults = {
-    roomCatalogVersion: '2026-03-23-mavi-inci-blue-v1',
+    roomCatalogVersion: '2026-03-24-corporate-copy-v1',
     hotel: {
       name: 'Mavi Inci Park Otel',
-      phone: '+90 266 000 00 00',
+      phone: '+905376963030',
       email: 'rezervasyon@maviinciparkotel.com',
-      address: 'Erdek Sahil Yolu, Balikesir',
-      description: 'Denize sifir butik otel deneyimi.',
+      address: 'Erdek Sahil Yolu No:12, Balikesir',
+      description: 'Erdek merkezde, sahile ve gunluk yasama yakin konumumuzla; modern konforu, sakin atmosferi ve ozenli hizmet anlayisini bir araya getiriyoruz.',
       checkInTime: '14:00',
       checkOutTime: '12:00',
       breakfastHours: '08:00 - 10:30',
@@ -19,7 +19,7 @@
       airportTransfer: true,
       beachService: true,
       onlineBooking: true,
-      whatsappNumber: '+90 555 000 00 00',
+      whatsappNumber: '+905376963030',
       instagram: '@maviinciparkotel'
     },
     roomTypes: [
@@ -120,11 +120,11 @@
     availability: buildDefaultAvailability(),
     content: {
       heroTitle: 'Mavi Inci Park Otel',
-      heroText: 'Denize sifir, mavi beyaz tonlarla zariflestirilmis ve huzurlu butik otel deneyimi.',
+      heroText: 'Mavi beyaz tasarim dili, merkezi konum avantajimiz ve misafir memnuniyeti odakli hizmet anlayisimizla Erdekte davetkar bir butik sehir oteli deneyimi sunuyoruz.',
       bookingLabel: 'Hemen Rezervasyon Yap',
       seoTitle: 'Mavi Inci Park Otel | Erdek Butik Otel',
-      seoDescription: 'Erdek sahilinde modern butik konaklama deneyimi.',
-      highlights: ['Mavi beyaz tasarim dili', 'Denize sifir', 'Butik konfor', 'Yerel mutfak']
+      seoDescription: 'Mavi Inci Park Otel, Erdek merkezde sahile yakin konumu, modern odalari ve ozenli hizmet anlayisiyla profesyonel butik otel deneyimi sunar.',
+      highlights: ['Erdek merkezde avantajli konum', 'Mavi beyaz modern tasarim', 'Ozenli kahvalti ve konfor', 'Direkt rezervasyonda hizli destek']
     },
     settings: {
       currency: 'TRY',

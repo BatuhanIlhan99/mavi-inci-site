@@ -7,7 +7,7 @@
       phone: '+905376963030',
       email: 'rezervasyon@maviinciparkotel.com',
       address: 'Erdek Sahil Yolu No:12, Balikesir',
-      description: 'Erdek sahilinde denizle iliskisi guclu, sakin, ozenli ve rafine bir butik konaklama deneyimi.',
+      description: 'Erdek merkezde, sahile ve gunluk yasama yakin konumumuzla; modern konforu, sakin atmosferi ve ozenli hizmet anlayisini bir araya getiriyoruz.',
       checkInTime: '14:00',
       checkOutTime: '12:00',
       breakfastHours: '08:00 - 10:30',
@@ -20,11 +20,11 @@
     },
     content: {
       heroTitle: 'Mavi Inci Park Otel',
-      heroText: 'Mavi beyaz tonlar, sahil sessizligi ve iyi kurgulanmis servis ritmiyle Erdek kiyisinda daha rafine bir butik konaklama deneyimi.',
+      heroText: 'Mavi beyaz tasarim dili, merkezi konum avantajimiz ve misafir memnuniyeti odakli hizmet anlayisimizla Erdekte davetkar bir butik sehir oteli deneyimi sunuyoruz.',
       bookingLabel: 'Hemen Rezervasyon Yap',
       seoTitle: 'Mavi Inci Park Otel | Erdek Butik Otel',
-      seoDescription: 'Erdek sahilinde denize yakin, modern, rafine ve dogrudan rezervasyon odakli butik otel deneyimi.',
-      highlights: ['Mavi beyaz tasarim dili', 'Sahil ritmine yakin konum', 'Kisisel olcekte butik servis', 'Gun batimi ve yavas sabah akisi']
+      seoDescription: 'Mavi Inci Park Otel, Erdek merkezde sahile yakin konumu, modern odalari ve ozenli hizmet anlayisiyla profesyonel butik otel deneyimi sunar.',
+      highlights: ['Erdek merkezde avantajli konum', 'Mavi beyaz modern tasarim', 'Ozenli kahvalti ve konfor', 'Direkt rezervasyonda hizli destek']
     },
     settings: {
       currency: 'TRY',
@@ -34,7 +34,7 @@
       cancellationWindow: 3,
       showOnlyAvailable: false
     },
-    roomCatalogVersion: '2026-03-24-etstur-photo-sync-v1',
+    roomCatalogVersion: '2026-03-24-corporate-copy-v1',
     roomTypes: [
       {
         id: 'standart',
@@ -48,15 +48,15 @@
         availableRooms: 6,
         status: 'active',
         featured: true,
-        amenities: 'Bahce esintisi, minibar, Wi-Fi, klima',
-        notes: 'Mavi beyaz dokularla sakin ve ferah bir konaklama.',
+        amenities: 'Minibar, yuksek hizli Wi-Fi, klima ve gunluk oda duzeni',
+        notes: 'Bakimli, ferah ve modern detaylarla tamamlanan dengeli bir konaklama alani.',
         size: '24 m2',
         bed: 'Queen bed',
         view: 'Ic avlu ve bahce',
         bathroom: 'Yagmur dusu',
-        story: 'Deniz kenari tatilin temposunu yumusatmak isteyen misafirler icin sade, serin ve dengeli bir oda deneyimi sunar.',
-        highlights: ['Mavi beyaz yalnizca temiz degil ferah bir atmosfer', 'Sessiz kat yerlesimi', 'Kisa ve rahat konaklama akisi'],
-        includes: ['Klima ve minibar', 'Yuksek hizli Wi-Fi', 'Gunluk housekeeping', 'Oda ici kahve-cay seti']
+        story: 'Standart Oda, Erdekte merkezi konaklama avantajini; temiz, duzenli ve dinlendirici bir yasam alaniyla birlestirir.',
+        highlights: ['Ferah mavi beyaz atmosfer', 'Gunluk konfor icin dengeli plan', 'Kisa ve uzun konaklamaya uygun'],
+        includes: ['Klima ve minibar', 'Yuksek hizli Wi-Fi', 'Gunluk oda bakimi', 'Oda ici kahve-cay seti']
       },
       {
         id: 'standart-buyuk',
@@ -70,15 +70,15 @@
         availableRooms: 3,
         status: 'active',
         featured: true,
-        amenities: 'Genis yasam alani, oturma kosesi, Wi-Fi, klima',
-        notes: 'Daha acik hacim ve daha rahat bir aile akisi isteyenler icin.',
+        amenities: 'Genis yasam alani, oturma kosesi, yuksek hizli Wi-Fi ve klima',
+        notes: 'Daha genis hareket alani ve rahat bir konaklama duzeni arayan misafirler icin ideal bir secenek.',
         size: '32 m2',
         bed: 'Queen bed + tekli oturma alani',
         view: 'Bahce ve yan cephe',
         bathroom: 'Genis dus alani',
-        story: 'Standart konforu daha buyuk bir yasam hissiyle birlestirir. Ferahlik, uzun konaklamalarda fark edilir bir rahatlik sunar.',
-        highlights: ['Daha genis plan', 'Aileler icin daha rahat hareket alani', 'Yumusak gun isigini alan ferah cephe'],
-        includes: ['Oturma alani', 'Premium tekstil secimi', 'Gunluk housekeeping', 'Oda ici kahve-cay seti']
+        story: 'Standart Buyuk Oda, aileler ve daha fazla yasam alani bekleyen misafirlerimiz icin konforu ferahlikla bir araya getirir.',
+        highlights: ['Genis plan ve rahat yerlesim', 'Aile konaklamasina uygun hacim', 'Ferah ve aydinlik oda kurgusu'],
+        includes: ['Oturma alani', 'Nitelikli tekstil secimi', 'Gunluk oda bakimi', 'Oda ici kahve-cay seti']
       },
       {
         id: 'deniz-manzarali-delux',
@@ -92,14 +92,14 @@
         availableRooms: 1,
         status: 'active',
         featured: true,
-        amenities: 'Ozel balkon, deniz manzarasi, espresso kosesi, klima',
-        notes: 'Dogrudan manzara odakli, daha ozel bir kacamak isteyenler icin tek oda.',
+        amenities: 'Ozel balkon, tam deniz manzarasi, espresso kosesi ve klima',
+        notes: 'Deniz manzarasini on planda yasamak ve daha ozel bir konaklama deneyimi tercih eden misafirlerimiz icin tasarlandi.',
         size: '34 m2',
         bed: 'King bed',
         view: 'Tam deniz manzarasi',
         bathroom: 'Premium dus alani',
-        story: 'Sabah isigi ve deniz cephesiyle gunun duygusunu ilk anda hissettiren, otelin en karakterli manzara deneyimlerinden biridir.',
-        highlights: ['Tam deniz manzarasi', 'Ozel balkon deneyimi', 'Sunset saatleri icin one cikan konum'],
+        story: 'Deniz Manzarali Delux Oda, gun isigi, acik manzara ve secili detaylariyla konaklama deneyimini daha ayri bir seviyeye tasir.',
+        highlights: ['Tam deniz manzarasi', 'Balkonlu ozel yasam alani', 'Seckin ve sakin konaklama'],
         includes: ['Espresso kosesi', 'Premium banyo seti', 'Balkon oturumu', 'Oncelikli oda hazirlama']
       },
       {
@@ -114,15 +114,15 @@
         availableRooms: 2,
         status: 'active',
         featured: true,
-        amenities: 'Genis yatak, lounge kosesi, premium set-up, klima',
-        notes: 'Daha ozel, daha sakin ve daha zarif bir premium konaklama hissi sunar.',
+        amenities: 'Genis yatak, lounge kosesi, premium karsilama duzeni ve klima',
+        notes: 'Daha ozel, daha sakin ve zarif bir atmosferde premium konaklama beklentisine yanit verir.',
         size: '42 m2',
         bed: 'King bed + lounge kosesi',
         view: 'Panoramik deniz ve acik cephe',
         bathroom: 'Genis premium banyo',
-        story: 'Otelin mavi beyaz cizgisini en rafine sekilde hissettiren, daha sessiz ve ozel bir konaklama kompozisyonudur.',
-        highlights: ['Premium mavi beyaz tasarim dili', 'Genis yasam hissi', 'Ozel gunler icin guclu atmosfer'],
-        includes: ['Premium karsilama seti', 'Lounge oturumu', 'Yuksek tekstil kalitesi', 'Oncelikli concierge destegi']
+        story: 'Sultan Keyfi Oda, genis yasam hissi ve seckin detaylariyla ozel gunler ve daha yuksek konfor beklentileri icin hazirlandi.',
+        highlights: ['Premium mavi beyaz tasarim', 'Genis ve sakin yasam hissi', 'Ozel gunler icin guclu atmosfer'],
+        includes: ['Premium karsilama seti', 'Lounge oturumu', 'Yuksek tekstil kalitesi', 'Oncelikli misafir destegi']
       },
       {
         id: 'tek-kisilik',
@@ -136,15 +136,15 @@
         availableRooms: 1,
         status: 'active',
         featured: true,
-        amenities: 'Akilli depolama, Wi-Fi, klima, calisma masasi',
-        notes: 'Yalniz seyahat eden misafirler icin sade, fonksiyonel ve huzurlu.',
+        amenities: 'Akilli depolama, yuksek hizli Wi-Fi, klima ve calisma masasi',
+        notes: 'Tek basina seyahat eden misafirlerimiz icin sade, fonksiyonel ve huzurlu bir konaklama secenegi sunar.',
         size: '18 m2',
         bed: 'Single bed',
         view: 'Ic avlu',
         bathroom: 'Kompakt modern banyo',
-        story: 'Tek kisilik konaklamalarda ferahlik hissini kaybetmeden, pratik ve sakin bir duzen sunacak sekilde planlandi.',
-        highlights: ['Yalniz seyahat icin verimli plan', 'Sessiz ve sade atmosfer', 'Calisma ve dinlenme dengesine uygun'],
-        includes: ['Calisma masasi', 'Yuksek hizli Wi-Fi', 'Gunluk housekeeping', 'Oda ici su seti']
+        story: 'Tek Kisilik Oda, pratik kullanim, duzenli yerlesim ve dingin atmosfer arayan misafirlerimiz icin verimli bir yasam alani sunar.',
+        highlights: ['Solo konaklamaya uygun plan', 'Sessiz ve duzenli atmosfer', 'Calisma ve dinlenme dengesi'],
+        includes: ['Calisma masasi', 'Yuksek hizli Wi-Fi', 'Gunluk oda bakimi', 'Oda ici su seti']
       }
     ],
     gallery: [
