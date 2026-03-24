@@ -3554,6 +3554,382 @@ body {
   }
 }
 
+.section-compare .section-header,
+.section-packages .section-header,
+.section-seasonal .section-header {
+  max-width: 54rem;
+}
+
+.compare-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.comparison-spotlight {
+  padding: 1.2rem 1.25rem;
+  border: 1px solid rgba(34, 118, 157, 0.12);
+  border-radius: 1.35rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(233, 246, 252, 0.9)),
+    radial-gradient(circle at top right, rgba(109, 191, 227, 0.16), rgba(109, 191, 227, 0));
+  box-shadow: 0 18px 44px rgba(8, 31, 45, 0.08);
+}
+
+.comparison-spotlight span,
+.package-kicker,
+.seasonal-topline span:last-child {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.comparison-spotlight strong {
+  display: block;
+  margin-top: 0.55rem;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.comparison-spotlight p {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+}
+
+.comparison-table-shell {
+  margin-top: 1.35rem;
+  overflow-x: auto;
+  border: 1px solid rgba(34, 118, 157, 0.1);
+  border-radius: 1.6rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(237, 248, 252, 0.94)),
+    radial-gradient(circle at top right, rgba(109, 191, 227, 0.12), rgba(109, 191, 227, 0));
+  box-shadow: 0 20px 54px rgba(8, 31, 45, 0.08);
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.comparison-table thead th,
+.comparison-table tbody th,
+.comparison-table td {
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid rgba(24, 82, 108, 0.08);
+  text-align: left;
+  vertical-align: top;
+}
+
+.comparison-table thead th {
+  background: rgba(245, 252, 255, 0.96);
+  font-weight: 600;
+}
+
+.comparison-table thead th:first-child,
+.comparison-table tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  backdrop-filter: blur(12px);
+}
+
+.comparison-table thead th:first-child {
+  z-index: 3;
+}
+
+.comparison-table tbody th {
+  width: 12.75rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: rgba(250, 254, 255, 0.98);
+}
+
+.comparison-table tbody tr:last-child th,
+.comparison-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.comparison-room-head {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 11rem;
+}
+
+.comparison-room-head strong {
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.comparison-room-head span:last-child {
+  color: var(--muted);
+}
+
+.comparison-room-tag {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid rgba(43, 132, 173, 0.14);
+  border-radius: 999px;
+  background: rgba(219, 242, 252, 0.92);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ocean-900);
+}
+
+.comparison-table td {
+  color: var(--ink);
+}
+
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.15rem;
+  margin-top: 2rem;
+}
+
+.package-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid rgba(34, 118, 157, 0.1);
+  border-radius: 1.65rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(236, 248, 252, 0.94)),
+    radial-gradient(circle at top right, rgba(109, 191, 227, 0.12), rgba(109, 191, 227, 0));
+  box-shadow: 0 22px 56px rgba(8, 31, 45, 0.08);
+  transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+}
+
+.package-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(43, 132, 173, 0.16);
+  box-shadow: 0 28px 64px rgba(8, 31, 45, 0.12);
+}
+
+.package-card.is-featured {
+  background:
+    linear-gradient(180deg, rgba(14, 61, 82, 0.96), rgba(9, 33, 47, 0.94)),
+    radial-gradient(circle at top right, rgba(109, 191, 227, 0.24), rgba(109, 191, 227, 0));
+  border-color: rgba(186, 231, 249, 0.18);
+  color: #f4fbff;
+}
+
+.package-card.is-featured h3,
+.package-card.is-featured p,
+.package-card.is-featured strong,
+.package-card.is-featured li,
+.package-card.is-featured .package-kicker {
+  color: inherit;
+}
+
+.package-topline,
+.seasonal-topline,
+.package-meta,
+.seasonal-meta {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.package-card h3 {
+  margin: 0.95rem 0 0;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+.package-card p {
+  margin: 0.8rem 0 0;
+  color: var(--muted);
+}
+
+.package-card.is-featured p,
+.package-card.is-featured .package-topline span,
+.package-card.is-featured .package-meta span {
+  color: rgba(242, 250, 255, 0.78);
+}
+
+.package-meta {
+  margin-top: 1rem;
+  padding: 1rem 0 0.95rem;
+  border-top: 1px solid rgba(31, 105, 141, 0.1);
+}
+
+.package-meta > div,
+.seasonal-meta {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.package-meta span,
+.seasonal-meta span {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.package-meta strong,
+.seasonal-meta strong,
+.seasonal-promo-card h4,
+.seasonal-note strong {
+  letter-spacing: -0.02em;
+}
+
+.package-perks {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.package-perks li {
+  position: relative;
+  padding-left: 1.15rem;
+}
+
+.package-perks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #62b3da, #1d6e92);
+}
+
+.package-card.is-featured .package-perks li::before {
+  background: linear-gradient(180deg, #ffffff, #b5e1f2);
+}
+
+.package-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1.15rem;
+}
+
+.package-actions .button {
+  flex: 1 1 0;
+}
+
+.section-seasonal .section-text,
+.section-seasonal .section-title,
+.section-seasonal .section-kicker {
+  color: inherit;
+}
+
+.seasonal-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(20rem, 0.9fr);
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.seasonal-panel,
+.seasonal-brief {
+  padding: 1.55rem;
+  border: 1px solid rgba(181, 227, 247, 0.14);
+  border-radius: 1.7rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06)),
+    radial-gradient(circle at top right, rgba(109, 191, 227, 0.14), rgba(109, 191, 227, 0));
+  box-shadow: 0 22px 62px rgba(3, 17, 24, 0.18);
+}
+
+.seasonal-card-grid,
+.seasonal-promo-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.seasonal-card-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.7rem;
+}
+
+.seasonal-card,
+.seasonal-promo-card,
+.seasonal-note {
+  padding: 1.2rem;
+  border: 1px solid rgba(181, 227, 247, 0.12);
+  border-radius: 1.3rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05)),
+    radial-gradient(circle at top right, rgba(109, 191, 227, 0.12), rgba(109, 191, 227, 0));
+}
+
+.seasonal-card.is-accent {
+  background:
+    linear-gradient(180deg, rgba(145, 210, 237, 0.22), rgba(255, 255, 255, 0.08)),
+    radial-gradient(circle at top right, rgba(235, 248, 255, 0.18), rgba(235, 248, 255, 0));
+}
+
+.seasonal-card h3,
+.seasonal-promo-card h4 {
+  margin: 0.8rem 0 0;
+  color: #f7fdff;
+}
+
+.seasonal-card p,
+.seasonal-promo-card p,
+.seasonal-note p {
+  margin: 0.7rem 0 0;
+  color: rgba(236, 247, 252, 0.78);
+}
+
+.seasonal-brief h3 {
+  margin: 0.55rem 0 0;
+  color: #f7fdff;
+}
+
+.seasonal-note {
+  margin-top: 1rem;
+}
+
+@media (max-width: 1180px) {
+  .package-grid,
+  .seasonal-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .seasonal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .compare-highlights,
+  .package-grid,
+  .seasonal-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-table {
+    min-width: 760px;
+  }
+
+  .package-actions {
+    flex-direction: column;
+  }
+
+  .seasonal-panel,
+  .seasonal-brief {
+    padding: 1.2rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .button,
   .floating-button,
@@ -3567,7 +3943,8 @@ body {
   .faq-item,
   .value-prop,
   .booking-review-card,
-  .room-related-card {
+  .room-related-card,
+  .package-card {
     transition: none !important;
     transform: none !important;
   }

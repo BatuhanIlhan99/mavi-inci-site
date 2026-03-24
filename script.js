@@ -173,13 +173,156 @@
     return '<section class="section section-light" id="odalar"><div class="container"><div class="section-header"><p class="section-kicker">Oda Secenekleri</p><h2 class="section-title">Her misafir profiline uygun, yeni oda envanterimiz</h2><p class="section-text">Standart odadan Sultan Keyfi odasina kadar tum aktif oda tiplerini mavi beyaz kimlige uygun, temiz ve net bir sunumla listeliyoruz.</p></div><div class="rooms-grid">' + Data.getFeaturedRooms(state).map(renderRoomCard).join('') + '</div></div></section>';
   }
 
+  function roomSizeValue(room) {
+    var match = String((room || {}).size || '').match(/(\d+(?:[.,]\d+)?)/);
+    return match ? parseFloat(match[1].replace(',', '.')) : 0;
+  }
+
+  function roomGuestFit(room) {
+    if (!room) return 'Dengeli sahil konaklamasi';
+    if (room.id === 'tek-kisilik') return 'Solo konaklama ve kisa is seyahati';
+    if (room.id === 'deniz-manzarali-delux') return 'Gun batimi odakli cift kacamaklari';
+    if (room.id === 'sultan-keyfi') return 'Ozel gunler ve premium konaklama';
+    if (room.id === 'standart-buyuk') return 'Aileler ve daha genis yasam ritmi';
+    return 'Sahil ritmine dengeli bir giris';
+  }
+
+  function roomCapacityLabel(room) {
+    return room.capacityAdults + ' yetiskin' + (Number(room.capacityChildren || 0) > 0 ? ' + ' + room.capacityChildren + ' cocuk' : '');
+  }
+
+  function renderComparisonSpotlight(label, room, detail) {
+    if (!room) return '';
+    return '<article class="comparison-spotlight">' +
+      '<span>' + Data.escapeHtml(label) + '</span>' +
+      '<strong>' + Data.escapeHtml(room.name) + '</strong>' +
+      '<p>' + Data.escapeHtml(detail) + '</p>' +
+      '</article>';
+  }
+
+  function renderRoomComparison() {
+    var rooms = Data.getActiveRooms(state);
+    if (!rooms.length) return '';
+    var lowest = rooms.slice().sort(function (left, right) { return Number(left.nightlyPrice || 0) - Number(right.nightlyPrice || 0); })[0];
+    var largest = rooms.slice().sort(function (left, right) { return roomSizeValue(right) - roomSizeValue(left); })[0];
+    var seaView = rooms.find(function (room) { return /deniz/i.test(String(room.view || '')); }) || largest || lowest;
+    var rows = [
+      { label: 'Hafta ici', render: function (room) { return Data.formatMoney(state, room.nightlyPrice); } },
+      { label: 'Hafta sonu', render: function (room) { return Data.formatMoney(state, room.weekendPrice || room.nightlyPrice); } },
+      { label: 'Boyut', render: function (room) { return Data.escapeHtml(room.size); } },
+      { label: 'Kapasite', render: function (room) { return Data.escapeHtml(roomCapacityLabel(room)); } },
+      { label: 'Yatak', render: function (room) { return Data.escapeHtml(room.bed); } },
+      { label: 'Gorunum', render: function (room) { return Data.escapeHtml(room.view); } },
+      { label: 'En uygun profil', render: function (room) { return Data.escapeHtml(roomGuestFit(room)); } },
+      { label: 'Musaitlik', render: function (room) { return Number(room.availableRooms || 0) > 0 ? room.availableRooms + ' oda musait' : 'Bekleme listesi'; } }
+    ];
+
+    return '<section class="section section-light section-compare" id="oda-karsilastirma"><div class="container">' +
+      '<div class="section-header"><p class="section-kicker">Oda Karsilastirma</p><h2 class="section-title">Hangi oda size daha cok uyuyor, tek bakista gorun</h2><p class="section-text">Fiyat, boyut, gorunum ve konaklama profiline gore tum oda tiplerini ayni satirda karsilastirarak karar vermeyi hizlandirdik.</p></div>' +
+      '<div class="compare-highlights">' +
+      renderComparisonSpotlight('En avantajli baslangic', lowest, Data.formatMoney(state, lowest.nightlyPrice) + ' ile mavi beyaz deneyime en dengeli giris') +
+      renderComparisonSpotlight('En genis yasam alani', largest, largest.size + ' ile uzun konaklamalarda daha rahat alan hissi') +
+      renderComparisonSpotlight('En guclu manzara secimi', seaView, seaView.view + ' ile gun batimini deneyimin merkezine alir') +
+      '</div>' +
+      '<div class="comparison-table-shell"><table class="comparison-table"><thead><tr><th scope="col">Kriter</th>' +
+      rooms.map(function (room) {
+        return '<th scope="col"><div class="comparison-room-head"><span class="comparison-room-tag">' + Data.escapeHtml(room.short || room.name) + '</span><strong>' + Data.escapeHtml(room.name) + '</strong><span>' + Data.formatMoney(state, room.nightlyPrice) + ' / gece</span></div></th>';
+      }).join('') +
+      '</tr></thead><tbody>' +
+      rows.map(function (row) {
+        return '<tr><th scope="row">' + Data.escapeHtml(row.label) + '</th>' + rooms.map(function (room) {
+          return '<td>' + row.render(room) + '</td>';
+        }).join('') + '</tr>';
+      }).join('') +
+      '</tbody></table></div></div></section>';
+  }
+
   function renderFeatures() {
     return '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Otel Deneyimi</p><h2 class="section-title">Sadece bir oda degil, tam bir konaklama ritmi</h2><p class="section-text">Deniz, servis, kahvalti, transfer ve gunluk operasyon kalitesi; iyi bir otel sitesinde yalnizca yazilmakla kalmamalidir, hissettirilmelidir.</p></div><div class="features-grid">' + featureLibrary.map(function (item) { return '<article class="feature-card"><div class="feature-icon">' + Data.escapeHtml(item.icon) + '</div><h3>' + Data.escapeHtml(item.title) + '</h3><p>' + Data.escapeHtml(item.text) + '</p></article>'; }).join('') + '</div></div></section>';
+  }
+
+  function buildSignaturePackages() {
+    var deluxe = Data.getRoomByKey(state, 'deniz-manzarali-delux') || Data.getRoomByKey(state, 'sultan-keyfi') || Data.getActiveRooms(state)[0];
+    var family = Data.getRoomByKey(state, 'standart-buyuk') || Data.getRoomByKey(state, 'standart') || deluxe;
+    var solo = Data.getRoomByKey(state, 'tek-kisilik') || Data.getRoomByKey(state, 'standart') || family;
+    var promo = Data.getPrimaryPromotion(state);
+
+    return [
+      {
+        title: 'Sunset Escape',
+        kicker: 'Imza Kacamak',
+        room: deluxe,
+        note: 'Gun batimi saatini manzara ve ozel servis hissiyle birlestiren daha rafine bir iki kisilik kacamak.',
+        perks: ['Deniz odakli oda secimi', 'Gun batimi saatine uygun karsilama ritmi', 'Premium banyo seti ve yavas sabah akisi'],
+        accent: true
+      },
+      {
+        title: 'Aile Mavi Beyaz Paketi',
+        kicker: 'Daha Genis Yasam',
+        room: family,
+        note: 'Ailece Erdek ritmine rahat bir giris yapmak isteyenler icin daha genis plan, daha sakin bir tempo.',
+        perks: ['Daha rahat hareket alani', 'Cocuklu konaklamaya uygun duzen', 'Kahvalti ve sahil ritmi icin dengeli planlama'],
+        accent: false
+      },
+      {
+        title: 'Weekday Reset',
+        kicker: promo ? 'Web Avantaji' : 'Yavas Konaklama',
+        room: solo,
+        note: promo ? 'Aktif web kampanyasi ile hafta ici daha sakin, daha hizli karar verilen bir konaklama alternatifi.' : 'Hafta ici daha sessiz bir ritimde calisma ve dinlenme dengesini koruyan sade bir kacis.',
+        perks: ['Hafta ici daha sakin operasyon', 'Hizli check-in ve net fiyat akisi', promo ? promo.code + ' koduyla ek avantaj' : 'Kisa ve verimli konaklama kompozisyonu'],
+        accent: false
+      }
+    ];
+  }
+
+  function renderSignaturePackages() {
+    var packages = buildSignaturePackages();
+    return '<section class="section section-light section-packages" id="imza-paketler"><div class="container">' +
+      '<div class="section-header"><p class="section-kicker">Ozel Deneyim Paketleri</p><h2 class="section-title">Hazir kurgulanmis konaklama senaryolari ile secimi kolaylastirin</h2><p class="section-text">Her misafirin ihtiyaci ayni degil; bu nedenle odalari sadece fiyatla degil, konaklama niyetiyle birlikte paketledik.</p></div>' +
+      '<div class="package-grid">' + packages.map(function (item) {
+        var room = item.room;
+        return '<article class="package-card' + (item.accent ? ' is-featured' : '') + '">' +
+          '<div class="package-topline"><span class="package-kicker">' + Data.escapeHtml(item.kicker) + '</span><span class="tag">' + Data.escapeHtml(room.short || room.name) + '</span></div>' +
+          '<h3>' + Data.escapeHtml(item.title) + '</h3>' +
+          '<p>' + Data.escapeHtml(item.note) + '</p>' +
+          '<div class="package-meta"><div><span>Oda</span><strong>' + Data.escapeHtml(room.name) + '</strong></div><div><span>Baslangic</span><strong>' + Data.formatMoney(state, room.nightlyPrice) + '</strong></div></div>' +
+          '<ul class="package-perks">' + item.perks.map(function (perk) { return '<li>' + Data.escapeHtml(perk) + '</li>'; }).join('') + '</ul>' +
+          '<div class="package-actions"><a class="button button-dark" href="' + bookingHref(room) + '">Rezervasyona Git</a><a class="button button-soft" href="' + roomDetailHref(room) + '">Odayi Incele</a></div>' +
+          '</article>';
+      }).join('') + '</div></div></section>';
   }
 
   function renderEditorial() {
     var promo = Data.getPrimaryPromotion(state);
     return '<section class="section section-dark"><div class="container editorial-layout"><article class="editorial-card"><p class="section-kicker">Planlama Notlari</p><h2 class="editorial-title">Rezervasyon kararini hizlandiran net bilgiler</h2><ul class="booking-bullets"><li>Check-in ' + Data.escapeHtml(state.hotel.checkInTime) + ' / Check-out ' + Data.escapeHtml(state.hotel.checkOutTime) + '</li><li>Kahvalti saati: ' + Data.escapeHtml(state.hotel.breakfastHours) + '</li><li>Iptal penceresi: ' + state.settings.cancellationWindow + ' gun</li><li>' + (state.hotel.onlineBooking ? 'Online rezervasyon su an acik.' : 'Online rezervasyon icin ekipten teyit alin.') + '</li></ul></article><article class="editorial-card"><p class="section-kicker">Fiyat Akisi</p><h2 class="editorial-title">Kampanya ve sezon kurallari gorunur olsun</h2><p>' + (promo ? Data.escapeHtml(promo.title) + ' kampanyasi su an aktif. Kod: ' + Data.escapeHtml(promo.code) + '.' : 'Aktif kampanya bulunmadiginda bile fiyat bloklari tutarli, net ve guven verici sekilde sunulmali.') + '</p><div class="inline-stats"><div class="inline-stat"><strong>' + state.seasonalPricing.length + '</strong><span>sezon kural seti</span></div><div class="inline-stat"><strong>' + state.promotions.length + '</strong><span>kampanya / kupon</span></div><div class="inline-stat"><strong>' + Data.formatMoney(state, Data.getStartingPrice(state)) + '</strong><span>en dusuk gece fiyat</span></div></div></article></div></section>';
+  }
+
+  function formatSeasonWindow(item) {
+    return Data.formatShortDate(item.start) + ' - ' + Data.formatShortDate(item.end);
+  }
+
+  function renderSeasonalOffers() {
+    var promotions = state.promotions.slice(0, 3);
+    var seasonal = state.seasonalPricing.slice(0, 3);
+    return '<section class="section section-dark section-seasonal" id="sezon-firsatlari"><div class="container seasonal-grid">' +
+      '<article class="seasonal-panel"><div class="section-header"><p class="section-kicker">Sezon Teklifleri</p><h2 class="section-title">Fiyat mantigi ve kampanya ritmi tek alanda toplansin</h2><p class="section-text">Misafir kararini guclendiren sey yalnizca dusuk fiyat degil; hangi avantajin ne zaman geldigini net gorebilmektir.</p></div>' +
+      '<div class="seasonal-card-grid">' + seasonal.map(function (item, index) {
+        var multiplier = Number(item.multiplier || 1);
+        var change = Math.round(Math.abs(multiplier - 1) * 100);
+        var label = multiplier >= 1 ? '%' + change + ' sezon etkisi' : '%' + change + ' web avantaji';
+        return '<article class="seasonal-card' + (index === 0 ? ' is-accent' : '') + '">' +
+          '<div class="seasonal-topline"><span class="tag">' + Data.escapeHtml(label) + '</span><span>' + Data.escapeHtml(item.channel || 'Tum Kanallar') + '</span></div>' +
+          '<h3>' + Data.escapeHtml(item.title) + '</h3>' +
+          '<p>' + Data.escapeHtml(item.note) + '</p>' +
+          '<div class="seasonal-meta"><strong>' + Data.escapeHtml(formatSeasonWindow(item)) + '</strong><span>' + (multiplier >= 1 ? 'Talep yogunlugu fiyata yansir' : 'Web rezervasyonunda indirim ritmi') + '</span></div>' +
+          '</article>';
+      }).join('') + '</div></article>' +
+      '<aside class="seasonal-brief"><p class="section-kicker">Aktif Promosyonlar</p><h3>Web uzerinden karar vermeyi kolaylastiran avantajlar</h3>' +
+      '<div class="seasonal-promo-list">' + promotions.map(function (promo) {
+        return '<article class="seasonal-promo-card"><div><span class="tag">%' + promo.discount + ' avantaj</span><h4>' + Data.escapeHtml(promo.title) + '</h4></div><p>' + Data.escapeHtml(promo.note) + '</p><div class="seasonal-meta"><strong>Kod: ' + Data.escapeHtml(promo.code) + '</strong><span>' + (promo.status === 'active' ? 'Su an kullanima acik' : 'Planlanan kampanya') + '</span></div></article>';
+      }).join('') + '</div>' +
+      '<div class="seasonal-note"><strong>Concierge Notu</strong><p>En dogru teklif genellikle oda secimi, kalis suresi ve sezon yogunlugunun birlikte okunmasiyla cikiyor. Bu alan, misafire fiyat mantigini saklamadan anlatmak icin tasarlandi.</p></div>' +
+      '</aside></div></section>';
   }
 
   function renderBookingStep(step) {
@@ -231,7 +374,7 @@
   }
 
   function renderApp() {
-    return '<div class="shell">' + renderTopStrip() + renderHeader() + '<main>' + renderHero() + renderExperience() + renderRooms() + renderFeatures() + renderEditorial() + renderBookingSection() + renderGallery() + renderReviewsAndContact() + '</main>' + renderFooter() + renderFloatingActions() + '</div>';
+    return '<div class="shell">' + renderTopStrip() + renderHeader() + '<main>' + renderHero() + renderExperience() + renderRooms() + renderRoomComparison() + renderFeatures() + renderSignaturePackages() + renderEditorial() + renderSeasonalOffers() + renderBookingSection() + renderGallery() + renderReviewsAndContact() + '</main>' + renderFooter() + renderFloatingActions() + '</div>';
   }
 
   function updateMeta() {
