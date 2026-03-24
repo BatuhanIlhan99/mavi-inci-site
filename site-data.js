@@ -4,14 +4,14 @@
   var fallbackState = {
     hotel: {
       name: 'Mavi Inci Park Otel',
-      phone: '+90 266 000 00 00',
+      phone: '+905376963030',
       email: 'rezervasyon@maviinciparkotel.com',
       address: 'Erdek Sahil Yolu No:12, Balikesir',
-      description: 'Denize sifir, modern, sakin ve ozenli bir butik konaklama deneyimi.',
+      description: 'Erdek sahilinde denizle iliskisi guclu, sakin, ozenli ve rafine bir butik konaklama deneyimi.',
       checkInTime: '14:00',
       checkOutTime: '12:00',
       breakfastHours: '08:00 - 10:30',
-      whatsappNumber: '+90 555 000 00 00',
+      whatsappNumber: '+905376963030',
       instagram: '@maviinciparkotel',
       petFriendly: false,
       airportTransfer: true,
@@ -20,11 +20,11 @@
     },
     content: {
       heroTitle: 'Mavi Inci Park Otel',
-      heroText: 'Erdek kiyisinda mavi beyaz tonlarla sakinlestirilmis, denizle ayni ritimde akan modern bir butik konaklama deneyimi.',
+      heroText: 'Mavi beyaz tonlar, sahil sessizligi ve iyi kurgulanmis servis ritmiyle Erdek kiyisinda daha rafine bir butik konaklama deneyimi.',
       bookingLabel: 'Hemen Rezervasyon Yap',
       seoTitle: 'Mavi Inci Park Otel | Erdek Butik Otel',
-      seoDescription: 'Erdek sahilinde denize sifir, modern ve rafine butik otel deneyimi.',
-      highlights: ['Mavi beyaz tasarim dili', 'Denize sifir konum', 'Butik servis anlayisi', 'Gun batimi terasi']
+      seoDescription: 'Erdek sahilinde denize yakin, modern, rafine ve dogrudan rezervasyon odakli butik otel deneyimi.',
+      highlights: ['Mavi beyaz tasarim dili', 'Sahil ritmine yakin konum', 'Kisisel olcekte butik servis', 'Gun batimi ve yavas sabah akisi']
     },
     settings: {
       currency: 'TRY',
