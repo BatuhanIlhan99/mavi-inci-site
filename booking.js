@@ -1,8 +1,10 @@
 (function () {
+  var Boot = window.MaviInciBoot;
   var Data = window.MaviInciData;
   var Shell = window.MaviInciShell;
   if (!Data || !Shell) {
     document.getElementById('root').innerHTML = '<div style="padding:40px;font-family:Arial,sans-serif;">Rezervasyon altyapisi yuklenemedi.</div>';
+    if (Boot && typeof Boot.fail === 'function') Boot.fail('Rezervasyon sayfasi cekirdek dosyalari yuklenemedi.');
     return;
   }
 
@@ -402,6 +404,7 @@
     Shell.initializeNavigation();
     initializeForms();
     Shell.initializeRevealAnimations();
+    if (Boot && typeof Boot.markMounted === 'function') Boot.markMounted();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -410,6 +413,7 @@
     } catch (error) {
       console.error(error);
       document.getElementById('root').innerHTML = '<div style="padding:40px;font-family:Arial,sans-serif;">Rezervasyon sayfasi yuklenirken bir hata olustu.</div>';
+      if (Boot && typeof Boot.fail === 'function') Boot.fail('Rezervasyon sayfasi yuklenirken teknik bir sorun olustu.');
     }
   });
 

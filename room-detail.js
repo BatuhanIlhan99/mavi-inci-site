@@ -1,7 +1,9 @@
 ﻿(function () {
+  var Boot = window.MaviInciBoot;
   var Data = window.MaviInciData;
   if (!Data) {
     document.getElementById('root').innerHTML = '<div style="padding:40px;font-family:Arial,sans-serif;">Veri katmani yuklenemedi.</div>';
+    if (Boot && typeof Boot.fail === 'function') Boot.fail('Oda detay sayfasi veri katmani yuklenemedi.');
     return;
   }
 
@@ -210,6 +212,7 @@
     document.getElementById('root').innerHTML = renderApp();
     initializeLightbox();
     initializeRevealAnimations();
+    if (Boot && typeof Boot.markMounted === 'function') Boot.markMounted();
   }
 
   function initializeLightbox() {
@@ -304,6 +307,7 @@
     } catch (error) {
       console.error(error);
       document.getElementById('root').innerHTML = '<div style="padding:40px;font-family:Arial,sans-serif;">Oda detay sayfasi yuklenemedi.</div>';
+      if (Boot && typeof Boot.fail === 'function') Boot.fail('Oda detay sayfasi yuklenirken teknik bir sorun olustu.');
     }
   });
 

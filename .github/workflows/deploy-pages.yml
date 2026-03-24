@@ -26,6 +26,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate site source
+        run: node ./scripts/validate-site.mjs
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
@@ -38,6 +46,7 @@ jobs:
           cp rezervasyon.html dist/
           cp room.html dist/
           cp styles.css dist/
+          cp boot.js dist/
           cp site-shell.js dist/
           cp home.js dist/
           cp rooms.js dist/
