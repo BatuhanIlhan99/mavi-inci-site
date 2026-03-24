@@ -159,8 +159,18 @@
     return '<footer class="footer"><div class="container footer-grid"><div class="footer-brand"><strong>' + Data.escapeHtml(state.hotel.name) + '</strong><span>' + Data.escapeHtml(state.hotel.description) + '</span></div><div><p class="section-kicker">Oda Akisi</p><div class="footer-links"><a href="#oda-galerisi">Galeri</a><a href="#oda-detaylari">Detaylar</a><a href="#benzer-odalar">Benzer Odalar</a><a href="./index.html#rezervasyon">Rezervasyon</a></div></div><div><p class="section-kicker">Iletisim</p><div class="footer-links"><a href="tel:' + Data.escapeHtml(state.hotel.phone) + '">' + Data.escapeHtml(state.hotel.phone) + '</a><a href="mailto:' + Data.escapeHtml(state.hotel.email) + '">' + Data.escapeHtml(state.hotel.email) + '</a><a href="https://wa.me/' + Data.escapeHtml(state.hotel.whatsappNumber.replace(/[^\d]/g, '')) + '">WhatsApp</a></div></div><div><p class="section-kicker">Diger</p><div class="footer-links"><a href="./index.html">Ana Sayfa</a><a href="./index.html#odalar">Tum Odalar</a><a href="./index.html#iletisim">Iletisim</a></div></div></div><div class="container footer-note"><div class="footer-meta">Oda detaylari, galeri ve rezervasyon akisinin tamamini ayni deneyimde birlestirir.</div><div class="footer-meta">' + Data.escapeHtml(room.name) + '</div></div></footer><div class="lightbox hidden" id="detailLightbox" aria-hidden="true"><div class="lightbox-backdrop" data-detail-close></div><div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Oda galerisi"><button class="lightbox-close" type="button" data-detail-close>Kapat</button><div class="lightbox-stage" id="detailStage"></div><div class="lightbox-meta"><div><strong id="detailTitle">Galeri</strong><span id="detailCaption"></span></div><div class="lightbox-controls"><button class="lightbox-nav" type="button" id="detailPrev">Onceki</button><span id="detailCounter">1 / 1</span><button class="lightbox-nav" type="button" id="detailNext">Sonraki</button></div></div></div></div>';
   }
 
+  function renderFloatingActions() {
+    var whatsapp = 'https://wa.me/' + Data.escapeHtml(state.hotel.whatsappNumber.replace(/[^\d]/g, ''));
+    return '<div class="floating-actions" aria-label="Oda icin hizli rezervasyon ve iletisim aksiyonlari">' +
+      '<a class="floating-button floating-button-secondary" href="' + whatsapp + '">' +
+      '<span>WhatsApp</span><strong>Bu Oda Icin Sor</strong></a>' +
+      '<a class="floating-button floating-button-primary" href="' + bookingHref() + '">' +
+      '<span>Rezervasyon</span><strong>Bu Odayi Ayir</strong></a>' +
+      '</div>';
+  }
+
   function renderApp() {
-    return '<div class="shell room-page-shell">' + renderHeader() + renderHero() + '<main>' + renderGallerySection() + renderDetailSection() + renderAvailabilitySection() + renderSimilarRooms() + '</main>' + renderFooter() + '</div>';
+    return '<div class="shell room-page-shell">' + renderHeader() + renderHero() + '<main>' + renderGallerySection() + renderDetailSection() + renderAvailabilitySection() + renderSimilarRooms() + '</main>' + renderFooter() + renderFloatingActions() + '</div>';
   }
 
   function updateMeta() {

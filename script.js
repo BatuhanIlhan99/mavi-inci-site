@@ -220,8 +220,18 @@
     return '<footer class="footer"><div class="container footer-grid"><div class="footer-brand"><strong>' + Data.escapeHtml(state.hotel.name) + '</strong><span>' + Data.escapeHtml(state.hotel.description) + '</span></div><div><p class="section-kicker">Kisayollar</p><div class="footer-links"><a href="#deneyim">Deneyim</a><a href="#odalar">Odalar</a><a href="#rezervasyon">Rezervasyon</a><a href="#galeri">Galeri</a></div></div><div><p class="section-kicker">Operasyon</p><div class="footer-links"><a href="#">Check-in ' + Data.escapeHtml(state.hotel.checkInTime) + '</a><a href="#">Check-out ' + Data.escapeHtml(state.hotel.checkOutTime) + '</a><a href="#">Kahvalti ' + Data.escapeHtml(state.hotel.breakfastHours) + '</a><a href="#iletisim">Iletisim Akisi</a></div></div><div><p class="section-kicker">Iletisim</p><div class="footer-links"><a href="tel:' + Data.escapeHtml(state.hotel.phone) + '">' + Data.escapeHtml(state.hotel.phone) + '</a><a href="mailto:' + Data.escapeHtml(state.hotel.email) + '">' + Data.escapeHtml(state.hotel.email) + '</a><a href="https://wa.me/' + Data.escapeHtml(state.hotel.whatsappNumber.replace(/[^\d]/g, '')) + '">WhatsApp</a></div></div></div><div class="container footer-note"><div class="footer-meta">Dogrudan rezervasyon, oda detaylari ve iletisim akisi tek bir sade deneyimde birlestirildi.</div><div class="footer-meta">Mavi Inci Park Otel | Erdek</div></div></footer><div class="toast" id="toast"></div><div class="lightbox hidden" id="lightbox" aria-hidden="true"><div class="lightbox-backdrop" data-lightbox-close></div><div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Galeri buyutme"><button class="lightbox-close" type="button" data-lightbox-close>Kapat</button><div class="lightbox-stage" id="lightboxStage"></div><div class="lightbox-meta"><div><strong id="lightboxTitle">Galeri</strong><span id="lightboxCaption"></span></div><div class="lightbox-controls"><button class="lightbox-nav" type="button" id="lightboxPrev">Onceki</button><span id="lightboxCounter">1 / 1</span><button class="lightbox-nav" type="button" id="lightboxNext">Sonraki</button></div></div></div></div>';
   }
 
+  function renderFloatingActions() {
+    var whatsapp = 'https://wa.me/' + Data.escapeHtml(state.hotel.whatsappNumber.replace(/[^\d]/g, ''));
+    return '<div class="floating-actions" aria-label="Hizli rezervasyon ve iletisim aksiyonlari">' +
+      '<a class="floating-button floating-button-secondary" href="' + whatsapp + '">' +
+      '<span>WhatsApp</span><strong>Hizli Bilgi Al</strong></a>' +
+      '<a class="floating-button floating-button-primary" href="#rezervasyon">' +
+      '<span>Rezervasyon</span><strong>Hemen Basla</strong></a>' +
+      '</div>';
+  }
+
   function renderApp() {
-    return '<div class="shell">' + renderTopStrip() + renderHeader() + '<main>' + renderHero() + renderExperience() + renderRooms() + renderFeatures() + renderEditorial() + renderBookingSection() + renderGallery() + renderReviewsAndContact() + '</main>' + renderFooter() + '</div>';
+    return '<div class="shell">' + renderTopStrip() + renderHeader() + '<main>' + renderHero() + renderExperience() + renderRooms() + renderFeatures() + renderEditorial() + renderBookingSection() + renderGallery() + renderReviewsAndContact() + '</main>' + renderFooter() + renderFloatingActions() + '</div>';
   }
 
   function updateMeta() {
