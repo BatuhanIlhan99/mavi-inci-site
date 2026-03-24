@@ -4287,3 +4287,141 @@ body {
     transform: none !important;
   }
 }
+
+.top-strip {
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.brand-copy strong,
+.footer-brand strong {
+  letter-spacing: -0.03em;
+}
+
+.brand-copy span {
+  color: rgba(232, 244, 249, 0.76);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero-prelude {
+  gap: 0.95rem;
+}
+
+.hero-annotation {
+  max-width: 34rem;
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+  line-height: 1.85;
+  color: rgba(235, 246, 250, 0.68);
+}
+
+.kicker {
+  max-width: 34rem;
+  letter-spacing: 0.34em;
+  font-size: 0.79rem;
+  font-weight: 700;
+}
+
+.section-header,
+.gallery-heading {
+  gap: 1rem;
+}
+
+.section-header::after {
+  width: 5.5rem;
+  margin-top: 0.2rem;
+}
+
+.hero-title,
+.section-title,
+.editorial-title,
+.gallery-heading h2 {
+  letter-spacing: -0.04em;
+}
+
+.hero-text,
+.section-text,
+.story-copy,
+.review-card p,
+.contact-card p,
+.destination-card p,
+.feature-card p,
+.editorial-card p,
+.footer-brand span {
+  font-size: clamp(1.01rem, 1vw, 1.14rem);
+  line-height: 1.92;
+}
+
+.hero-text {
+  max-width: 56ch;
+}
+
+.page-hero-copy .hero-text {
+  max-width: 60ch;
+}
+
+.story-card,
+.feature-card,
+.review-card,
+.contact-card,
+.editorial-card,
+.booking-shell,
+.booking-review-card,
+.destination-card,
+.seasonal-promo-card,
+.seasonal-card {
+  border-radius: 2rem;
+}
+
+.story-card,
+.feature-card,
+.review-card,
+.contact-card,
+.destination-card,
+.seasonal-promo-card,
+.seasonal-card,
+.booking-review-card {
+  box-shadow: 0 26px 68px rgba(8, 31, 45, 0.1);
+}
+
+.hero-collector-card strong,
+.hero-signature-card strong,
+.summary-line strong {
+  letter-spacing: -0.02em;
+}
+
+.hero-collector-card strong {
+  line-height: 1.55;
+}
+
+.booking-shell-header h3,
+.booking-panel-header h3,
+.gallery-heading h2,
+.seasonal-note strong,
+.package-card h3 {
+  letter-spacing: -0.03em;
+}
+
+.booking-shell-header p,
+.booking-panel-header p,
+.seasonal-note p,
+.package-card p {
+  line-height: 1.84;
+}
+
+.footer-note {
+  color: rgba(235, 246, 250, 0.72);
+}
+
+@media (max-width: 860px) {
+  .hero-annotation,
+  .kicker {
+    max-width: none;
+  }
+
+  .section-header,
+  .gallery-heading {
+    gap: 0.85rem;
+  }
+}

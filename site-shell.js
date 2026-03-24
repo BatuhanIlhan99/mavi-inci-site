@@ -138,7 +138,7 @@
   function renderTopStrip(state) {
     var promo = Data.getPrimaryPromotion(state);
     return '<div class="top-strip"><div class="container top-strip-inner"><div>' +
-      (promo ? '<strong>' + Data.escapeHtml(promo.title) + '</strong> | ' + Data.escapeHtml(promo.code) + ' koduyla %' + promo.discount + ' web avantaji' : '<strong>Direkt Rezervasyon Hatti</strong> | Telefon ve WhatsApp uzerinden hizli geri donus') +
+      (promo ? '<strong>' + Data.escapeHtml(promo.title) + '</strong> | ' + Data.escapeHtml(promo.code) + ' koduyla %' + promo.discount + ' web avantaji' : '<strong>Direkt rezervasyon ve hizli geri donus</strong> | Telefon ve WhatsApp uzerinden ayni gun planlama destegi') +
       '</div><div class="quick-meta"><span>Tel ' + Data.escapeHtml(state.hotel.phone) + '</span><span>Check-in ' + Data.escapeHtml(state.hotel.checkInTime) + '</span><span>Kahvalti ' + Data.escapeHtml(state.hotel.breakfastHours) + '</span></div></div></div>';
   }
 
@@ -149,7 +149,7 @@
       { id: 'experiences', label: 'Deneyimler', href: pageHref('experiences') },
       { id: 'booking', label: 'Rezervasyon', href: pageHref('booking') }
     ];
-    return '<header class="site-header site-header-page"><div class="container nav-shell"><a class="brand" href="' + pageHref('home') + '" aria-label="Mavi Inci Park Otel ana sayfa"><span class="brand-mark">MI</span><span class="brand-copy"><strong>' + Data.escapeHtml(state.hotel.name) + '</strong><span>Erdek Sahilinde Rafine Butik Konaklama</span></span></a><nav class="desktop-nav" aria-label="Ana menu">' +
+    return '<header class="site-header site-header-page"><div class="container nav-shell"><a class="brand" href="' + pageHref('home') + '" aria-label="Mavi Inci Park Otel ana sayfa"><span class="brand-mark">MI</span><span class="brand-copy"><strong>' + Data.escapeHtml(state.hotel.name) + '</strong><span>Erdek merkezde modern butik konaklama</span></span></a><nav class="desktop-nav" aria-label="Ana menu">' +
       links.map(function (link) {
         return '<a class="' + (link.id === activePage ? 'is-current' : '') + '" href="' + link.href + '">' + link.label + '</a>';
       }).join('') +
@@ -169,7 +169,7 @@
       links.map(function (link) {
         return '<a class="' + (link.id === activePage ? 'is-current' : '') + '" href="' + link.href + '">' + link.label + '</a>';
       }).join('') +
-      '</div></div><div><p class="section-kicker">Rezervasyon Ofisi</p><div class="footer-links"><a href="tel:' + Data.escapeHtml(state.hotel.phone) + '">' + Data.escapeHtml(state.hotel.phone) + '</a><a href="https://wa.me/' + Data.escapeHtml(state.hotel.whatsappNumber.replace(/[^\d]/g, '')) + '">WhatsApp Hatti</a><a href="mailto:' + Data.escapeHtml(state.hotel.email) + '">' + Data.escapeHtml(state.hotel.email) + '</a></div></div><div><p class="section-kicker">Operasyon</p><div class="footer-links"><a href="#">Check-in ' + Data.escapeHtml(state.hotel.checkInTime) + '</a><a href="#">Check-out ' + Data.escapeHtml(state.hotel.checkOutTime) + '</a><a href="#">Kahvalti ' + Data.escapeHtml(state.hotel.breakfastHours) + '</a><a href="#">Adres ' + Data.escapeHtml(state.hotel.address) + '</a></div></div></div><div class="container footer-note"><div class="footer-meta">Cok sayfali otel deneyimi; odalar, rezervasyon ve deneyim akisini daha net karar vermek icin ayristirir.</div><div class="footer-meta">Mavi Inci Park Otel | Erdek</div></div></footer><div class="toast" id="toast"></div>';
+      '</div></div><div><p class="section-kicker">Rezervasyon Ofisi</p><div class="footer-links"><a href="tel:' + Data.escapeHtml(state.hotel.phone) + '">' + Data.escapeHtml(state.hotel.phone) + '</a><a href="https://wa.me/' + Data.escapeHtml(state.hotel.whatsappNumber.replace(/[^\d]/g, '')) + '">WhatsApp Hatti</a><a href="mailto:' + Data.escapeHtml(state.hotel.email) + '">' + Data.escapeHtml(state.hotel.email) + '</a></div></div><div><p class="section-kicker">Operasyon</p><div class="footer-links"><a href="#">Check-in ' + Data.escapeHtml(state.hotel.checkInTime) + '</a><a href="#">Check-out ' + Data.escapeHtml(state.hotel.checkOutTime) + '</a><a href="#">Kahvalti ' + Data.escapeHtml(state.hotel.breakfastHours) + '</a><a href="#">Adres ' + Data.escapeHtml(state.hotel.address) + '</a></div></div></div><div class="container footer-note"><div class="footer-meta">Cok sayfali otel deneyimi; otel, odalar, deneyimler ve rezervasyon akislarini daha okunur ve guven veren bir duzende sunar.</div><div class="footer-meta">Mavi Inci Park Otel | Erdek</div></div></footer><div class="toast" id="toast"></div>';
   }
 
   function renderFloatingActions(state, options) {
