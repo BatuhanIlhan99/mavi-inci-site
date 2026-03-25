@@ -41,6 +41,7 @@ jobs:
         run: |
           mkdir -p dist
           cp index.html dist/
+          cp iletisim.html dist/
           cp odalar.html dist/
           cp kurumsal.html dist/
           cp erdek-rehberi.html dist/

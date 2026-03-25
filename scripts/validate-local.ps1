@@ -6,6 +6,7 @@ $ErrorActionPreference = 'Stop'
 
 $htmlFiles = @(
   'index.html',
+  'iletisim.html',
   'odalar.html',
   'kurumsal.html',
   'erdek-rehberi.html',

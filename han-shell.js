@@ -17,6 +17,7 @@
     if (page === 'venues') return './deneyimler.html';
     if (page === 'guide') return './erdek-rehberi.html';
     if (page === 'corporate') return './kurumsal.html';
+    if (page === 'contact') return './iletisim.html';
     if (page === 'booking') return './rezervasyon.html';
     if (page === 'admin') return './admin.html';
     return './index.html';
@@ -28,6 +29,12 @@
 
   function absoluteUrl(href) {
     return new URL(href, window.location.href).href;
+  }
+
+  function primaryHotel(state) {
+    return Data && typeof Data.getBusinessById === 'function'
+      ? (Data.getBusinessById(state, 'mavi-inci-park-otel') || null)
+      : null;
   }
 
   function updateMeta(state, meta) {
@@ -71,25 +78,29 @@
   }
 
   function renderHeader(state, activePage) {
+    var hotel = primaryHotel(state) || {};
+    var brandName = hotel.name || 'Mavi Inci Park Otel';
+    var brandTagline = hotel.tagline || 'Erdek sahilinde butik sehir oteli';
+    var brandPhone = hotel.phone || state.group.phone;
     var links = [
       { id: 'home', label: 'Ana Sayfa', href: pageHref('home') },
-      { id: 'hotels', label: 'Oteller', href: pageHref('hotels') },
-      { id: 'guide', label: 'Erdek Rehberi', href: pageHref('guide') },
       { id: 'corporate', label: 'Kurumsal', href: pageHref('corporate') },
-      { id: 'venues', label: 'Fast Food & Pub', href: pageHref('venues') },
-      { id: 'booking', label: 'Talep Formu', href: pageHref('booking') }
+      { id: 'hotels', label: 'Odalar', href: pageHref('hotels') },
+      { id: 'guide', label: 'Erdek Rehberi', href: pageHref('guide') },
+      { id: 'contact', label: 'Iletisim', href: pageHref('contact') },
+      { id: 'booking', label: 'Rezervasyon', href: pageHref('booking') }
     ];
     return '' +
       '<div class="top-strip">' +
       '<div class="container top-strip-inner">' +
-      '<div><strong>' + escapeHtml(state.group.name) + '</strong> | ' + escapeHtml(state.group.tagline) + '</div>' +
-      '<div class="quick-meta"><span>' + escapeHtml(state.group.city) + '</span><span>' + escapeHtml(state.group.phone) + '</span></div>' +
+      '<div><strong>' + escapeHtml(brandName) + '</strong> | ' + escapeHtml(brandTagline) + '</div>' +
+      '<div class="quick-meta"><span>' + escapeHtml(hotel.location || state.group.city) + '</span><span>' + escapeHtml(brandPhone) + '</span></div>' +
       '</div></div>' +
       '<header class="site-header site-header-page">' +
       '<div class="container nav-shell">' +
-      '<a class="brand" href="' + pageHref('home') + '" aria-label="' + escapeHtml(state.group.name) + ' ana sayfa">' +
-      '<span class="brand-mark">H</span>' +
-      '<span class="brand-copy"><strong>' + escapeHtml(state.group.name) + '</strong><span>Coklu isletme ve konaklama grubu</span></span>' +
+      '<a class="brand" href="' + pageHref('home') + '" aria-label="' + escapeHtml(brandName) + ' ana sayfa">' +
+      '<span class="brand-mark">M</span>' +
+      '<span class="brand-copy"><strong>' + escapeHtml(brandName) + '</strong><span>13 odali butik sehir oteli</span></span>' +
       '</a>' +
       '<nav class="desktop-nav" aria-label="Ana menu">' +
       links.map(function (link) {
@@ -97,8 +108,8 @@
       }).join('') +
       '</nav>' +
       '<div class="nav-actions">' +
-      '<a class="button button-soft nav-contact-button" href="tel:' + escapeHtml(state.group.phone.replace(/\s+/g, '')) + '">Ara</a>' +
-      '<a class="button button-primary" href="' + pageHref('booking') + '">Isletme Secerek Talep Olustur</a>' +
+      '<a class="button button-soft nav-contact-button" href="tel:' + escapeHtml(brandPhone.replace(/\s+/g, '')) + '">Ara</a>' +
+      '<a class="button button-primary" href="' + pageHref('booking') + '">Hemen Rezervasyon Yap</a>' +
       '<button class="button button-secondary mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="mobilePanel"><span></span></button>' +
       '</div>' +
       '</div>' +
@@ -110,25 +121,31 @@
   }
 
   function renderFooter(state) {
+    var hotel = primaryHotel(state) || {};
+    var hotelName = hotel.name || 'Mavi Inci Park Otel';
+    var hotelDescription = hotel.description || 'Erdek merkezde konforlu ve guven veren butik konaklama deneyimi.';
+    var hotelPhone = hotel.phone || state.group.phone;
+    var hotelEmail = hotel.email || state.group.email;
+    var hotelWhatsapp = (hotelPhone || state.group.whatsapp).replace(/[^\d]/g, '');
     return '' +
       '<footer class="footer">' +
       '<div class="container footer-grid">' +
-      '<div class="footer-brand"><strong>' + escapeHtml(state.group.name) + '</strong><span>' + escapeHtml(state.group.description) + '</span></div>' +
-      '<div><p class="section-kicker">Portfoy</p><div class="footer-links">' +
-      '<a href="' + pageHref('hotels') + '">Uc Otel</a>' +
+      '<div class="footer-brand"><strong>' + escapeHtml(hotelName) + '</strong><span>' + escapeHtml(hotelDescription) + '</span></div>' +
+      '<div><p class="section-kicker">Kisayollar</p><div class="footer-links">' +
+      '<a href="' + pageHref('home') + '">Ana Sayfa</a>' +
+      '<a href="' + pageHref('corporate') + '">Kurumsal</a>' +
+      '<a href="' + pageHref('hotels') + '">Odalar</a>' +
       '<a href="' + pageHref('guide') + '">Erdek Rehberi</a>' +
-      '<a href="' + pageHref('corporate') + '">Kurumsal Standartlar</a>' +
-      '<a href="' + pageHref('venues') + '">Fast Food & Pub</a>' +
-      '<a href="' + pageHref('booking') + '">Talep Formu</a>' +
+      '<a href="' + pageHref('contact') + '">Iletisim</a>' +
       '</div></div>' +
       '<div><p class="section-kicker">Iletisim</p><div class="footer-links">' +
-      '<a href="tel:' + escapeHtml(state.group.phone.replace(/\s+/g, '')) + '">' + escapeHtml(state.group.phone) + '</a>' +
-      '<a href="mailto:' + escapeHtml(state.group.email) + '">' + escapeHtml(state.group.email) + '</a>' +
-      '<a href="https://wa.me/' + escapeHtml(state.group.whatsapp.replace(/[^\d]/g, '')) + '">WhatsApp</a>' +
+      '<a href="tel:' + escapeHtml(hotelPhone.replace(/\s+/g, '')) + '">' + escapeHtml(hotelPhone) + '</a>' +
+      '<a href="mailto:' + escapeHtml(hotelEmail) + '">' + escapeHtml(hotelEmail) + '</a>' +
+      '<a href="https://wa.me/' + escapeHtml(hotelWhatsapp) + '">WhatsApp</a>' +
       '</div></div>' +
-      '<div><p class="section-kicker">Kurumsal</p><div class="footer-links"><a href="' + pageHref('corporate') + '">Standartlar ve gizlilik</a><a href="' + pageHref('booking') + '">Dogrudan talep avantajlari</a><a href="./admin.html">Yonetim Girisi</a></div></div>' +
+      '<div><p class="section-kicker">Yasal Bilgi</p><div class="footer-links"><a href="' + pageHref('contact') + '#kvkk-placeholder">KVKK Aydinlatma Metni</a><a href="' + pageHref('contact') + '#iptal-iade-placeholder">Iptal ve Iade Kosullari</a><a href="' + pageHref('booking') + '">Hemen Rezervasyon Yap</a></div></div>' +
       '</div>' +
-      '<div class="container footer-note"><div class="footer-meta">Han Otelcilik | Erdek merkezli grup operasyonu</div><div class="footer-meta">3 otel + 2 yeme icme noktasi</div></div>' +
+      '<div class="container footer-note"><div class="footer-meta">Mavi Inci Park Otel | Erdek merkezli butik konaklama</div><div class="footer-meta">13 oda | merkezi konum | dogrudan rezervasyon</div></div>' +
       '</footer>';
   }
 
