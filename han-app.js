@@ -275,7 +275,7 @@
       hero(state, {
         kicker: 'Han Otelcilik',
         title: 'Erdek odakli coklu konaklama ve yeme icme grubu',
-        text: 'Han Otelcilik; Mavi Inci Park Otel, Gulplaj Hotel ve Villa Ece Pansiyon bilgilerini tek cati altinda toplarken, fast food restoran ve pub operasyonlarini da ayni kurumsal yapinin icine yerlestirir.',
+        text: 'Han Otelcilik; Mavi Inci Park Otel, Gulplaj Hotel ve Villa Ece Pansiyon bilgilerini tek cati altinda toplarken, Smile Foodhouse restoran markasi ve pub operasyonunu da ayni kurumsal yapinin icine yerlestirir.',
         primaryLabel: 'Otelleri Incele',
         primaryHref: Shell.pageHref('hotels'),
         secondaryLabel: 'Fast Food & Pub',
@@ -333,14 +333,14 @@
         chip: 'Han Otelcilik / Yeme Icme',
         kicker: 'Fast Food ve Pub Operasyonlari',
         title: 'Konaklama disi gelir yaratan iki ayri marka kurgusu',
-        text: 'Fast food restoran ve pub isimleri kullanici tarafindan henuz verilmedigi icin esnek calisma markalariyla acildi. Her ikisi de panelden yeniden adlandirilabilir, menu ve servis yapisi ayri ayri yonetilebilir.',
+        text: 'Smile Foodhouse hizli servis restoran markasi olarak netlestirildi. Pub birimi ise ayrik panel yapisi icinde yonetiliyor ve istenirse daha sonra yeniden adlandirilabiliyor.',
         primaryLabel: 'Isletme Talebi Ac',
         primaryHref: Shell.pageHref('booking'),
         secondaryLabel: 'Admin Hub',
         secondaryHref: './admin.html',
         statsHtml: statCards(venues.map(function (item) { return { label: item.shortName, value: item.heroTag }; }))
       }) +
-      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Yeme Icme Portfoyu</p><h2 class="section-title">Otel trafigini grubun icinde tutan ticari hatlar</h2><p class="section-text">Fast food noktasi hizli servis ve paket satis odagi ile; pub ise aksam ekonomisi ve etkinlik kurgusu ile ele alindi. Ikisi de otel markalariyla birlikte capraz satis uretecek sekilde planlandi.</p></div><div class="stay-preview-grid han-business-grid">' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Yeme Icme Portfoyu</p><h2 class="section-title">Otel trafigini grubun icinde tutan ticari hatlar</h2><p class="section-text">Smile Foodhouse hizli servis ve paket satis odagi ile; pub ise aksam ekonomisi ve etkinlik kurgusu ile ele alindi. Ikisi de otel markalariyla birlikte capraz satis uretecek sekilde planlandi.</p></div><div class="stay-preview-grid han-business-grid">' +
       venues.map(function (business) { return Shell.renderBusinessCard(business, { actionLabel: 'Birimi Incele', secondaryLabel: 'Bu Birime Talep' }); }).join('') +
       '</div></div></section>');
   }

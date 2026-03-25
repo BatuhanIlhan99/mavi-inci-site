@@ -153,10 +153,10 @@
       {
         id: 'han-fast-food',
         type: 'fastfood',
-        name: 'Han Fast Food',
-        shortName: 'Fast Food',
-        heroTag: 'Calisma adi ile acilan hizli servis restoran birimi',
-        tagline: 'Otel misafirleri ve sokak trafigi icin hizli servis noktasi',
+        name: 'Smile Foodhouse',
+        shortName: 'Smile Foodhouse',
+        heroTag: 'Erdek icin hizli servis restoran markasi',
+        tagline: 'Otel misafirleri ve sehir trafigi icin modern hizli servis noktasi',
         location: 'Erdek / Balikesir',
         address: 'Erdek merkez operasyon noktasi - panelden guncellenebilir',
         phone: '+90 537 696 30 30',
@@ -164,10 +164,10 @@
         website: '',
         accent: '#c7642c',
         cover: 'linear-gradient(135deg, #5d2f16 0%, #c7642c 44%, #f5d9b9 100%)',
-        summary: 'Kullanici tarafindan isim verilmedigi icin marka adi gecici olarak Han Fast Food olarak kurgulandi; panelden kolayca guncellenebilir.',
-        description: 'Han Fast Food, grubun konaklama disi yeme icme operasyonu icin hazirlanan calisma markasidir. Erdek merkez akisi icinde paket servis, hizli masa devri ve otel misafirlerine capraz satis yapabilecek sekilde konumlandirildi.',
+        summary: 'Smile Foodhouse, Han Otelcilik icindeki hizli servis restoran markasi olarak konumlandirildi.',
+        description: 'Smile Foodhouse, grubun konaklama disi yeme icme operasyonunu tasiyan hizli servis restoran markasidir. Erdek merkez akisi icinde paket servis, hizli masa devri ve otel misafirlerine capraz satis yapabilecek sekilde konumlandirildi.',
         highlights: [
-          'Calisma adi panelden degistirilebilir',
+          'Marka kimligi ve menu yapisi panelden yonetilebilir',
           'Otel misafirlerine hizli servis entegrasyonu',
           'Paket servis ve gece gec saat operasyonu kurgusu'
         ],
@@ -179,7 +179,7 @@
         stats: [
           { label: 'Tip', value: 'Fast Food' },
           { label: 'Model', value: 'Hizli servis + paket' },
-          { label: 'Durum', value: 'Calisma adi ile hazir' }
+          { label: 'Durum', value: 'Smile Foodhouse markasi aktif' }
         ],
         rooms: [],
         offerings: [
@@ -244,7 +244,49 @@
     return [];
   }
 
+  function migrateLegacyEntry(entry) {
+    if (!entry || entry.id !== 'han-fast-food') return entry;
+
+    var next = Object.assign({}, entry);
+    var legacy = {
+      name: 'Han Fast Food',
+      shortName: 'Fast Food',
+      heroTag: 'Calisma adi ile acilan hizli servis restoran birimi',
+      tagline: 'Otel misafirleri ve sokak trafigi icin hizli servis noktasi',
+      summary: 'Kullanici tarafindan isim verilmedigi icin marka adi gecici olarak Han Fast Food olarak kurgulandi; panelden kolayca guncellenebilir.',
+      description: 'Han Fast Food, grubun konaklama disi yeme icme operasyonu icin hazirlanan calisma markasidir. Erdek merkez akisi icinde paket servis, hizli masa devri ve otel misafirlerine capraz satis yapabilecek sekilde konumlandirildi.',
+      highlights: [
+        'Calisma adi panelden degistirilebilir',
+        'Otel misafirlerine hizli servis entegrasyonu',
+        'Paket servis ve gece gec saat operasyonu kurgusu'
+      ],
+      stats: [
+        { label: 'Tip', value: 'Fast Food' },
+        { label: 'Model', value: 'Hizli servis + paket' },
+        { label: 'Durum', value: 'Calisma adi ile hazir' }
+      ]
+    };
+    var current = defaults.businesses[3];
+
+    Object.keys(legacy).forEach(function (key) {
+      if (!next[key] || next[key] === legacy[key]) {
+        next[key] = current[key];
+      }
+    });
+
+    if (JSON.stringify(next.highlights || []) === JSON.stringify(legacy.highlights || [])) {
+      next.highlights = current.highlights.slice();
+    }
+
+    if (JSON.stringify(next.stats || []) === JSON.stringify(legacy.stats || [])) {
+      next.stats = current.stats.slice();
+    }
+
+    return next;
+  }
+
   function hydrateEntry(entry) {
+    entry = migrateLegacyEntry(entry);
     return Object.assign({
       id: '',
       type: 'hotel',
