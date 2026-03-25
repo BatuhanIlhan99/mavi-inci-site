@@ -175,6 +175,72 @@
     { icon: 'OP', title: 'Operasyon seffafligi', text: 'Telefon, WhatsApp, e-posta ve isletme bazli panel yapisi ile tum akisin gorunur ve yonetilebilir olmasi hedeflenmistir.' }
   ];
 
+  var CORPORATE_MISSION_VISION = [
+    {
+      icon: 'fa-solid fa-bullseye',
+      title: 'Misyonumuz',
+      lead: 'Erdekte konaklamayi yalnizca bir oda secimi degil, guven veren bir misafir deneyimi olarak sunmak.',
+      text: 'Han Otelcilik olarak; merkezi iletisim, profesyonel operasyon ve ozenli misafirperverlik anlayisimizla hem tatil hem is seyahati planlayan misafirlerimize net, konforlu ve tutarli bir yolculuk sunuyoruz.'
+    },
+    {
+      icon: 'fa-solid fa-eye',
+      title: 'Vizyonumuz',
+      lead: 'Erdegin en guven veren, en estetik ve en iyi yonetilen butik konaklama gruplarindan biri olmak.',
+      text: 'Hedefimiz; konaklama, yeme icme, rota ve destinasyon bilgisini tek bir kurumsal cati altinda toplayarak Erdek deneyimini ulusal ve uluslararasi misafirler icin daha guclu hale getirmektir.'
+    }
+  ];
+
+  var CORPORATE_FEATURES = [
+    {
+      icon: 'fa-solid fa-concierge-bell',
+      title: '7/24 resepsiyon ve iletisim destegi',
+      text: 'Misafir talepleri gunun her saatinde merkezi ekip tarafindan takip edilir; ihtiyaca gore dogru isletmeye hizla yonlendirilir.'
+    },
+    {
+      icon: 'fa-solid fa-shield-halved',
+      title: 'Hijyen ve duzen odakli operasyon',
+      text: 'Temizlik, oda duzeni ve ortak alan bakimi; butik otel deneyiminin temel kalite gostergesi olarak ele alinir.'
+    },
+    {
+      icon: 'fa-solid fa-location-dot',
+      title: 'Erdek merkezine yakin konum avantajlari',
+      text: 'Portfoyumuz, sahil bandi, merkez aks ve gezi noktalarina kolay erisim saglayacak sekilde kurgulanmistir.'
+    },
+    {
+      icon: 'fa-solid fa-wifi',
+      title: 'Ucretsiz Wi-Fi ve temel konfor altyapisi',
+      text: 'Hem tatil hem is seyahati planlayan misafirler icin baglanti, iletisim ve gunluk ihtiyaclara cevap veren altyapi onceliklidir.'
+    },
+    {
+      icon: 'fa-solid fa-briefcase',
+      title: 'Is seyahati ve kisa konaklama uygunlugu',
+      text: 'Merkezi ulasim, hizli geri donus ve pratik operasyon sayesinde kurumsal seyahatler ve hafta ici planlar icin de elverislidir.'
+    },
+    {
+      icon: 'fa-solid fa-umbrella-beach',
+      title: 'Tatil odakli davetkar atmosfer',
+      text: 'Erdegin sahil ritmi, gun batimi, plaj kullanimi ve sakin butik konaklama duygusu tek cati altinda bulusturulur.'
+    }
+  ];
+
+  var CORPORATE_DOCUMENTS = [
+    {
+      icon: 'fa-solid fa-file-lines',
+      title: 'Turizm ve isletme belgeleri',
+      text: 'Resmi belge ve yetki basliklari icin bu alan dokumantasyon yuklendikce guncellenebilir.'
+    },
+    {
+      icon: 'fa-solid fa-shield-halved',
+      title: 'Hijyen ve kalite protokolleri',
+      text: 'Temizlik, guvenlik ve operasyon standartlarina dair protokol basliklari burada sergilenecek sekilde hazirlandi.'
+    },
+    {
+      icon: 'fa-solid fa-file-signature',
+      title: 'Kurumsal politika ve KVKK notlari',
+      text: 'Gizlilik, rezervasyon sureci ve misafir iletisim standartlarini aciklayan politika metinleri icin yer ayrildi.'
+    }
+  ];
+
   var BUSINESS_ENHANCEMENTS = {
     'mavi-inci-park-otel': {
       audience: ['Merkezde kalmak isteyen ciftler', 'Kisa hafta ici kacamaklari', 'Sahile dogrudan yakin butik otel arayan misafirler'],
@@ -806,8 +872,8 @@
       hero(state, {
         chip: 'Han Otelcilik / Kurumsal',
         kicker: 'Kurumsal Standartlar',
-        title: 'Dogrudan rezervasyon, merkezi operasyon ve Erdek uzmanligini tek dilden yoneten grup yapisi',
-        text: 'Bu sayfa; Han Otelcilik markasinin calisma mantigini, hizmet standartlarini, gizlilik yaklasimini ve misafire sundugu dogrudan rezervasyon avantajlarini daha net anlatmak icin tasarlandi.',
+        title: 'Erdegin kalbinde, butik zarafet ile kurumsal guveni bir araya getiren konaklama anlayisi',
+        text: 'Han Otelcilik; Erdek merkezli otelleri, yeme icme markalari ve merkezi operasyon yapisi ile hem tatil hem is seyahati planlayan misafirler icin profesyonel, davetkar ve tutarli bir deneyim sunar.',
         primaryLabel: 'Merkezi Talep Formu',
         primaryHref: Shell.pageHref('booking'),
         secondaryLabel: 'Otelleri Incele',
@@ -816,22 +882,38 @@
         sideTitle: 'Kurumsal Soz',
         sideText: state.group.directBookingPromise
       }) +
-      '<section class="section section-light"><div class="container story-grid"><article class="story-card"><p class="section-kicker">Manifesto</p><h2>Bizim icin iyi konaklama, yalnizca oda satmak degil; guvenli planlama ve dogru yonlendirme sunmaktir</h2><p class="story-copy">' + safe(state.group.manifesto) + '</p><p class="han-editorial-note">' + safe(state.group.reservationNote) + '</p><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '">Talep Gonder</a><a class="button button-secondary" href="https://wa.me/905376963030">WhatsApp ile Yaz</a></div></article><div class="value-stack"><article class="value-prop"><h3>Kurumsal omurga</h3>' + momentList(state.group.highlights) + '</article><article class="value-prop"><h3>Iletisim</h3><p>' + safe(state.group.address) + '</p><p><a class="contact-link" href="tel:' + safe((state.group.phone || '').replace(/\s+/g, '')) + '">' + safe(state.group.phone) + '</a></p><p><a class="contact-link" href="mailto:' + safe(state.group.email) + '">' + safe(state.group.email) + '</a></p></article></div></div></section>' +
-      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Standartlar</p><h2 class="section-title">Markanin karar verdiren temel hizmet standartlari</h2><p class="section-text">Bu maddeler, sitenin metin dilini ve rezervasyon akisini profesyonel gosteren kurumsal cekirdegi olusturur.</p></div><div class="features-grid">' +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Hakkimizda</p><h2 class="section-title">Erdegin kalbinde, profesyonel ve davetkar bir konaklama vizyonu</h2><p class="section-text lead text-muted">Han Otelcilik olarak Erdek merkezli portfoyumuzu; misafirperverlik, konfor ve guven duygusunu ayni cati altinda bulusturacak sekilde yonetiyoruz.</p></div><div class="story-grid"><article class="story-card"><h3>Butik zarafet, kurumsal disiplin</h3><p class="story-copy lead">Erdegin sahil ritmini, modern butik otel anlayisi ile birlestiriyor; kisa hafta ici konaklamalardan uzun yaz tatillerine kadar her planda tutarli bir misafir deneyimi sunuyoruz.</p><p class="text-muted">Merkezi konum avantajimiz, net iletisim dilimiz ve ozenli operasyon anlayisimiz sayesinde hem tatil odakli misafirler hem de is seyahati planlayan ziyaretciler icin guven veren bir alternatif olusturuyoruz. Her temas noktasinda amacimiz; sade, zarif ve profesyonel bir hizmet standardi sunmaktir.</p><p class="text-muted mb-0">Misafirlerimizin yalnizca bir oda ayirtmasini degil; Erdek deneyimini rahat, planli ve keyifli sekilde yasamasini hedefliyoruz.</p></article><div class="value-stack"><article class="value-prop"><h3>Kurumsal omurga</h3>' + momentList(state.group.highlights) + '</article><article class="value-prop"><h3>Iletisim</h3><p class="mb-2">' + safe(state.group.address) + '</p><p class="mb-2"><a class="contact-link" href="tel:' + safe((state.group.phone || '').replace(/\s+/g, '')) + '">' + safe(state.group.phone) + '</a></p><p class="mb-0"><a class="contact-link" href="mailto:' + safe(state.group.email) + '">' + safe(state.group.email) + '</a></p></article></div></div></div></section>' +
+      '<section class="section section-dark py-5"><div class="container"><div class="section-header"><p class="section-kicker">Misyon ve Vizyon</p><h2 class="section-title">Hizmet anlayisimizi belirleyen iki temel eksen</h2><p class="section-text text-muted">Kurumsal kimligimizi guclendiren misyon ve vizyon yapisi, sayfanin tum dilini ve hizmet standardini yonlendirir.</p></div><div class="row g-4 align-items-stretch">' +
+      CORPORATE_MISSION_VISION.map(function (item) {
+        return '<div class="col-lg-6"><article class="contact-card han-corporate-card h-100"><div class="han-corporate-icon"><i class="' + safe(item.icon) + '" aria-hidden="true"></i></div><h3>' + safe(item.title) + '</h3><p class="lead">' + safe(item.lead) + '</p><p class="text-muted mb-0">' + safe(item.text) + '</p></article></div>';
+      }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Neden Biz?</p><h2 class="section-title">Misafir deneyimini guclendiren hizmet standartlari</h2><p class="section-text lead text-muted">Resepsiyon desteginden hijyen hassasiyetine, merkezi konumdan baglanti altyapisina kadar temel beklentileri premium bir cati altinda topluyoruz.</p></div><div class="row g-4 align-items-stretch">' +
+      CORPORATE_FEATURES.map(function (item) {
+        return '<div class="col-md-6 col-xl-4"><article class="feature-card han-standard-card h-100"><div class="han-corporate-icon"><i class="' + safe(item.icon) + '" aria-hidden="true"></i></div><h3>' + safe(item.title) + '</h3><p class="text-muted mb-0">' + safe(item.text) + '</p></article></div>';
+      }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-dark py-5"><div class="container"><div class="section-header"><p class="section-kicker">Kalite ve Guven</p><h2 class="section-title">Belgelerimiz ve kalite standartlarimiz icin hazir alan</h2><p class="section-text text-muted">Kurumsal kimligi destekleyen belge, protokol ve kalite basliklari bu alanda profesyonel bir hiyerarsi ile sunulacak sekilde kurgulandi.</p></div><div class="row g-4 align-items-stretch">' +
+      CORPORATE_DOCUMENTS.map(function (item) {
+        return '<div class="col-md-6 col-xl-4"><article class="contact-card han-document-card h-100"><div class="han-corporate-icon"><i class="' + safe(item.icon) + '" aria-hidden="true"></i></div><h3>' + safe(item.title) + '</h3><p class="text-muted">' + safe(item.text) + '</p><span class="han-document-placeholder">Placeholder alan</span></article></div>';
+      }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Operasyon Standartlari</p><h2 class="section-title">Markanin karar verdiren temel hizmet standartlari</h2><p class="section-text">Bu maddeler, sitenin metin dilini ve rezervasyon akisini profesyonel gosteren kurumsal cekirdegi olusturur.</p></div><div class="features-grid">' +
       infoCards(CORPORATE_STANDARDS) +
       '</div></div></section>' +
-      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Dogrudan Rezervasyon Avantajlari</p><h2 class="section-title">Araci yerine dogrudan iletisim kurmanin profesyonel faydalari</h2><p class="section-text">Teklif, uygunluk, tarih ve isletme secimini tek merkezde topladigimiz icin misafir daha hizli ve daha net bilgi alir.</p></div><div class="features-grid">' +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Dogrudan Rezervasyon Avantajlari</p><h2 class="section-title">Araci yerine dogrudan iletisim kurmanin profesyonel faydalari</h2><p class="section-text">Teklif, uygunluk, tarih ve isletme secimini tek merkezde topladigimiz icin misafir daha hizli ve daha net bilgi alir.</p></div><div class="features-grid">' +
       promoCards(DIRECT_BOOKING_STEPS) +
       '</div></div></section>' +
-      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Gizlilik ve Hazirlik</p><h2 class="section-title">Kurumsal guveni destekleyen tamamlayici notlar</h2><p class="section-text">Uluslararasi hazirlik, veri hassasiyeti ve seffaf operasyon dili premium bir marka algisinin vazgecilmez parcalaridir.</p></div><div class="features-grid">' +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Gizlilik ve Hazirlik</p><h2 class="section-title">Kurumsal guveni destekleyen tamamlayici notlar</h2><p class="section-text">Uluslararasi hazirlik, veri hassasiyeti ve seffaf operasyon dili premium bir marka algisinin vazgecilmez parcalaridir.</p></div><div class="features-grid">' +
       infoCards(LEGAL_AND_SERVICE_NOTES) +
       '</div></div></section>' +
-      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Portfoy Baglantilari</p><h2 class="section-title">Kurumsal omurgayi tasiyan isletmeler</h2><p class="section-text">Her isletme kendi sahnesini oynar; ancak hepsi ortak bir hizmet diline ve merkezi operasyon mantigina baglidir.</p></div><div class="stay-preview-grid han-business-grid">' +
+      '<section class="section section-dark py-5"><div class="container"><div class="section-header"><p class="section-kicker">Portfoy Baglantilari</p><h2 class="section-title">Kurumsal omurgayi tasiyan isletmeler</h2><p class="section-text">Her isletme kendi sahnesini oynar; ancak hepsi ortak bir hizmet diline ve merkezi operasyon mantigina baglidir.</p></div><div class="stay-preview-grid han-business-grid">' +
       state.businesses.map(function (business) { return Shell.renderBusinessCard(business, { actionLabel: 'Detayi Ac', secondaryLabel: 'Bu Isletmeye Talep' }); }).join('') +
       '</div></div></section>' +
-      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Sik Sorulan Konular</p><h2 class="section-title">Kurumsal surecimiz hakkinda hizli cevaplar</h2></div><div class="contact-grid">' +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Sik Sorulan Konular</p><h2 class="section-title">Kurumsal surecimiz hakkinda hizli cevaplar</h2></div><div class="contact-grid">' +
       faqCards(groupFaq(state)) +
-      '</div></div></section>');
+      '</div></div></section>' +
+      '<section class="section section-dark py-5"><div class="container"><article class="contact-card han-cta-banner"><div><p class="section-kicker">Rezervasyon Cagrisi</p><h2>Erdekte profesyonel, konforlu ve davetkar bir konaklama icin yerinizi simdiden ayirtin</h2><p class="lead text-muted">Tatil, is seyahati veya kisa hafta ici planiniz icin size en uygun isletmeyi birlikte belirleyelim.</p></div><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '">Hemen Rezervasyon Yapin</a><a class="button button-secondary" href="https://wa.me/905376963030">WhatsApp ile Ulasin</a></div></article></div></section>');
   }
 
   function renderBusiness(state, business) {
@@ -1279,8 +1361,8 @@
       title = state.group.name + ' | Oteller';
       description = 'Han Otelcilik catisi altindaki Mavi Inci Park Otel, Gulplaj Hotel ve Villa Ece Pansiyon bilgileri.';
     } else if (currentPage === 'corporate') {
-      title = state.group.name + ' | Kurumsal Standartlar';
-      description = 'Han Otelcilik kurumsal hizmet standartlari, dogrudan rezervasyon avantaji ve merkezi operasyon yaklasimi.';
+      title = state.group.name + ' | Erdek Butik Otel ve Kurumsal Konaklama Standartlari';
+      description = 'Erdek otelleri, butik otel vizyonu ve kurumsal konaklama standartlari odaginda Han Otelcilik kurumsal sayfasi.';
       schema = {
         '@context': 'https://schema.org',
         '@type': 'AboutPage',
