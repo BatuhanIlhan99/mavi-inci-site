@@ -243,6 +243,134 @@ body {
   background: rgba(230, 241, 245, 0.88);
 }
 
+.han-editorial-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.han-editorial-card {
+  display: grid;
+  gap: 18px;
+  min-height: 100%;
+}
+
+.han-editorial-note {
+  margin: 0;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(230, 241, 245, 0.7);
+  color: rgba(22, 49, 62, 0.82);
+}
+
+.han-moment-list {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.han-moment-list li {
+  color: rgba(22, 49, 62, 0.84);
+}
+
+.han-destination-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.han-destination-card {
+  overflow: hidden;
+  display: grid;
+  gap: 0;
+}
+
+.han-destination-media {
+  position: relative;
+  aspect-ratio: 1.16 / 1;
+  overflow: hidden;
+}
+
+.han-destination-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 21, 28, 0) 0%, rgba(7, 21, 28, 0.08) 100%);
+}
+
+.han-destination-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 260ms ease;
+}
+
+.han-destination-card:hover .han-destination-media img {
+  transform: scale(1.04);
+}
+
+.han-destination-body {
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+}
+
+.han-destination-tagline {
+  font-size: 1.02rem;
+  color: var(--han-blue-800);
+  font-weight: 700;
+}
+
+.han-destination-meta {
+  display: grid;
+  gap: 10px;
+  padding-top: 4px;
+  color: rgba(22, 49, 62, 0.72);
+}
+
+.han-itinerary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.han-itinerary-card {
+  gap: 14px;
+}
+
+.han-section-actions {
+  margin-top: 28px;
+}
+
+.han-business-spotlight {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  align-items: stretch;
+}
+
+.han-business-photo {
+  overflow: hidden;
+  border-radius: 30px;
+  min-height: 420px;
+  box-shadow: var(--han-shadow);
+}
+
+.han-business-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.han-business-spotlight-copy {
+  display: grid;
+  align-content: center;
+  gap: 18px;
+}
+
+.han-source-list {
+  gap: 12px;
+}
+
 .footer .footer-links a[href="#"] {
   pointer-events: none;
 }
@@ -258,6 +386,17 @@ body {
 
   .han-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .han-editorial-grid,
+  .han-destination-grid,
+  .han-itinerary-grid,
+  .han-business-spotlight {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .han-business-spotlight {
+    align-items: start;
   }
 }
 
@@ -275,5 +414,20 @@ body {
   .han-inquiry-head {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .han-editorial-grid,
+  .han-destination-grid,
+  .han-itinerary-grid,
+  .han-business-spotlight {
+    grid-template-columns: 1fr;
+  }
+
+  .han-business-photo {
+    min-height: 280px;
+  }
+
+  .han-destination-body {
+    padding: 20px;
   }
 }

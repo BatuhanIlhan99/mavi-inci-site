@@ -2,6 +2,10 @@
   var STORAGE_KEY = 'han-otelcilik-state-v1';
   var LOGIN_KEY = 'han-otelcilik-admin-session-v1';
 
+  function commons(fileName) {
+    return 'https://commons.wikimedia.org/wiki/Special:FilePath/' + fileName;
+  }
+
   var defaults = {
     group: {
       name: 'Han Otelcilik',
@@ -9,15 +13,117 @@
       email: 'iletisim@hanotelcilik.com',
       address: 'Erdek, Balikesir',
       city: 'Erdek / Balikesir',
-      tagline: 'Erdek merkezli coklu isletme ve konaklama grubu',
-      description: 'Han Otelcilik; Erdek merkezde konaklama, yeme icme ve gece hayati operasyonlarini tek bir kurumsal cati altinda toplayan coklu isletme yapisidir.',
-      reservationNote: 'Tum talepler merkez ofis tarafindan ilgili isletmeye yonlendirilir.',
+      tagline: 'Erdek merkezli konaklama, lezzet ve deneyim grubu',
+      description: 'Han Otelcilik; Erdek merkezli uc ayri konaklama markasi, bir hizli servis restoran markasi ve bir pub operasyonunu tek cati altinda toplayan premium deneyim grubudur.',
+      reservationNote: 'Tum talepler merkez ofis tarafindan ilgili isletmeye yonlendirilir ve en gec ayni gun icinde geri donus planlanir.',
       whatsapp: '+90 537 696 30 30',
+      manifesto: 'Biz, Erdek yolculugunu sadece konaklama olarak degil; hikayesi, ritmi, mutfagi ve sahil hafizasi ile birlikte tasarlanan butunsel bir deneyim olarak goruyoruz.',
+      directBookingPromise: 'Dogrudan talep, hizli geri donus, net bilgi ve tek merkezden yonetilen guvenli planlama.',
       highlights: [
         '3 ayri konaklama markasi',
-        '1 fast food restoran operasyonu',
-        '1 pub ve gece hayati noktasi',
-        'Merkezi operasyon ve tek cati yonetim'
+        'Smile Foodhouse ve pub ile tamamlanan yeme icme deneyimi',
+        'Erdek odakli yerel rota, hikaye ve gezi kurgusu',
+        'Merkezi operasyon ve tek cati marka dili'
+      ]
+    },
+    guide: {
+      title: 'Erdek Rehberi',
+      introTitle: 'Kapidag Yarimadasi ile antik miras arasinda kurulan ritim',
+      introText: 'Han Otelcilik icin Erdek yalnizca bir deniz kasabasi degil; antik liman tarihi, adalari, sahil ritmi ve koyleriyle derin bir rota. Bu rehber, misafirlerin konaklama kararini bir destinasyon tecrubesine donusturmek icin hazirlandi.',
+      destinations: [
+        {
+          id: 'zeytinliada',
+          name: 'Zeytinliada Arkeopark',
+          category: 'Tarih ve simge',
+          tagline: 'Erdek siluetinin en taninan adasi ve ruhani hafizasi',
+          image: commons('Erdek%20Turkey.jpg'),
+          imageAlt: 'Erdek sahili ve deniz gorunumu',
+          duration: '60-90 dk',
+          bestTime: 'Sabah erken saatler veya gun batimi',
+          story: 'Erdek Kaymakamligi sayfasina gore Zeytinliada, ilcenin sembolu kabul edilir. M.S. 500 yillarinda insa edilen Meryem Ana Kilisesi, kutsal su ayazmasi ve Anadoludaki Ortodoks mimarisinin en buyuk vaftizhanesi bu adada tespit edilmistir.',
+          whyGo: 'Erdek gezi dilinde kartpostal etkisi yaratan ilk durak burasidir; sahil yuruyusu, fotograf ve tarih katmani ayni anda hissedilir.',
+          sourceLabel: 'Erdek Kaymakamligi',
+          sourceUrl: 'https://www.erdek.gov.tr/tarihituristik'
+        },
+        {
+          id: 'kyzikos',
+          name: 'Kyzikos Antik Kenti',
+          category: 'Antik miras',
+          tagline: 'Erdek tarihinin antik liman hafizasini acan buyuk alan',
+          image: commons('Kyzikos%20antik%20kenti%20kal%C4%B1nt%C4%B1lar%C4%B1.jpg'),
+          imageAlt: 'Kyzikos antik kent kalintilari',
+          duration: '2-3 saat',
+          bestTime: 'Sabah veya ikindi',
+          story: 'Kyzikos, Erdek Kaymakamligi metninde Anadolu sahillerinin onemli antik liman kentlerinden biri olarak anlatilir. Roma ve Bizans donemlerinde ticari ve dinsel bakimdan buyuk bir merkez olan kentte, Hadrian Tapinagi kalintilari en dikkat ceken odaklardan biridir.',
+          whyGo: 'Erdekte kalirken bolgenin yalnizca denizle degil, antik Akdeniz ticaret rotalariyla da kurdugu iliskiyi gormek icin vazgecilmez bir duraktir.',
+          sourceLabel: 'Erdek Kaymakamligi',
+          sourceUrl: 'https://www.erdek.gov.tr/tarihituristik'
+        },
+        {
+          id: 'kirazli-manastiri',
+          name: 'Kirazli Manastiri',
+          category: 'Tarih ve doga',
+          tagline: 'Ballipinar yukselerinde sakli manastir kalintisi',
+          image: commons('Kirazli_Manastiri.jpg'),
+          imageAlt: 'Kirazli Manastiri kalintilari',
+          duration: '90-120 dk',
+          bestTime: 'Sabah serinligi',
+          story: 'Balikesir Il Kultur ve Turizm Mudurlugu bilgisinde Kirazli Manastiri, Yukariyapici ile Ballipinar arasinda, 1895 tarihli oldugu belirtilen ve 99 odali olarak anilan buyuk bir dini yapi toplulugu olarak geciyor.',
+          whyGo: 'Kapidag peyzaji icinde tarih, fotograf ve hafif doga yuruyusunu tek planda birlestiren en etkileyici noktalardan biridir.',
+          sourceLabel: 'Balikesir Il Kultur ve Turizm Mudurlugu',
+          sourceUrl: 'https://balikesir.ktb.gov.tr/tr-113501/kirazli-manastiri.html'
+        },
+        {
+          id: 'apostol-cifte-oluk',
+          name: 'Apostol ve Cifte Oluk',
+          category: 'Yerel hafiza',
+          tagline: 'Dilek, Hidirlez ve koy hafizasini tasiyan kutsal durak',
+          image: commons('Sunset%20in%20Erdek.jpg'),
+          imageAlt: 'Erdekte gun batimi gorunumu',
+          duration: '45-60 dk',
+          bestTime: 'Ikindi ve gun batimi',
+          story: 'Erdek Kaymakamligi metninde Apostol, 1638 tarihli bir koy kilisesi ve buyuk cinar agaci ile anilir. Ayni metinde Cifte Oluk alani Hidirlez gelenekleri, dilek ritueli ve eski koy yasami ile bag kuran bir hafiza noktasi olarak aktarilir.',
+          whyGo: 'Erdekin yalnizca plaj degil, gelenek ve mevsim ritueli ile de kimlik kazandigini hissettirir.',
+          sourceLabel: 'Erdek Kaymakamligi',
+          sourceUrl: 'https://www.erdek.gov.tr/tarihituristik'
+        },
+        {
+          id: 'cugra-kurbagali',
+          name: 'Cugra ve Kurbagali Sahil Hatti',
+          category: 'Sahil ritmi',
+          tagline: 'Altin kum, sig deniz ve aksam yuruyusleri icin klasik Erdek hatti',
+          image: commons('Sunset%20in%20Erdek.jpg'),
+          imageAlt: 'Erdekte sahil boyunca gun batimi',
+          duration: 'Yarim gun',
+          bestTime: 'Sabah deniz, aksam yuruyus',
+          story: 'Erdek Kaymakamligi tanitiminda Cugra, ilcenin en bilinen ve en uzun plajlarindan biri olarak; Kurbagali ise Seyit Gazi eteklerine uzanan kordon, cay bahceleri ve restoranlariyla gunluk hayatla denizi birlestiren sahil alani olarak anilir.',
+          whyGo: 'Denize giris, ailece zaman gecirme ve aksam ustu yavaslamak isteyen misafirler icin Erdek’in en guvenli klasiklerinden biridir.',
+          sourceLabel: 'Erdek Kaymakamligi',
+          sourceUrl: 'https://www.erdek.gov.tr/tarihituristik'
+        },
+        {
+          id: 'pasalimani',
+          name: 'Pasalimani Adasi Rotasi',
+          category: 'Ada kacisi',
+          tagline: 'Erdekten bir gunlugune ayrilip deniz ritmini buyuten rota',
+          image: commons('Pasalimani.JPG'),
+          imageAlt: 'Pasalimani Adasi kiyisi',
+          duration: 'Tam gun',
+          bestTime: 'Ruzgarsiz yaz gunleri',
+          story: 'Yerel gezi kaynaklarinda Pasalimani, Erdek cevresindeki en cekici gunluk deniz rotalarindan biri olarak onerilir. Ada etkisi, daha sakin koylar ve tekneyle gecen bir gun duygusu nedeniyle Erdek konaklamasini genisleten bir deneyim sunar.',
+          whyGo: 'Konaklama tecrubesine mavi rota, deniz ustu zaman ve daha sakin koy hissi eklemek isteyen misafirler icin idealdir.',
+          sourceLabel: 'Erdek.com',
+          sourceUrl: 'https://www.erdek.com/kat3,pasalimani-adasi'
+        }
+      ],
+      itinerary: [
+        { day: '1. Gun', title: 'Erdek ile tanisma ve sahil ritmini kurma', morning: 'Otele yerlesme, sahil boyu yavas yuruyus ve Erdek merkez kahvesi.', afternoon: 'Zeytinliada manzarasi esliginde sahil hattini kesfetme ve fotograf molalari.', evening: 'Gunayimi veya gun batimi saatinde sahil restorani, ardindan otelde sakin aksama donus.' },
+        { day: '2. Gun', title: 'Kyzikos ile antik Erdek katmanini acma', morning: 'Kyzikos Antik Kenti ve Hadrian Tapinagi kalintilarini gezme.', afternoon: 'Duzler cevresinde yerel ogle yemegi ve antik kent notlariyla sakin rota.', evening: 'Erdek merkeze donus, deniz kenari aksam kahvesi.' },
+        { day: '3. Gun', title: 'Kirazli Manastiri ve Kapidag peyzaji', morning: 'Ballipinar yonunde doga manzarali yolculuk ve Kirazli Manastiri gezisi.', afternoon: 'Kirsal rota, fotograf duraklari ve zeytinlikler arasinda yavas gezi.', evening: 'Otele donus, deniz manzarali aksam ustu dinlenmesi.' },
+        { day: '4. Gun', title: 'Apostol hafizasi ve koy ritueleri', morning: 'Apostol ve Cifte Oluk duraklarini kesfetme, koy hikayelerini dinleme.', afternoon: 'Kurbagali hattinda yuruyus, cay bahcesi ve sahil molasi.', evening: 'Cugra tarafinda hafif deniz keyfi ve gun batimi.' },
+        { day: '5. Gun', title: 'Sahil gunu ve yavas tatil', morning: 'Cugra veya Kurbagali hattinda deniz, yuzme ve uzun plaj saati.', afternoon: 'Smile Foodhouse veya sahil cevresinde hizli ogle yemegi, otelde dinlenme.', evening: 'Pub veya sahil rotasinda daha sosyal bir aksam plani.' },
+        { day: '6. Gun', title: 'Pasalimani veya tekne kacisi', morning: 'Ruzgar ve sezon uygunsa Pasalimani rotasi icin erken hareket.', afternoon: 'Ada veya tekne gunu, deniz ustu zaman ve sakin koy molalari.', evening: 'Otele donus, yavas aksama gecis ve ertesi gun icin serbest zaman.' },
+        { day: '7. Gun', title: 'Erdek hafizasini tamamlayip donus', morning: 'Merkezde son kahvalti, sahil yuruyusu ve hediyelik alisverisi.', afternoon: 'Kisa bir son plaj molasi veya fotograf turu.', evening: 'Cikis oncesi sakin kapanis ve bir sonraki Erdek seyahati icin notlar.' }
       ]
     },
     businesses: [
@@ -34,24 +140,19 @@
         email: 'rezervasyon@maviinciparkotel.com',
         website: '',
         accent: '#2f6f8d',
-        cover: 'linear-gradient(135deg, #174055 0%, #4f93b3 48%, #f1e2c7 100%)',
+        cover: 'linear-gradient(135deg, rgba(17,52,67,0.72) 0%, rgba(63,126,157,0.38) 54%, rgba(241,226,199,0.20) 100%), url(https://commons.wikimedia.org/wiki/Special:FilePath/Sunset%20in%20Erdek.jpg) center/cover no-repeat',
+        photo: commons('Sunset%20in%20Erdek.jpg'),
+        photoAlt: 'Erdekte gun batimi ve sahil gorunumu',
         summary: 'Kaynaklarda 2015 cikisli, 13 odali ve Erdek merkezde denize sifir konumlanan bir butik otel olarak geciyor.',
         description: 'Mavi Inci Park Otel; Erdek merkezde deniz kiyisina yakin konumu, 13 odali butik yapisi ve merkezi operasyon kolayligi ile gruptaki sehir oteli karakterini temsil eder. Tatilhatti ve Etstur listelemelerinde denize sifir konumu, teras kullanimi ve secili odalarda sauna veya jakuzi detaylari one cikiyor.',
-        highlights: [
-          '13 odali butik konaklama olcegi',
-          'Erdek merkezde sahile yurumelik konum',
-          'Teras, kahvalti ve secili premium oda detaylari'
-        ],
-        features: [
-          'Merkezi rezervasyon yonetimine uygun butik oda envanteri',
-          'Denize sifir ve merkezle dogrudan iliskili lokasyon',
-          'Standart, buyuk oda ve premium segment oda karmasi'
-        ],
-        stats: [
-          { label: 'Oda Sayisi', value: '13 oda' },
-          { label: 'Konum', value: 'Erdek merkez' },
-          { label: 'Acik Bilgi', value: '2015 cikisli' }
-        ],
+        storyTitle: 'Erdek merkez temposuna acilan butik denge',
+        story: 'Mavi Inci Park Otel hikayesi, Erdekte denize yakin ama merkezle de temasi koparmayan kompakt bir konaklama ihtiyacindan okunur. Kaynaklarda 2015 cikisli ve 13 odali olarak gecmesi, bu markayi buyuk olcekli bir tesis yerine, hizli karar verilen ve tekrar gelinen bir sahil oteli karakterine yerlestiriyor.',
+        editorial: 'Bu otelde on plana cikan his; sabah deniz kokusuna, ogleden sonra sahil yuruyusune ve aksam Erdek merkez ritmine kolayca karisabilmek.',
+        signatureMoments: ['Gun erken baslarken sahil boyunca kahve ve yuruyus', 'Merkezde zaman kaybetmeden otele geri donebilme konforu', 'Butik oda olcegi nedeniyle daha sakin ve kontrollu bir konaklama'],
+        nearby: ['zeytinliada', 'kyzikos', 'cugra-kurbagali'],
+        highlights: ['13 odali butik konaklama olcegi', 'Erdek merkezde sahile yurumelik konum', 'Teras, kahvalti ve secili premium oda detaylari'],
+        features: ['Merkezi rezervasyon yonetimine uygun butik oda envanteri', 'Denize sifir ve merkezle dogrudan iliskili lokasyon', 'Standart, buyuk oda ve premium segment oda karmasi'],
+        stats: [{ label: 'Oda Sayisi', value: '13 oda' }, { label: 'Konum', value: 'Erdek merkez' }, { label: 'Acik Bilgi', value: '2015 cikisli' }],
         rooms: [
           { name: 'Standart Oda', meta: '24 m2 | 2 yetiskin', price: '4.700 TL', note: 'Butik olcekte dengeli fiyat segmenti' },
           { name: 'Standart Buyuk Oda', meta: '32 m2 | 3 yetiskin', price: '5.900 TL', note: 'Aile ve genis oda talebine uygun' },
@@ -77,24 +178,19 @@
         email: 'info@hotelgulplaj.com',
         website: 'https://www.hotelgulplaj.com/',
         accent: '#1f5d7f',
-        cover: 'linear-gradient(135deg, #163a4a 0%, #2f7ea6 46%, #f5e6cc 100%)',
+        cover: 'linear-gradient(135deg, rgba(16,42,56,0.76) 0%, rgba(40,121,156,0.36) 54%, rgba(247,230,204,0.16) 100%), url(https://commons.wikimedia.org/wiki/Special:FilePath/Erdek%20Turkey.jpg) center/cover no-repeat',
+        photo: commons('Erdek%20Turkey.jpg'),
+        photoAlt: 'Erdek kiyisi ve deniz manzarasi',
         summary: 'Resmi sitesinde tum odalarin deniz gordugu, ozel plaj kullanimli ve aile yonetimli bir Erdek oteli olarak tanitiliyor.',
         description: 'Gulplaj Hotel; resmi sitesinde aile yonetimi, tum odalarin deniz gormesi ve denize sifir konumuyla one cikiyor. Balnet ve Etstur listelemelerinde ozel plaj, acik bufe kahvalti ve restoran operasyonu bilgileri yer aliyor. Han Otelcilik portfoyunde deniz tatili odakli aile oteli pozisyonunda kurgulaniyor.',
-        highlights: [
-          'Tum odalar deniz goruyor',
-          'Denize sifir ve ozel plaj kullanimli',
-          'Aile yonetimi ve restoran destekli hizmet'
-        ],
-        features: [
-          'Acik bufe kahvalti ve restoran akisi',
-          'Sahil bandinda aile odakli konaklama deneyimi',
-          'Plaj kullanimi ve restoran operasyonu ile tumlesik model'
-        ],
-        stats: [
-          { label: 'Konum', value: 'Sahil bandi' },
-          { label: 'Oda Yapisi', value: 'Tum odalar deniz gorur' },
-          { label: 'Temas', value: 'Aile yonetimi' }
-        ],
+        storyTitle: 'Erdek hafizasinda yeri olan sahil oteli',
+        story: 'Gulplaj Hotel resmi anlatiminda kendisini 1960 yilinda Erdekte kurulan ve Turkiyenin ilk turizm belgeli oteli olarak tanimlar. Aile yonetimi vurgusu ve 2014 ile 2020 yenilemeleri, markanin nostalji ile guncel konforu bir araya getirme cabasini netlestirir.',
+        editorial: 'Bu markanin en guclu yani; deniz manzarasini sadece bir goruntu degil, butun konaklama deneyiminin omurgasi haline getirmesidir.',
+        signatureMoments: ['Tum odalarda denizle goz temasi kuran yerlesim duzeni', 'Aile tatilinde plaj kullanimini kolaylastiran sahil temasi', 'Kusaklar boyunca geri donulebilecek tanidik yaz oteli hissi'],
+        nearby: ['zeytinliada', 'cugra-kurbagali', 'apostol-cifte-oluk'],
+        highlights: ['Tum odalar deniz goruyor', 'Denize sifir ve ozel plaj kullanimli', 'Aile yonetimi ve restoran destekli hizmet'],
+        features: ['Acik bufe kahvalti ve restoran akisi', 'Sahil bandinda aile odakli konaklama deneyimi', 'Plaj kullanimi ve restoran operasyonu ile tumlesik model'],
+        stats: [{ label: 'Konum', value: 'Sahil bandi' }, { label: 'Oda Yapisi', value: 'Tum odalar deniz gorur' }, { label: 'Temas', value: 'Aile yonetimi' }],
         rooms: [
           { name: 'Standart Deniz Manzarali', meta: '16-18 m2 | 2 kisi', price: 'Panelden girilir', note: 'Tum odalarin deniz gormesi temel vaadi' },
           { name: 'Aile Oda', meta: '2+1 veya 3 kisi', price: 'Panelden girilir', note: 'Aile konaklamasi icin planlanir' },
@@ -120,24 +216,19 @@
         email: 'erdekvillaece@gmail.com',
         website: 'https://www.villaece.com/',
         accent: '#3c6e61',
-        cover: 'linear-gradient(135deg, #264c46 0%, #5da291 45%, #f1e0c4 100%)',
+        cover: 'linear-gradient(135deg, rgba(32,63,57,0.78) 0%, rgba(80,149,134,0.34) 54%, rgba(241,224,196,0.16) 100%), url(https://commons.wikimedia.org/wiki/Special:FilePath/Narl%C4%B1%20Turkey%20-%20panoramio.jpg) center/cover no-repeat',
+        photo: commons('Narl%C4%B1%20Turkey%20-%20panoramio.jpg'),
+        photoAlt: 'Kapidag Yarimadasinda Narlidan deniz manzarasi',
         summary: 'Resmi sitede denize sifir, yarim pansiyon veya oda kahvalti secenekli ve merkez yurume mesafesinde bir pansiyon olarak sunuluyor.',
         description: 'Villa Ece Pansiyon; resmi sitesinde Erdek merkez yurume mesafesinde, denize sifir bir villa veya pansiyon olarak konumlaniyor. Iletisim sayfasinda kendi adresi ve telefonu yer aliyor; ana sayfasinda ise Gul Plaj Hotel ve Mavi Inci Park Otel diger tesislerimiz olarak gosteriliyor. Bu nedenle Han Otelcilik altindaki coklu portfoyun aile pansiyonu halkasini olusturuyor.',
-        highlights: [
-          'Denize sifir pansiyon karakteri',
-          'Merkeze yurumelik ve aile odakli yerlesim',
-          'Yarim pansiyon veya oda kahvalti secenekleri'
-        ],
-        features: [
-          'Standart, dort kisilik ve bes kisilik oda karmasi',
-          'Restoran, teras ve bahce kullanimi',
-          'Tek merkezden yonetilen aile konaklamasi modeli'
-        ],
-        stats: [
-          { label: 'Konum', value: 'Denize sifir' },
-          { label: 'Model', value: 'Pansiyon / yarim pansiyon' },
-          { label: 'Baglanti', value: 'Diger tesislerle birlikte' }
-        ],
+        storyTitle: 'Portfoyun aile evi karakterini tasiyan sahil pansiyonu',
+        story: 'Villa Ece Pansiyon resmi anlatiminda denize sifir, merkeze yurume mesafesinde ve yarim pansiyon veya oda kahvalti secenekleriyle sunuluyor. Ayni sitede diger tesislerimiz ifadesiyle Mavi Inci Park Otel ve Gulplaj Hotelin birlikte anilmasi, bu markayi Han Otelcilik portfoyunun bir bag dokusu haline getiriyor.',
+        editorial: 'Villa Ece tarafinda one cikan his; daha yavas, daha ailevi ve daha yerel bir Erdek ritmine karisabilmek.',
+        signatureMoments: ['Denize sifir karakteri daha sakin ve ev sicakliginda hissettiren pansiyon duzeni', 'Merkeze yurumelik konum sayesinde otomobilsiz tatil rahatligi', 'Aile odakli odalarda uzun konaklamaya uygun daha yavas seyir'],
+        nearby: ['zeytinliada', 'kirazli-manastiri', 'pasalimani'],
+        highlights: ['Denize sifir pansiyon karakteri', 'Merkeze yurumelik ve aile odakli yerlesim', 'Yarim pansiyon veya oda kahvalti secenekleri'],
+        features: ['Standart, dort kisilik ve bes kisilik oda karmasi', 'Restoran, teras ve bahce kullanimi', 'Tek merkezden yonetilen aile konaklamasi modeli'],
+        stats: [{ label: 'Konum', value: 'Denize sifir' }, { label: 'Model', value: 'Pansiyon / yarim pansiyon' }, { label: 'Baglanti', value: 'Diger tesislerle birlikte' }],
         rooms: [
           { name: 'Standart Oda', meta: '15 m2 | 2 kisi', price: 'Panelden girilir', note: 'Kisa konaklama ve cift odakli' },
           { name: 'Dort Kisilik Oda', meta: 'Aile duzeni', price: 'Panelden girilir', note: 'Aileler icin daha islevsel kapasite' },
@@ -164,23 +255,18 @@
         website: '',
         accent: '#c7642c',
         cover: 'linear-gradient(135deg, #5d2f16 0%, #c7642c 44%, #f5d9b9 100%)',
+        photo: commons('Erdek%20Turkey.jpg'),
+        photoAlt: 'Erdekte sahil ve merkez atmosferi',
         summary: 'Smile Foodhouse, Han Otelcilik icindeki hizli servis restoran markasi olarak konumlandirildi.',
         description: 'Smile Foodhouse, grubun konaklama disi yeme icme operasyonunu tasiyan hizli servis restoran markasidir. Erdek merkez akisi icinde paket servis, hizli masa devri ve otel misafirlerine capraz satis yapabilecek sekilde konumlandirildi.',
-        highlights: [
-          'Marka kimligi ve menu yapisi panelden yonetilebilir',
-          'Otel misafirlerine hizli servis entegrasyonu',
-          'Paket servis ve gece gec saat operasyonu kurgusu'
-        ],
-        features: [
-          'Burger, wrap, box menu ve gece paketi akisi',
-          'Merkezi operasyonla birden fazla tesise servis senaryosu',
-          'Kampanya ve menulerin panelden kolay guncellenmesi'
-        ],
-        stats: [
-          { label: 'Tip', value: 'Fast Food' },
-          { label: 'Model', value: 'Hizli servis + paket' },
-          { label: 'Durum', value: 'Smile Foodhouse markasi aktif' }
-        ],
+        storyTitle: 'Hizli servis ama marka disiplini yuksek',
+        story: 'Smile Foodhouse, gruptaki konaklama markalarinin gun icindeki hizli yeme ihtiyacini ve sahil hattindaki sokak trafigini ayni anda yakalamak icin tasarlandi. Kisa bekleme suresi, net menu kurgusu ve paket servis kas yapisi markanin ana omurgasini olusturur.',
+        editorial: 'Bu marka, Erdek merkezde gunu kesmeden dogru urune hizlica ulasmayi hedefleyen misafirler icin kurgulandi.',
+        signatureMoments: ['Otele donmeden once hizli ogle veya gece atistirmasi', 'Paket servisle oda veya sahil rotasina eslik eden duzen', 'Gencler ve aileler icin kolay karar verilen menu yapisi'],
+        nearby: ['zeytinliada', 'cugra-kurbagali'],
+        highlights: ['Marka kimligi ve menu yapisi panelden yonetilebilir', 'Otel misafirlerine hizli servis entegrasyonu', 'Paket servis ve gece gec saat operasyonu kurgusu'],
+        features: ['Burger, wrap, box menu ve gece paketi akisi', 'Merkezi operasyonla birden fazla tesise servis senaryosu', 'Kampanya ve menulerin panelden kolay guncellenmesi'],
+        stats: [{ label: 'Tip', value: 'Fast Food' }, { label: 'Model', value: 'Hizli servis + paket' }, { label: 'Durum', value: 'Smile Foodhouse markasi aktif' }],
         rooms: [],
         offerings: [
           { name: 'Signature Burger Menu', meta: 'Burger + patates + icecek', price: 'Panelden girilir', note: 'Acilis kampanyasi icin uygun lider urun' },
@@ -203,23 +289,18 @@
         website: '',
         accent: '#5f3c74',
         cover: 'linear-gradient(135deg, #271831 0%, #5f3c74 44%, #e2d5ea 100%)',
-        summary: 'Kullanici tarafindan isim verilmedigi icin marka adi gecici olarak Han Pub olarak kurgulandi; panelden kolayca guncellenebilir.',
+        photo: commons('Sunset%20in%20Erdek.jpg'),
+        photoAlt: 'Erdekte aksam ustu sahil gorunumu',
+        summary: 'Han Pub, Erdek aksamina sosyal ritim ve etkinlik kurgusu eklemek icin tasarlanan ayri bir yeme icme markasidir.',
         description: 'Han Pub, grubun yeme icme tarafini gece ekonomisi ve sosyal etkinliklerle genisletmek icin tasarlandi. Otel misafirlerinin aksam deneyimini grup icinde tutan, yerel ziyaretciyi de iceri ceken bir sosyal mekan olarak ele alindi.',
-        highlights: [
-          'Calisma adi panelden degistirilebilir',
-          'Otel konaklamasina gece hayati uzantisi kazandirir',
-          'Etkinlik, maca gunu ve akustik gece senaryolarina uygun'
-        ],
-        features: [
-          'Draft secenekleri, signature kokteyl ve etkinlik geceleri',
-          'Masa rezervasyonu ve otel misafirine oncelikli giris kurgusu',
-          'Merkez operasyondan kampanya ve etkinlik takvimi yonetimi'
-        ],
-        stats: [
-          { label: 'Tip', value: 'Pub' },
-          { label: 'Model', value: 'Etkinlik + gece hayati' },
-          { label: 'Durum', value: 'Calisma adi ile hazir' }
-        ],
+        storyTitle: 'Aksam ekonomisini grup icinde tutan sosyal alan',
+        story: 'Pub birimi, Erdek gecelerinde otelden sonra devam edecek kontrollu ve karakterli bir sosyal deneyim yaratmak icin kurgulandi. Etkinlik geceleri, kokteyl secenekleri ve masa rezervasyonu akisi, bu markanin gece tarafindaki omurgasini kurar.',
+        editorial: 'Konaklama deneyimini bir gece ritmi ile tamamlamak isteyen misafir icin pub, hatirlanan ikinci adres olur.',
+        signatureMoments: ['Gun batimindan sonra yavasca canlanan sosyal ortam', 'Etkinlik geceleriyle tatili daha hatirlanir kilan program', 'Otel misafirine kolay gecis veren merkez konum'],
+        nearby: ['zeytinliada', 'cugra-kurbagali'],
+        highlights: ['Calisma adi panelden degistirilebilir', 'Otel konaklamasina gece hayati uzantisi kazandirir', 'Etkinlik, maca gunu ve akustik gece senaryolarina uygun'],
+        features: ['Draft secenekleri, signature kokteyl ve etkinlik geceleri', 'Masa rezervasyonu ve otel misafirine oncelikli giris kurgusu', 'Merkez operasyondan kampanya ve etkinlik takvimi yonetimi'],
+        stats: [{ label: 'Tip', value: 'Pub' }, { label: 'Model', value: 'Etkinlik + gece hayati' }, { label: 'Durum', value: 'Konsept marka aktif' }],
         rooms: [],
         offerings: [
           { name: 'Signature Cocktail List', meta: 'Aksam servisi', price: 'Panelden girilir', note: 'Marka kimligini tasiyan icim hatti' },
@@ -244,46 +325,17 @@
     return [];
   }
 
+  function findDefaultEntry(id) {
+    return defaults.businesses.find(function (item) { return item.id === id; }) || null;
+  }
+
   function migrateLegacyEntry(entry) {
     if (!entry || entry.id !== 'han-fast-food') return entry;
 
     var next = Object.assign({}, entry);
-    var legacy = {
-      name: 'Han Fast Food',
-      shortName: 'Fast Food',
-      heroTag: 'Calisma adi ile acilan hizli servis restoran birimi',
-      tagline: 'Otel misafirleri ve sokak trafigi icin hizli servis noktasi',
-      summary: 'Kullanici tarafindan isim verilmedigi icin marka adi gecici olarak Han Fast Food olarak kurgulandi; panelden kolayca guncellenebilir.',
-      description: 'Han Fast Food, grubun konaklama disi yeme icme operasyonu icin hazirlanan calisma markasidir. Erdek merkez akisi icinde paket servis, hizli masa devri ve otel misafirlerine capraz satis yapabilecek sekilde konumlandirildi.',
-      highlights: [
-        'Calisma adi panelden degistirilebilir',
-        'Otel misafirlerine hizli servis entegrasyonu',
-        'Paket servis ve gece gec saat operasyonu kurgusu'
-      ],
-      stats: [
-        { label: 'Tip', value: 'Fast Food' },
-        { label: 'Model', value: 'Hizli servis + paket' },
-        { label: 'Durum', value: 'Calisma adi ile hazir' }
-      ]
-    };
-    var current = defaults.businesses[3];
-
+    var current = findDefaultEntry('han-fast-food');
     next.name = current.name;
     next.shortName = current.shortName;
-
-    Object.keys(legacy).forEach(function (key) {
-      if (!next[key] || next[key] === legacy[key]) {
-        next[key] = current[key];
-      }
-    });
-
-    if (JSON.stringify(next.highlights || []) === JSON.stringify(legacy.highlights || [])) {
-      next.highlights = current.highlights.slice();
-    }
-
-    if (JSON.stringify(next.stats || []) === JSON.stringify(legacy.stats || [])) {
-      next.stats = current.stats.slice();
-    }
 
     if (typeof next.summary === 'string') {
       next.summary = next.summary.replace(/Han Fast Food/g, current.name);
@@ -298,6 +350,7 @@
 
   function hydrateEntry(entry) {
     entry = migrateLegacyEntry(entry);
+    var base = findDefaultEntry(entry.id) || {};
     return Object.assign({
       id: '',
       type: 'hotel',
@@ -312,21 +365,30 @@
       website: '',
       accent: '#1f5d7f',
       cover: 'linear-gradient(135deg, #16394a 0%, #4f93b3 48%, #f1e2c7 100%)',
+      photo: '',
+      photoAlt: '',
       summary: '',
       description: '',
+      storyTitle: '',
+      story: '',
+      editorial: '',
+      signatureMoments: [],
+      nearby: [],
       highlights: [],
       features: [],
       stats: [],
       rooms: [],
       offerings: [],
       sources: []
-    }, entry, {
-      highlights: listify(entry.highlights),
-      features: listify(entry.features),
-      stats: Array.isArray(entry.stats) ? entry.stats : [],
-      rooms: Array.isArray(entry.rooms) ? entry.rooms : [],
-      offerings: Array.isArray(entry.offerings) ? entry.offerings : [],
-      sources: Array.isArray(entry.sources) ? entry.sources : []
+    }, base, entry, {
+      signatureMoments: listify((entry.signatureMoments && entry.signatureMoments.length ? entry.signatureMoments : base.signatureMoments) || []),
+      nearby: listify((entry.nearby && entry.nearby.length ? entry.nearby : base.nearby) || []),
+      highlights: listify(entry.highlights && entry.highlights.length ? entry.highlights : base.highlights || []),
+      features: listify(entry.features && entry.features.length ? entry.features : base.features || []),
+      stats: Array.isArray(entry.stats) && entry.stats.length ? entry.stats : clone(base.stats || []),
+      rooms: Array.isArray(entry.rooms) && entry.rooms.length ? entry.rooms : clone(base.rooms || []),
+      offerings: Array.isArray(entry.offerings) && entry.offerings.length ? entry.offerings : clone(base.offerings || []),
+      sources: Array.isArray(entry.sources) && entry.sources.length ? entry.sources : clone(base.sources || [])
     });
   }
 
@@ -335,6 +397,9 @@
     next.group = Object.assign({}, defaults.group, next.group || {});
     next.group.highlights = listify(next.group.highlights || defaults.group.highlights);
     next.businesses = Array.isArray(next.businesses) && next.businesses.length ? next.businesses.map(hydrateEntry) : defaults.businesses.map(hydrateEntry);
+    next.guide = Object.assign({}, defaults.guide, next.guide || {});
+    next.guide.destinations = Array.isArray(next.guide.destinations) && next.guide.destinations.length ? next.guide.destinations : clone(defaults.guide.destinations);
+    next.guide.itinerary = Array.isArray(next.guide.itinerary) && next.guide.itinerary.length ? next.guide.itinerary : clone(defaults.guide.itinerary);
     next.inquiries = Array.isArray(next.inquiries) ? next.inquiries : [];
     return next;
   }
@@ -365,6 +430,11 @@
   function getBusinessById(state, id) {
     var resolved = state || resolveState();
     return resolved.businesses.find(function (item) { return item.id === id; }) || null;
+  }
+
+  function getDestinationById(state, id) {
+    var resolved = state || resolveState();
+    return (resolved.guide.destinations || []).find(function (item) { return item.id === id; }) || null;
   }
 
   function listBusinesses(state) {
@@ -422,6 +492,7 @@
     resolveState: resolveState,
     saveState: saveState,
     getBusinessById: getBusinessById,
+    getDestinationById: getDestinationById,
     listBusinesses: listBusinesses,
     listHotels: listHotels,
     listVenues: listVenues,

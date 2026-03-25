@@ -15,6 +15,7 @@
     if (page === 'home') return './index.html';
     if (page === 'hotels') return './odalar.html';
     if (page === 'venues') return './deneyimler.html';
+    if (page === 'guide') return './erdek-rehberi.html';
     if (page === 'booking') return './rezervasyon.html';
     if (page === 'admin') return './admin.html';
     return './index.html';
@@ -72,6 +73,7 @@
     var links = [
       { id: 'home', label: 'Ana Sayfa', href: pageHref('home') },
       { id: 'hotels', label: 'Oteller', href: pageHref('hotels') },
+      { id: 'guide', label: 'Erdek Rehberi', href: pageHref('guide') },
       { id: 'venues', label: 'Fast Food & Pub', href: pageHref('venues') },
       { id: 'booking', label: 'Talep Formu', href: pageHref('booking') }
     ];
@@ -112,6 +114,7 @@
       '<div class="footer-brand"><strong>' + escapeHtml(state.group.name) + '</strong><span>' + escapeHtml(state.group.description) + '</span></div>' +
       '<div><p class="section-kicker">Portfoy</p><div class="footer-links">' +
       '<a href="' + pageHref('hotels') + '">Uc Otel</a>' +
+      '<a href="' + pageHref('guide') + '">Erdek Rehberi</a>' +
       '<a href="' + pageHref('venues') + '">Fast Food & Pub</a>' +
       '<a href="' + pageHref('booking') + '">Talep Formu</a>' +
       '</div></div>' +
