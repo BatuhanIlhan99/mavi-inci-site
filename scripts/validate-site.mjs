@@ -9,20 +9,21 @@ const htmlFiles = [
   'odalar.html',
   'deneyimler.html',
   'rezervasyon.html',
-  'room.html'
+  'admin.html',
+  'room.html',
+  'tesis.html',
+  'panel-mavi-inci.html',
+  'panel-gulplaj.html',
+  'panel-villa-ece.html',
+  'panel-fastfood.html',
+  'panel-pub.html'
 ];
 
 const jsFiles = [
   'boot.js',
-  'site-state.override.js',
-  'site-data.js',
-  'site-shell.js',
-  'home.js',
-  'rooms.js',
-  'experiences.js',
-  'booking.js',
-  'room-detail.js',
-  'script.js'
+  'han-data.js',
+  'han-shell.js',
+  'han-app.js'
 ];
 
 function assert(condition, message) {

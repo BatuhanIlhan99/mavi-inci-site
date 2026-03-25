@@ -1,7 +1,7 @@
 {
-  "name": "Mavi Inci Park Otel",
-  "short_name": "Mavi Inci",
-  "description": "Erdek sahilinde butik, modern ve deniz kenari otel deneyimi.",
+  "name": "Han Otelcilik",
+  "short_name": "Han",
+  "description": "Erdek merkezli coklu konaklama ve yeme icme grubu.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f6f1e8",

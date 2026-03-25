@@ -44,18 +44,20 @@ jobs:
           cp odalar.html dist/
           cp deneyimler.html dist/
           cp rezervasyon.html dist/
+          cp admin.html dist/
           cp room.html dist/
+          cp tesis.html dist/
+          cp panel-mavi-inci.html dist/
+          cp panel-gulplaj.html dist/
+          cp panel-villa-ece.html dist/
+          cp panel-fastfood.html dist/
+          cp panel-pub.html dist/
           cp styles.css dist/
+          cp han.css dist/
           cp boot.js dist/
-          cp site-shell.js dist/
-          cp home.js dist/
-          cp rooms.js dist/
-          cp experiences.js dist/
-          cp booking.js dist/
-          cp script.js dist/
-          cp room-detail.js dist/
-          cp site-data.js dist/
-          cp site-state.override.js dist/
+          cp han-shell.js dist/
+          cp han-app.js dist/
+          cp han-data.js dist/
           cp favicon.svg dist/
           cp site.webmanifest dist/
           cp robots.txt dist/

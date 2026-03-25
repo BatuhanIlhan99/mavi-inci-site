@@ -1,0 +1,279 @@
+:root {
+  --han-blue-900: #0f2f3d;
+  --han-blue-800: #153f52;
+  --han-blue-700: #1d5771;
+  --han-blue-600: #2d7392;
+  --han-blue-100: #e6f1f5;
+  --han-sand-100: #f6efe5;
+  --han-sand-200: #ecdfc7;
+  --han-white: #ffffff;
+  --han-ink: #16313e;
+  --han-shadow: 0 26px 60px rgba(12, 34, 46, 0.12);
+}
+
+body {
+  background:
+    radial-gradient(circle at top right, rgba(246, 239, 229, 0.7), transparent 24%),
+    linear-gradient(180deg, #f6fbfd 0%, #edf5f9 58%, #f7f1e8 100%);
+}
+
+.page-hero-group {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero-group::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(49, 118, 149, 0.16), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(236, 223, 199, 0.22), transparent 32%);
+  pointer-events: none;
+}
+
+.page-hero-group .page-hero-grid,
+.section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.han-side-card,
+.han-tone-card,
+.han-settings-card,
+.han-panel-links,
+.han-inquiry-card {
+  border: 1px solid rgba(18, 55, 71, 0.08);
+  box-shadow: var(--han-shadow);
+}
+
+.han-business-grid {
+  gap: 24px;
+}
+
+.han-business-card {
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(18, 55, 71, 0.1);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.han-business-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(29, 87, 113, 0.22);
+  box-shadow: 0 30px 64px rgba(12, 34, 46, 0.16);
+}
+
+.han-business-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--business-accent, var(--han-blue-600));
+}
+
+.han-business-cover {
+  min-height: 160px;
+  background-size: cover;
+  background-position: center;
+}
+
+.han-business-body {
+  padding: 28px;
+}
+
+.han-business-summary {
+  min-height: 84px;
+}
+
+.han-note {
+  color: rgba(22, 49, 62, 0.75);
+}
+
+.han-flash {
+  margin-bottom: 24px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(45, 115, 146, 0.14);
+  background: rgba(230, 241, 245, 0.88);
+  color: var(--han-blue-800);
+  font-weight: 600;
+}
+
+.han-admin-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.85fr);
+  align-items: start;
+}
+
+.han-panel-links {
+  position: sticky;
+  top: 108px;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.han-mini-links {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.han-mini-link {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  text-decoration: none;
+  color: var(--han-ink);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 247, 250, 0.96));
+  border: 1px solid rgba(18, 55, 71, 0.08);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.han-mini-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(29, 87, 113, 0.2);
+}
+
+.han-mini-link span {
+  color: rgba(22, 49, 62, 0.68);
+  font-size: 0.95rem;
+}
+
+.han-inquiry-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.han-inquiry-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.han-inquiry-head span {
+  font-size: 0.92rem;
+  color: rgba(22, 49, 62, 0.6);
+}
+
+.han-inquiry-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 16px;
+}
+
+.han-inquiry-grid span {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(22, 49, 62, 0.52);
+}
+
+.han-inquiry-grid strong {
+  display: block;
+  margin-top: 4px;
+}
+
+.han-editor-block {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(18, 55, 71, 0.08);
+}
+
+.han-editor-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.han-editor-head h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.han-row-editor {
+  display: grid;
+  gap: 14px;
+}
+
+.han-row {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 249, 252, 0.94));
+  border: 1px solid rgba(18, 55, 71, 0.08);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.han-row .field {
+  margin: 0;
+}
+
+.han-row-remove {
+  align-self: end;
+  justify-self: start;
+}
+
+.han-login-shell {
+  min-height: calc(100vh - 120px);
+  display: grid;
+  align-items: center;
+}
+
+.han-admin-login {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.button.button-ghost {
+  border: 1px solid rgba(18, 55, 71, 0.12);
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--han-ink);
+}
+
+.button.button-ghost:hover {
+  background: rgba(230, 241, 245, 0.88);
+}
+
+.footer .footer-links a[href="#"] {
+  pointer-events: none;
+}
+
+@media (max-width: 1080px) {
+  .han-admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .han-panel-links {
+    position: static;
+  }
+
+  .han-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .han-business-body {
+    padding: 22px;
+  }
+
+  .han-inquiry-grid,
+  .han-row {
+    grid-template-columns: 1fr;
+  }
+
+  .han-editor-head,
+  .han-inquiry-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
