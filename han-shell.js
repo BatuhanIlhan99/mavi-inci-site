@@ -16,6 +16,7 @@
     if (page === 'hotels') return './odalar.html';
     if (page === 'venues') return './deneyimler.html';
     if (page === 'guide') return './erdek-rehberi.html';
+    if (page === 'corporate') return './kurumsal.html';
     if (page === 'booking') return './rezervasyon.html';
     if (page === 'admin') return './admin.html';
     return './index.html';
@@ -74,6 +75,7 @@
       { id: 'home', label: 'Ana Sayfa', href: pageHref('home') },
       { id: 'hotels', label: 'Oteller', href: pageHref('hotels') },
       { id: 'guide', label: 'Erdek Rehberi', href: pageHref('guide') },
+      { id: 'corporate', label: 'Kurumsal', href: pageHref('corporate') },
       { id: 'venues', label: 'Fast Food & Pub', href: pageHref('venues') },
       { id: 'booking', label: 'Talep Formu', href: pageHref('booking') }
     ];
@@ -115,6 +117,7 @@
       '<div><p class="section-kicker">Portfoy</p><div class="footer-links">' +
       '<a href="' + pageHref('hotels') + '">Uc Otel</a>' +
       '<a href="' + pageHref('guide') + '">Erdek Rehberi</a>' +
+      '<a href="' + pageHref('corporate') + '">Kurumsal Standartlar</a>' +
       '<a href="' + pageHref('venues') + '">Fast Food & Pub</a>' +
       '<a href="' + pageHref('booking') + '">Talep Formu</a>' +
       '</div></div>' +
@@ -123,7 +126,7 @@
       '<a href="mailto:' + escapeHtml(state.group.email) + '">' + escapeHtml(state.group.email) + '</a>' +
       '<a href="https://wa.me/' + escapeHtml(state.group.whatsapp.replace(/[^\d]/g, '')) + '">WhatsApp</a>' +
       '</div></div>' +
-      '<div><p class="section-kicker">Operasyon Notu</p><div class="footer-links"><a href="#">' + escapeHtml(state.group.reservationNote) + '</a><a href="#">' + escapeHtml(state.group.address) + '</a><a href="./admin.html">Yonetim Girisi</a></div></div>' +
+      '<div><p class="section-kicker">Kurumsal</p><div class="footer-links"><a href="' + pageHref('corporate') + '">Standartlar ve gizlilik</a><a href="' + pageHref('booking') + '">Dogrudan talep avantajlari</a><a href="./admin.html">Yonetim Girisi</a></div></div>' +
       '</div>' +
       '<div class="container footer-note"><div class="footer-meta">Han Otelcilik | Erdek merkezli grup operasyonu</div><div class="footer-meta">3 otel + 2 yeme icme noktasi</div></div>' +
       '</footer>';

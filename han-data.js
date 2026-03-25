@@ -97,7 +97,7 @@
           duration: 'Yarim gun',
           bestTime: 'Sabah deniz, aksam yuruyus',
           story: 'Erdek Kaymakamligi tanitiminda Cugra, ilcenin en bilinen ve en uzun plajlarindan biri olarak; Kurbagali ise Seyit Gazi eteklerine uzanan kordon, cay bahceleri ve restoranlariyla gunluk hayatla denizi birlestiren sahil alani olarak anilir.',
-          whyGo: 'Denize giris, ailece zaman gecirme ve aksam ustu yavaslamak isteyen misafirler icin Erdek’in en guvenli klasiklerinden biridir.',
+          whyGo: 'Denize giris, ailece zaman gecirme ve aksam ustu yavaslamak isteyen misafirler icin Erdekin en guvenli klasiklerinden biridir.',
           sourceLabel: 'Erdek Kaymakamligi',
           sourceUrl: 'https://www.erdek.gov.tr/tarihituristik'
         },

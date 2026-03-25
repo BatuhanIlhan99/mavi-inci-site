@@ -7,6 +7,7 @@ const root = process.cwd();
 const htmlFiles = [
   'index.html',
   'odalar.html',
+  'kurumsal.html',
   'erdek-rehberi.html',
   'deneyimler.html',
   'rezervasyon.html',

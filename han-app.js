@@ -54,6 +54,205 @@
         { key: 'price', label: 'Fiyat', placeholder: 'Panelden girilir' },
         { key: 'note', label: 'Not', placeholder: 'Acilis veya servis notu' }
       ]
+    },
+    groupTrust: {
+      title: 'Guven Metrikleri',
+      addLabel: 'Yeni guven metrik karti',
+      fields: [
+        { key: 'label', label: 'Baslik', placeholder: 'Ayni gun geri donus' },
+        { key: 'value', label: 'Deger', placeholder: 'Merkezi ekip' }
+      ]
+    },
+    pillars: {
+      title: 'Marka Pillarlari',
+      addLabel: 'Yeni pillar ekle',
+      fields: [
+        { key: 'title', label: 'Baslik', placeholder: 'Yerel uzmanlik' },
+        { key: 'text', label: 'Aciklama', placeholder: 'Erdek ve Kapidag ritmini bilen ekip' }
+      ]
+    },
+    offers: {
+      title: 'Teklif ve Kampanyalar',
+      addLabel: 'Yeni teklif ekle',
+      fields: [
+        { key: 'title', label: 'Baslik', placeholder: 'Erken rezervasyon' },
+        { key: 'meta', label: 'Meta', placeholder: 'Secili tarihler' },
+        { key: 'note', label: 'Not', placeholder: 'Avantaj ve kosul ozeti' }
+      ]
+    },
+    testimonials: {
+      title: 'Yorum ve Sosyal Kanit',
+      addLabel: 'Yeni yorum ekle',
+      fields: [
+        { key: 'name', label: 'Ad', placeholder: 'Misafir tipi' },
+        { key: 'meta', label: 'Meta', placeholder: 'Aile konaklamasi' },
+        { key: 'quote', label: 'Yorum', placeholder: 'Kisa guven verici yorum' }
+      ]
+    },
+    faq: {
+      title: 'Sik Sorulan Sorular',
+      addLabel: 'Yeni SSS ekle',
+      fields: [
+        { key: 'question', label: 'Soru', placeholder: 'Giris saati nedir?' },
+        { key: 'answer', label: 'Cevap', placeholder: 'Operasyon cevabi' }
+      ]
+    },
+    access: {
+      title: 'Ulasim ve Konum Notlari',
+      addLabel: 'Yeni ulasim karti ekle',
+      fields: [
+        { key: 'title', label: 'Baslik', placeholder: 'Istanbul cikisli ulasim' },
+        { key: 'text', label: 'Aciklama', placeholder: 'Kisa ulasim notu' }
+      ]
+    },
+    gallery: {
+      title: 'Galeri Gorselleri',
+      addLabel: 'Yeni gorsel ekle',
+      fields: [
+        { key: 'image', label: 'Gorsel URL', placeholder: 'https://...' },
+        { key: 'alt', label: 'Alt metin', placeholder: 'Gorsel aciklamasi' }
+      ]
+    }
+  };
+
+  var DEFAULT_GROUP_TRUST = [
+    { label: 'Merkezi Geri Donus', value: 'Ayni gun icinde' },
+    { label: 'Portfoy Yapisi', value: '3 otel + 2 yeme icme' },
+    { label: 'Yerel Uzmanlik', value: 'Erdek odakli rota bilgisi' }
+  ];
+
+  var DEFAULT_GROUP_PILLARS = [
+    { title: 'Tek merkezden planlama', text: 'Talepler, marka fark etmeksizin merkezi ekipte toplanir ve dogru isletmeye yonlendirilir.' },
+    { title: 'Yerel deneyim bilgisi', text: 'Erdegi yalnizca bir konaklama lokasyonu olarak degil, rota ve hikaye destinasyonu olarak ele aliyoruz.' },
+    { title: 'Konfor + ritim dengesi', text: 'Butik konaklama, sahil hafizasi, yeme icme ve gezi katmanlarini tek cati altinda dengeliyoruz.' }
+  ];
+
+  var DEFAULT_GROUP_OFFERS = [
+    { title: 'Erken Rezervasyon Avantaji', meta: 'Secili yaz tarihleri', note: 'Dogrudan talepte erken planlama yapan misafirler icin fiyat avantaji ve daha esnek secim alani.' },
+    { title: 'Hafta Ici Erdek Kacamagi', meta: 'Pazar-Persembe', note: 'Kisa sureli deniz ve rahatlama odakli konaklamalar icin daha sakin operasyon ve hizli geri donus.' },
+    { title: 'Aile ve Cift Segmentleri', meta: 'Otele gore yonlendirme', note: 'Aile, cift ve sakin konaklama beklentisine gore uygun otel tonuna yonlendirme.' }
+  ];
+
+  var DEFAULT_GROUP_TESTIMONIALS = [
+    { name: 'Aile Konaklamasi', meta: 'Portfoy misafiri', quote: 'Tek merkezden iletisim almak, hangi otelin bize daha uygun oldugunu anlamayi ciddi bicimde kolaylastirdi.' },
+    { name: 'Yaz Kacamagi', meta: 'Cift segmenti', quote: 'Sadece oda degil, Erdekte ne yapacagimizi da planlayabildigimiz icin site daha guven veren bir deneyim sundu.' },
+    { name: 'Kisa Sureli Tatil', meta: 'Hafta ici talep', quote: 'Merkezi geri donus hizi ve WhatsApp uzerinden net bilgi almak, karar surecini cok hizlandirdi.' }
+  ];
+
+  var DEFAULT_GROUP_FAQ = [
+    { question: 'Dogrudan talep gonderdigimde ne olur?', answer: 'Talep merkezi hat tarafindan ilgili isletmeye yonlendirilir, uygunluk ve detaylar kontrol edilerek ayni gun icinde geri donus planlanir.' },
+    { question: 'Hangi otelin bana uygun oldugunu nasil anlarim?', answer: 'Oteller sayfasindaki karsilastirma ve isletme detaylarindaki uygun misafir profilleri bu secimi kolaylastirir; gerekirse ekibimiz de yonlendirir.' },
+    { question: 'WhatsApp uzerinden rezervasyon sureci ilerler mi?', answer: 'Evet. On bilgi, uygunluk, tarih netlestirme ve geri donus tercihine gore WhatsApp hatti aktif olarak kullanilabilir.' }
+  ];
+
+  var DEFAULT_GROUP_ACCESS = [
+    { title: 'Istanbul ve Bursa cikisli ulasim', text: 'Erdege ozel arac, otobus veya bolgesel ulasim kombinasyonlariyla rahat ulasilabilir; en dogru rota sezon ve cikis sehrine gore degisir.' },
+    { title: 'Merkez odakli konaklama avantaji', text: 'Erdek merkez ve sahil bandi odakli tesisler sayesinde yuruyerek veya kisa arac kullanimi ile deneyim noktalarina ulasim kolaylasir.' },
+    { title: 'TR / EN destek', text: 'Talep formu ve merkezi iletisim hatti yerli ve yabanci misafirler icin acik, kisa ve anlasilir bilgi akisi saglayacak sekilde kurgulandi.' }
+  ];
+
+  var TRAVEL_PROFILES = [
+    { title: 'Ciftler Icin Erdek', text: 'Gun batimi, sahil yuruyusu, butik konaklama ve daha yavas bir tempo arayan misafirlere uygun.' },
+    { title: 'Aileler Icin Erdek', text: 'Plaj odagi, kolay ulasim, genis oda secenekleri ve gunu bolmeden ilerleyen bir gezi ritmi sunar.' },
+    { title: 'Tarih ve Foto Odakli Rota', text: 'Zeytinliada, Kyzikos ve Kirazli Manastiri gibi duraklarla Kapidag hafizasini one cikarir.' }
+  ];
+
+  var CORPORATE_STANDARDS = [
+    { icon: '01', title: 'Merkezi talep yonetimi', text: 'Tum talepler tek merkezde toplanir, ilgili isletmeye yonlendirilir ve geri donus sureci ortak bir dille ilerletilir.' },
+    { icon: '02', title: 'Dogrudan rezervasyon netligi', text: 'Misafir, hangi isletmeye yonlendirildigini, hangi kanaldan donus alacagini ve bir sonraki adimi en basindan gorur.' },
+    { icon: '03', title: 'Yerel destinasyon uzmanligi', text: 'Konaklama secimini Erdek rehberi, rota onerileri ve yakin deneyim katmanlariyla destekliyoruz.' }
+  ];
+
+  var DIRECT_BOOKING_STEPS = [
+    { title: 'Dogru isletmeye hizli yonlendirme', meta: 'Portfoy icin merkezi on eleme', note: 'Talep tipi, tarih ve misafir beklentisi ayristirilarak en uygun isletme secimi kolaylastirilir.' },
+    { title: 'WhatsApp, telefon veya e-posta ile geri donus', meta: 'Misafir tercihine uygun kanal', note: 'Geri donus tercihine gore operasyon ekibi daha net ve daha hizli iletisim kurar.' },
+    { title: 'Konaklama + rota birlikteligi', meta: 'Satin almadan once tam resim', note: 'Misafir yalnizca oda degil, gezi akisini da gorebildigi icin daha guvenli karar verir.' }
+  ];
+
+  var LEGAL_AND_SERVICE_NOTES = [
+    { icon: 'KV', title: 'Gizlilik ve veri hassasiyeti', text: 'Paylasilan bilgiler yalnizca iletisim ve planlama icin kullanilir; statik demo kurgusunda form verileri tarayici icinde tutulur.' },
+    { icon: 'EN', title: 'TR / EN bilgilendirme hazirligi', text: 'Metin yapisi, yabanci misafir iletisimine uyarlanabilecek kadar acik ve profesyonel kurgulanmistir.' },
+    { icon: 'OP', title: 'Operasyon seffafligi', text: 'Telefon, WhatsApp, e-posta ve isletme bazli panel yapisi ile tum akisin gorunur ve yonetilebilir olmasi hedeflenmistir.' }
+  ];
+
+  var BUSINESS_ENHANCEMENTS = {
+    'mavi-inci-park-otel': {
+      audience: ['Merkezde kalmak isteyen ciftler', 'Kisa hafta ici kacamaklari', 'Sahile dogrudan yakin butik otel arayan misafirler'],
+      gallery: [
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sunset%20in%20Erdek.jpg', alt: 'Mavi Inci Park Otel icin Erdek sahil gun batimi atmosferi' },
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Erdek%20Turkey.jpg', alt: 'Erdek sahil ve kiyi gorunumu' },
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Erdek%20Turkey.jpg', alt: 'Erdek silueti ve sahil hatti' }
+      ],
+      offerCards: [
+        { title: 'Merkezde Hizli Kacis', meta: '2 gece - butik deneyim', note: 'Merkez tempo ve sahil yakinligi arayan misafirler icin tasarlandi.' },
+        { title: 'Gun Batimi Odakli Konaklama', meta: 'Cift segmenti', note: 'Aksam ritmini otel ve sahil yuruyusleriyle birlestiren kisa plan.' }
+      ],
+      faq: [
+        { question: 'Bu otel kimler icin daha uygun?', answer: 'Merkeze yakin olmak, sahil bandina hizli cikmak ve butik olcekte daha kontrollu bir deneyim yasamak isteyen misafirler icin.' },
+        { question: 'Kisa konaklama icin uygun mu?', answer: 'Evet. Butik olcegi ve merkez konumu sayesinde 1-3 gecelik kisa planlarda verimli calisir.' }
+      ]
+    },
+    'gulplaj-hotel': {
+      audience: ['Deniz manzarasi oncelikli aileler', 'Klasik yaz oteli hafizasini seven misafirler', 'Plaj kullanimi oncelikli konaklamalar'],
+      gallery: [
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Erdek%20Turkey.jpg', alt: 'Gulplaj Hotel icin Erdek sahil gorunumu' },
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sunset%20in%20Erdek.jpg', alt: 'Erdekte gun batimi' },
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pasalimani.JPG', alt: 'Erdek deniz rotalari' }
+      ],
+      offerCards: [
+        { title: 'Aile Yaz Paketi', meta: 'Deniz manzarali plan', note: 'Tum odalari deniz goren yerlesim yapisi ile aile tatiline uygun senaryo.' },
+        { title: 'Plaj Odakli Erdek', meta: 'Sahil kullanim avantaji', note: 'Denize sifir konum ve klasik yaz oteli ritmi isteyen misafirler icin.' }
+      ],
+      faq: [
+        { question: 'Gulplaj hangi konaklama tonunu sunar?', answer: 'Deniz manzarasi, aile yonetimi ve yaz oteli hafizasi guclu olan daha klasik bir sahil deneyimi sunar.' },
+        { question: 'Aileler icin uygun mu?', answer: 'Evet. Plaj temasi ve oda yerlesimi nedeniyle aile segmentinde guclu bir alternatiftir.' }
+      ]
+    },
+    'villa-ece-pansiyon': {
+      audience: ['Daha sakin ritim arayan aileler', 'Uzun konaklama planlayan misafirler', 'Pansiyon sicakligi ve yerel his arayanlar'],
+      gallery: [
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Narl%C4%B1%20Turkey%20-%20panoramio.jpg', alt: 'Villa Ece Pansiyon icin Kapidag ve deniz gorunumu' },
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Erdek%20Turkey.jpg', alt: 'Erdek sahil hatti' },
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kirazli_Manastiri.jpg', alt: 'Kirazli Manastiri ve doga rotasi' }
+      ],
+      offerCards: [
+        { title: 'Ailevi Erdek Rotasi', meta: 'Pansiyon ritmi', note: 'Daha yavas tempolu ve aile odakli bir Erdek deneyimi icin kurgulandi.' },
+        { title: 'Uzun Konaklama Rahatligi', meta: 'Yarim pansiyon avantaji', note: 'Merkeze yurunecek mesafe ve denize sifir karakter ile birlikte sunulur.' }
+      ],
+      faq: [
+        { question: 'Villa Ece hangi misafir tipine daha uygun?', answer: 'Aileler, daha yerel his arayanlar ve konaklamayi yavas ritimle yasamak isteyen misafirler icin daha uygundur.' },
+        { question: 'Merkeze uzak mi?', answer: 'Hayir. Resmi bilgilerde merkeze yurume mesafesinde ve denize sifir karakterde oldugu aktarilir.' }
+      ]
+    },
+    'han-fast-food': {
+      audience: ['Hizli servis arayan otel misafirleri', 'Sahil arasinda pratik ogle yemegi isteyenler', 'Paket servis ve gece atistirmasi arayan ziyaretciler'],
+      gallery: [
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Erdek%20Turkey.jpg', alt: 'Smile Foodhouse icin Erdek merkez atmosferi' },
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sunset%20in%20Erdek.jpg', alt: 'Erdek merkez aksami' }
+      ],
+      offerCards: [
+        { title: 'Otel Misafirine Hizli Menu', meta: 'Paket veya gel al', note: 'Konaklama ile yeme icmeyi ayni grup icinde tutacak hizli servis senaryosu.' },
+        { title: 'Gunun Ortasi Pratik Servis', meta: 'Sahil arasi kullanim', note: 'Merkezde zamani bolmeden dogru urune hizli ulasmayi hedefler.' }
+      ],
+      faq: [
+        { question: 'Smile Foodhouse ne vaat ediyor?', answer: 'Kisa bekleme suresi, net menu kurgusu ve otel misafirine kolay entegre olan hizli servis yapisi.' },
+        { question: 'Paket servis mantigina uygun mu?', answer: 'Evet. Marka omurgasi, paket servis ve hizli masa devri ile kurgulandi.' }
+      ]
+    },
+    'han-pub': {
+      audience: ['Aksam programini otelden sonra surdurmek isteyen misafirler', 'Sosyal bulusma ve etkinlik gecesi arayan ziyaretciler', 'Tatilde gece ritmini de planlayan cift ve arkadas gruplari'],
+      gallery: [
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sunset%20in%20Erdek.jpg', alt: 'Han Pub icin Erdek aksami' },
+        { image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Erdek%20Turkey.jpg', alt: 'Erdek merkez gecesi' }
+      ],
+      offerCards: [
+        { title: 'Aksam Ritmi Paketi', meta: 'Etkinlik geceleri', note: 'Gun batimi sonrasi sosyal deneyimi grup icinde tutan pub kurgusu.' },
+        { title: 'Mac Gunu ve Sosyal Masa', meta: 'Draft ve etkinlik odagi', note: 'Yerel ziyaretci ile otel misafirini ayni atmosferde bulusturur.' }
+      ],
+      faq: [
+        { question: 'Han Pub nasil bir deneyim sunar?', answer: 'Etkinlik, kokteyl ve masa rezervasyonu akisini bir arada tutan kontrollu bir aksam deneyimi sunar.' },
+        { question: 'Otel misafirleri icin uygun mu?', answer: 'Evet. Otele kolay gecis, aksam programi ve daha sosyal bir tatil ritmi icin kurgulandi.' }
+      ]
     }
   };
 
@@ -185,7 +384,7 @@
   }
 
   function publicShell(state, activePage, main) {
-    return '<div class="shell">' + Shell.renderHeader(state, activePage) + '<main>' + main + '</main>' + Shell.renderFooter(state) + '</div>';
+    return '<div class="shell">' + Shell.renderHeader(state, activePage) + '<main>' + main + '</main>' + Shell.renderFooter(state) + (activePage ? renderFloatingBar(state) : '') + '</div>';
   }
 
   function inquiryList(items, title, emptyText) {
@@ -270,6 +469,118 @@
     }).join('');
   }
 
+  function useRows(value, fallback) {
+    return Array.isArray(value) && value.length ? value : fallback;
+  }
+
+  function useTexts(value, fallback) {
+    return Array.isArray(value) && value.length ? value : fallback;
+  }
+
+  function groupTrustStats(state) {
+    return useRows(state.group.trustStats, DEFAULT_GROUP_TRUST);
+  }
+
+  function groupPillars(state) {
+    return useRows(state.group.pillars, DEFAULT_GROUP_PILLARS);
+  }
+
+  function groupOffers(state) {
+    return useRows(state.group.offers, DEFAULT_GROUP_OFFERS);
+  }
+
+  function groupTestimonials(state) {
+    return useRows(state.group.testimonials, DEFAULT_GROUP_TESTIMONIALS);
+  }
+
+  function groupFaq(state) {
+    return useRows(state.group.faq, DEFAULT_GROUP_FAQ);
+  }
+
+  function groupAccess(state) {
+    return useRows(state.group.access, DEFAULT_GROUP_ACCESS);
+  }
+
+  function businessEnhancements(state, business) {
+    var base = BUSINESS_ENHANCEMENTS[business.id] || {};
+    var nearby = relatedDestinations(state, business).slice(0, 2).map(function (item) {
+      return { image: item.image, alt: item.imageAlt || item.name };
+    });
+    var fallbackGallery = [{ image: business.photo, alt: business.photoAlt || business.name }].concat(nearby).filter(function (item) {
+      return item && item.image;
+    });
+
+    return {
+      audience: useTexts(business.audience, base.audience || []),
+      gallery: useRows(business.gallery, base.gallery || fallbackGallery),
+      faq: useRows(business.faq, base.faq || []),
+      offerCards: useRows(business.offerCards, base.offerCards || [])
+    };
+  }
+
+  function trustCards(items) {
+    return (items || []).map(function (item) {
+      return '<article class="feature-card han-trust-card"><div class="feature-icon">TR</div><h3>' + safe(item.label) + '</h3><div class="feature-stat">' + safe(item.value) + '</div></article>';
+    }).join('');
+  }
+
+  function quoteCards(items) {
+    return (items || []).map(function (item) {
+      return '<article class="contact-card han-quote-card"><p class="section-kicker">' + safe(item.name) + '</p><h3>' + safe(item.meta) + '</h3><p>"' + safe(item.quote) + '"</p></article>';
+    }).join('');
+  }
+
+  function promoCards(items) {
+    return (items || []).map(function (item) {
+      return '<article class="feature-card han-offer-card"><div class="feature-icon">OF</div><h3>' + safe(item.title || item.name) + '</h3><p>' + safe(item.meta || '') + '</p><div class="feature-stat">' + safe(item.note || item.price || '') + '</div></article>';
+    }).join('');
+  }
+
+  function faqCards(items) {
+    return (items || []).map(function (item) {
+      return '<article class="contact-card han-faq-card"><p class="section-kicker">Sik Sorulan</p><h3>' + safe(item.question) + '</h3><p>' + safe(item.answer) + '</p></article>';
+    }).join('');
+  }
+
+  function accessCards(items) {
+    return (items || []).map(function (item) {
+      return '<article class="feature-card han-access-card"><div class="feature-icon">GO</div><h3>' + safe(item.title) + '</h3><p>' + safe(item.text) + '</p></article>';
+    }).join('');
+  }
+
+  function galleryCards(items) {
+    return (items || []).map(function (item) {
+      return '<article class="contact-card han-gallery-card"><div class="han-gallery-frame"><img src="' + safe(item.image) + '" alt="' + safe(item.alt || '') + '" loading="lazy" /></div></article>';
+    }).join('');
+  }
+
+  function audienceCards(items) {
+    return (items || []).map(function (item) {
+      return '<article class="feature-card han-audience-card"><div class="feature-icon">FIT</div><p>' + safe(item) + '</p></article>';
+    }).join('');
+  }
+
+  function compareTable(hotels, state) {
+    return '' +
+      '<div class="han-compare-shell"><div class="han-compare-row han-compare-head"><span>Baslik</span>' +
+      hotels.map(function (hotel) { return '<strong>' + safe(hotel.shortName) + '</strong>'; }).join('') +
+      '</div>' +
+      '<div class="han-compare-row"><span>Konum tonu</span>' + hotels.map(function (hotel) { return '<div>' + safe(hotel.location) + '</div>'; }).join('') + '</div>' +
+      '<div class="han-compare-row"><span>One cikan vaat</span>' + hotels.map(function (hotel) { return '<div>' + safe(hotel.heroTag) + '</div>'; }).join('') + '</div>' +
+      '<div class="han-compare-row"><span>Kimler icin uygun</span>' + hotels.map(function (hotel) { return '<div>' + safe((businessEnhancements(state, hotel).audience || [])[0] || '-') + '</div>'; }).join('') + '</div>' +
+      '<div class="han-compare-row"><span>Segment notu</span>' + hotels.map(function (hotel) { return '<div>' + safe((hotel.highlights || [])[0] || '-') + '</div>'; }).join('') + '</div>' +
+      '</div>';
+  }
+
+  function renderFloatingBar(state) {
+    return '' +
+      '<div class="han-floating-bar" aria-label="Hizli iletisim kisayollari">' +
+      '<a href="tel:' + safe(state.group.phone.replace(/\s+/g, '')) + '">Ara</a>' +
+      '<a href="https://wa.me/' + safe(state.group.whatsapp.replace(/[^\d]/g, '')) + '">WhatsApp</a>' +
+      '<a href="' + safe(Shell.pageHref('booking')) + '">Talep</a>' +
+      '</div>';
+  }
+
   function momentList(items) {
     return '<ul class="highlight-list han-moment-list">' + (items || []).map(function (item) {
       return '<li>' + safe(item) + '</li>';
@@ -315,10 +626,16 @@
 
   function renderHome(state) {
     var hotels = Data.listHotels(state);
+    var moodboard = hotels.map(function (item) {
+      return { image: item.photo, alt: item.photoAlt || item.name };
+    }).concat((state.guide.destinations || []).slice(0, 3).map(function (item) {
+      return { image: item.image, alt: item.imageAlt || item.name };
+    }));
+
     return publicShell(state, 'home',
       hero(state, {
         kicker: 'Han Otelcilik',
-        title: 'Erdekte konaklama, hikaye ve deneyimi bir araya getiren premium grup',
+        title: 'Erdekte konaklama, hikaye, rota ve yeme icmeyi tek cati altinda birlestiren premium grup',
         text: state.group.manifesto,
         primaryLabel: 'Otelleri Incele',
         primaryHref: Shell.pageHref('hotels'),
@@ -332,13 +649,25 @@
         sideTitle: 'Dogrudan Konaklama Avantaji',
         sideText: state.group.directBookingPromise
       }) +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Guven Katmani</p><h2 class="section-title">Tek merkezden yonetilen, net ve profesyonel bir misafir yolculugu</h2><p class="section-text">Karar vermeyi kolaylastiran en kritik guven unsurlarini ilk ekranda acik sekilde sunuyoruz.</p></div><div class="features-grid">' +
+      trustCards(groupTrustStats(state)) +
+      '</div></div></section>' +
+      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Neden Han Otelcilik?</p><h2 class="section-title">Marka dilimizi tasiyan uc temel ilke</h2><p class="section-text">Butik konaklama, yerel deneyim ve merkezi operasyon rahatligini ayni sistemde topluyoruz.</p></div><div class="features-grid">' +
+      infoCards(groupPillars(state).map(function (item, index) { return { icon: '0' + (index + 1), title: item.title, text: item.text }; })) +
+      '</div></div></section>' +
       '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Portfoy Yapisi</p><h2 class="section-title">Her isletme ayri sayfa, ayri panel ve ayri deneyim vaadi ile kurgulandi</h2><p class="section-text">Ana sayfa marka hikayesini anlatir; oteller, yeme icme birimleri ve Erdek rehberi ise karar vermeyi kolaylastiran ayri katmanlar olarak calisir.</p></div><div class="stay-preview-grid han-business-grid">' +
       state.businesses.map(function (business) { return Shell.renderBusinessCard(business); }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Kampanyalar</p><h2 class="section-title">Direkt rezervasyonu guclendiren teklif katmani</h2><p class="section-text">Kampanya dilini fiyat odakli degil, karar kolaylastirici ve segment odakli bir yapida kuruyoruz.</p></div><div class="features-grid">' +
+      promoCards(groupOffers(state)) +
       '</div></div></section>' +
       '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Grubun Hikayesi</p><h2 class="section-title">Her marka, Erdek deneyiminin farkli bir sahnesini tasir</h2><p class="section-text">' + safe(state.group.description) + '</p></div><div class="han-editorial-grid">' +
       hotels.map(function (business) {
         return '<article class="story-card han-editorial-card"><p class="section-kicker">' + safe(business.shortName) + '</p><h3>' + safe(business.storyTitle) + '</h3><p class="story-copy">' + safe(business.story) + '</p><p class="han-editorial-note">' + safe(business.editorial) + '</p><a class="button button-secondary" href="' + Shell.businessHref(business) + '">Hikayeyi Ac</a></article>';
       }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Gorsel Atmosfer</p><h2 class="section-title">Portfoyun sahil, rota ve konaklama hissini tasiyan secili kareler</h2><p class="section-text">Gorsel dil; sadece oda gostermek yerine Erdek duygusunu, sahil hafizasini ve markalarin tonunu birlikte anlatacak sekilde kurgulandi.</p></div><div class="han-gallery-grid">' +
+      galleryCards(moodboard) +
       '</div></div></section>' +
       '<section class="section section-light"><div class="container story-grid"><article class="story-card"><p class="section-kicker">Erdek Rehberi</p><h2>' + safe(state.guide.introTitle) + '</h2><p class="story-copy">' + safe(state.guide.introText) + '</p><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('guide') + '">Tum Rehberi Ac</a><a class="button button-secondary" href="' + Shell.pageHref('booking') + '">Talep Formu</a></div></article><div class="value-stack"><article class="value-prop"><h3>Bu rehber neden var?</h3><p>Misafirler yalnizca oda degil, iyi kurgulanmis bir destinasyon deneyimi satin alir. Bu yuzden tarihi duraklari, sahil ritmini ve yerel rota onerilerini sayfaya tasidik.</p></article><article class="value-prop"><h3>One cikan duraklar</h3>' + momentList(state.guide.destinations.slice(0, 4).map(function (item) { return item.name + ' | ' + item.tagline; })) + '</article></div></div></section>' +
       '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Kesfet</p><h2 class="section-title">Erdekte mutlaka zaman ayirilmasi gereken duraklar</h2><p class="section-text">Tarihi alanlar, sahil hafizasi ve mavi rota duraklari tek bir karar ekraninda toplandi.</p></div><div class="han-destination-grid">' +
@@ -346,7 +675,15 @@
       '</div></div></section>' +
       '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">1 Haftalik Rota</p><h2 class="section-title">Konaklama kararini guclendiren tam hafta kurgusu</h2><p class="section-text">Erdege ilk kez gelen bir misafirin bir haftayi nasil gecirebilecegine dair ozenle kurgulanmis plan.</p></div><div class="features-grid han-itinerary-grid">' +
       itineraryCards(state.guide.itinerary, 3) +
-      '</div><div class="hero-actions han-section-actions"><a class="button button-primary" href="' + Shell.pageHref('guide') + '">7 Gunluk Programi Ac</a><a class="button button-secondary" href="' + Shell.pageHref('booking') + '">Dogrudan Talep Gonder</a></div></div></section>');
+      '</div><div class="hero-actions han-section-actions"><a class="button button-primary" href="' + Shell.pageHref('guide') + '">7 Gunluk Programi Ac</a><a class="button button-secondary" href="' + Shell.pageHref('booking') + '">Dogrudan Talep Gonder</a></div></div></section>' +
+      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Sosyal Kanit</p><h2 class="section-title">Guven veren misafir perspektifi</h2><p class="section-text">Yorum dili, dogrudan rezervasyon kararini guclendiren ikinci katmandir; bu nedenle otel seciminden once guven hissini destekleyen bir blok olarak kullaniyoruz.</p></div><div class="contact-grid">' +
+      quoteCards(groupTestimonials(state)) +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Ulasim ve Destek</p><h2 class="section-title">Erdege gelmeden once bilmeniz gerekenler</h2><p class="section-text">Ulasim, iletisim ve uluslararasi misafir hazirligi ayni yerde toplandi.</p></div><div class="features-grid">' +
+      accessCards(groupAccess(state)) +
+      '</div><div class="contact-grid han-dual-grid">' +
+      faqCards(groupFaq(state)) +
+      '</div></div></section>');
   }
 
   function renderHotels(state) {
@@ -363,13 +700,24 @@
         secondaryHref: Shell.pageHref('guide'),
         statsHtml: statCards(hotels.map(function (item) { return { label: item.shortName, value: item.heroTag }; }))
       }) +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Karsilastirma</p><h2 class="section-title">Uc farkli otel tonunu ayni ekranda karsilastirin</h2><p class="section-text">Misafir profiline gore hizli karar verebilmek icin konum tonu, vaat ve uygun segment bilgilerini tablo halinde topladik.</p></div>' +
+      compareTable(hotels, state) +
+      '</div></section>' +
       '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Otellerimiz</p><h2 class="section-title">Dogal segment ayrimi ile kurgulanmis otel portfoyu</h2><p class="section-text">Her otel icin resmi veya guvenilir kaynaklardan toplanan bilgiler temel alindi. Panel yapisi sayesinde bu bilgi seti, kendi operasyon akisiniza gore kolayca guncellenebilir.</p></div><div class="stay-preview-grid han-business-grid">' +
       hotels.map(function (business) { return Shell.renderBusinessCard(business, { actionLabel: 'Otel Detayi', secondaryLabel: 'Bu Otel Icin Talep' }); }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Kim Hangi Oteli Secmeli?</p><h2 class="section-title">Segment bazli hizli yonlendirme</h2><p class="section-text">Her otelin guclu oldugu misafir tipi tek bakista anlasilsin diye ek karar katmani ekledik.</p></div><div class="features-grid">' +
+      hotels.map(function (business) {
+        return '<article class="feature-card han-fit-card"><div class="feature-icon">HT</div><h3>' + safe(business.name) + '</h3>' + momentList(businessEnhancements(state, business).audience) + '<div class="hero-actions"><a class="button button-soft" href="' + Shell.businessHref(business) + '">Detayi Ac</a></div></article>';
+      }).join('') +
       '</div></div></section>' +
       '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Hikaye Katmani</p><h2 class="section-title">Her otel kendi misafir tipine gore konumlanir</h2></div><div class="han-editorial-grid">' +
       hotels.map(function (business) {
         return '<article class="story-card han-editorial-card"><p class="section-kicker">' + safe(business.name) + '</p><h3>' + safe(business.storyTitle) + '</h3><p class="story-copy">' + safe(business.story) + '</p>' + momentList(business.signatureMoments) + '</article>';
       }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Teklifler</p><h2 class="section-title">Portfoy genelindeki direkt rezervasyon avantajlari</h2></div><div class="features-grid">' +
+      promoCards(groupOffers(state)) +
       '</div></div></section>');
   }
 
@@ -390,10 +738,16 @@
       '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Yeme Icme Portfoyu</p><h2 class="section-title">Otel trafigini grubun icinde tutan ticari hatlar</h2><p class="section-text">Smile Foodhouse hizli servis ve paket satis odagi ile; pub ise aksam ekonomisi ve etkinlik kurgusu ile ele alindi. Ikisi de otel markalariyla birlikte capraz satis uretecek sekilde planlandi.</p></div><div class="stay-preview-grid han-business-grid">' +
       venues.map(function (business) { return Shell.renderBusinessCard(business, { actionLabel: 'Birimi Incele', secondaryLabel: 'Bu Birime Talep' }); }).join('') +
       '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Imza Teklifler</p><h2 class="section-title">Yeme icme tarafini ticarilestiren iki net teklif kurgusu</h2><p class="section-text">Her birimin hizli anlasilan ticari vaadini ve kullanim zamanini ayrik kartlar halinde gosterdik.</p></div><div class="features-grid">' +
+      venues.map(function (business) { return promoCards(businessEnhancements(state, business).offerCards); }).join('') +
+      '</div></div></section>' +
       '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Marka Rolleri</p><h2 class="section-title">Her birim gunun farkli bir anina cevap verir</h2></div><div class="han-editorial-grid">' +
       venues.map(function (business) {
         return '<article class="story-card han-editorial-card"><p class="section-kicker">' + safe(business.name) + '</p><h3>' + safe(business.storyTitle) + '</h3><p class="story-copy">' + safe(business.story) + '</p><p class="han-editorial-note">' + safe(business.editorial) + '</p>' + momentList(business.signatureMoments) + '</article>';
       }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Atmosfer</p><h2 class="section-title">Gunun farkli saatlerine eslik eden yeme icme dili</h2></div><div class="han-gallery-grid">' +
+      venues.map(function (business) { return galleryCards(businessEnhancements(state, business).gallery); }).join('') +
       '</div></div></section>');
   }
 
@@ -430,15 +784,54 @@
       '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Mutlaka Gorulmeli</p><h2 class="section-title">Erdegin tarihi, sahili ve ada ritmini bir araya getiren secili duraklar</h2><p class="section-text">Her kartta, lokasyonun hikayesi, en iyi ziyaret zamani ve resmi ya da yerel kaynaga giden referans baglantisi yer alir.</p></div><div class="han-destination-grid">' +
       destinationCards(state.guide.destinations) +
       '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Rota Tipleri</p><h2 class="section-title">Farkli misafir tipleri icin uc farkli Erdek kurgusu</h2><p class="section-text">Rehberi sadece tek rota gibi degil, farkli seyahat motivasyonlari icin esnek bir destinasyon plani olarak ele aldik.</p></div><div class="features-grid">' +
+      infoCards(TRAVEL_PROFILES.map(function (item, index) { return { icon: 'P' + (index + 1), title: item.title, text: item.text }; })) +
+      '</div></div></section>' +
       '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">7 Gunluk Gezi Plani</p><h2 class="section-title">Erdekte bir haftayi dogru tempo ile planlayan premium rota</h2><p class="section-text">Konaklama, tarih, deniz ve aksami dengeleyen; hem ilk kez gelenler hem de tekrar gelenler icin uygulanabilir bir program.</p></div><div class="features-grid han-itinerary-grid">' +
       itineraryCards(state.guide.itinerary) +
       '</div></div></section>' +
       '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Nerede Konaklamali?</p><h2 class="section-title">Bu rehberin ritmine uyumlu uc farkli konaklama tonu</h2><p class="section-text">Rehberdeki rotalara gore merkez temposu, klasik yaz oteli hafizasi veya daha sakin aile pansiyonu karakteri arasindan tercih yapabilirsiniz.</p></div><div class="stay-preview-grid han-business-grid">' +
       hotels.map(function (business) { return Shell.renderBusinessCard(business, { actionLabel: 'Bu Oteli Incele', secondaryLabel: 'Bu Otel Icin Talep' }); }).join('') +
       '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Ulasim ve Hazirlik</p><h2 class="section-title">Rotaya cikmadan once temel plan notlari</h2></div><div class="features-grid">' +
+      accessCards(groupAccess(state)) +
+      '</div></div></section>' +
       '<section class="section section-dark"><div class="container contact-grid"><article class="contact-card"><p class="section-kicker">Kaynaklar</p><h3>Rehber hangi bilgilerle hazirlandi?</h3><div class="footer-links han-source-list">' +
       sources.map(function (source) { return '<a href="' + safe(source.url) + '">' + safe(source.label) + '</a>'; }).join('') +
       '</div></article><article class="contact-card"><p class="section-kicker">Planlama Destegi</p><h3>Rotayi birlikte netlestirelim</h3><p>Hangi otelin hangi rota ile daha uyumlu oldugunu netlestirmek, tarih secmek ve aile yapiniza uygun plan olusturmak icin merkezi talep formunu kullanabilirsiniz.</p><div class="footer-links"><a href="' + Shell.pageHref('booking') + '">Talep Formunu Ac</a><a href="https://wa.me/905376963030">WhatsApp ile Yaz</a></div></article></div></section>');
+  }
+
+  function renderCorporate(state) {
+    return publicShell(state, 'corporate',
+      hero(state, {
+        chip: 'Han Otelcilik / Kurumsal',
+        kicker: 'Kurumsal Standartlar',
+        title: 'Dogrudan rezervasyon, merkezi operasyon ve Erdek uzmanligini tek dilden yoneten grup yapisi',
+        text: 'Bu sayfa; Han Otelcilik markasinin calisma mantigini, hizmet standartlarini, gizlilik yaklasimini ve misafire sundugu dogrudan rezervasyon avantajlarini daha net anlatmak icin tasarlandi.',
+        primaryLabel: 'Merkezi Talep Formu',
+        primaryHref: Shell.pageHref('booking'),
+        secondaryLabel: 'Otelleri Incele',
+        secondaryHref: Shell.pageHref('hotels'),
+        statsHtml: statCards(groupTrustStats(state)),
+        sideTitle: 'Kurumsal Soz',
+        sideText: state.group.directBookingPromise
+      }) +
+      '<section class="section section-light"><div class="container story-grid"><article class="story-card"><p class="section-kicker">Manifesto</p><h2>Bizim icin iyi konaklama, yalnizca oda satmak degil; guvenli planlama ve dogru yonlendirme sunmaktir</h2><p class="story-copy">' + safe(state.group.manifesto) + '</p><p class="han-editorial-note">' + safe(state.group.reservationNote) + '</p><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '">Talep Gonder</a><a class="button button-secondary" href="https://wa.me/905376963030">WhatsApp ile Yaz</a></div></article><div class="value-stack"><article class="value-prop"><h3>Kurumsal omurga</h3>' + momentList(state.group.highlights) + '</article><article class="value-prop"><h3>Iletisim</h3><p>' + safe(state.group.address) + '</p><p><a class="contact-link" href="tel:' + safe((state.group.phone || '').replace(/\s+/g, '')) + '">' + safe(state.group.phone) + '</a></p><p><a class="contact-link" href="mailto:' + safe(state.group.email) + '">' + safe(state.group.email) + '</a></p></article></div></div></section>' +
+      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Standartlar</p><h2 class="section-title">Markanin karar verdiren temel hizmet standartlari</h2><p class="section-text">Bu maddeler, sitenin metin dilini ve rezervasyon akisini profesyonel gosteren kurumsal cekirdegi olusturur.</p></div><div class="features-grid">' +
+      infoCards(CORPORATE_STANDARDS) +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Dogrudan Rezervasyon Avantajlari</p><h2 class="section-title">Araci yerine dogrudan iletisim kurmanin profesyonel faydalari</h2><p class="section-text">Teklif, uygunluk, tarih ve isletme secimini tek merkezde topladigimiz icin misafir daha hizli ve daha net bilgi alir.</p></div><div class="features-grid">' +
+      promoCards(DIRECT_BOOKING_STEPS) +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Gizlilik ve Hazirlik</p><h2 class="section-title">Kurumsal guveni destekleyen tamamlayici notlar</h2><p class="section-text">Uluslararasi hazirlik, veri hassasiyeti ve seffaf operasyon dili premium bir marka algisinin vazgecilmez parcalaridir.</p></div><div class="features-grid">' +
+      infoCards(LEGAL_AND_SERVICE_NOTES) +
+      '</div></div></section>' +
+      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Portfoy Baglantilari</p><h2 class="section-title">Kurumsal omurgayi tasiyan isletmeler</h2><p class="section-text">Her isletme kendi sahnesini oynar; ancak hepsi ortak bir hizmet diline ve merkezi operasyon mantigina baglidir.</p></div><div class="stay-preview-grid han-business-grid">' +
+      state.businesses.map(function (business) { return Shell.renderBusinessCard(business, { actionLabel: 'Detayi Ac', secondaryLabel: 'Bu Isletmeye Talep' }); }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Sik Sorulan Konular</p><h2 class="section-title">Kurumsal surecimiz hakkinda hizli cevaplar</h2></div><div class="contact-grid">' +
+      faqCards(groupFaq(state)) +
+      '</div></div></section>');
   }
 
   function renderBusiness(state, business) {
@@ -448,6 +841,7 @@
     }
 
     var nearby = relatedDestinations(state, business);
+    var enhancements = businessEnhancements(state, business);
     return publicShell(state, business.type === 'hotel' ? 'hotels' : 'venues',
       hero(state, {
         chip: business.name,
@@ -462,10 +856,22 @@
         sideText: business.summary
       }) +
       '<section class="section section-light"><div class="container han-business-spotlight"><div class="han-business-photo"><img src="' + safe(business.photo ? business.photo : state.guide.destinations[0].image) + '" alt="' + safe(business.photoAlt || business.name) + '" loading="eager" /></div><div class="han-business-spotlight-copy"><p class="section-kicker">Genel Bakis</p><h2>' + safe(business.tagline) + '</h2><p class="story-copy">' + safe(business.summary) + '</p>' + momentList(business.highlights) + '<div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '?business=' + encodeURIComponent(business.id) + '">Bu Isletme Icin Talep</a><a class="button button-secondary" href="' + Shell.pageHref('guide') + '">Erdek Rehberi</a></div></div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Kime Uygun?</p><h2 class="section-title">' + safe(business.name) + ' icin uygun misafir profilleri</h2><p class="section-text">Karar verme surecini kolaylastirmak icin bu isletmenin en guclu oldugu konaklama veya kullanim profillerini ayri kartlarda gosterdik.</p></div><div class="features-grid">' +
+      audienceCards(enhancements.audience) +
+      '</div></div></section>' +
       '<section class="section section-light"><div class="container story-grid"><article class="story-card"><p class="section-kicker">Marka Hikayesi</p><h2>' + safe(business.storyTitle) + '</h2><p class="story-copy">' + safe(business.story) + '</p><p class="han-editorial-note">' + safe(business.editorial) + '</p></article><div class="value-stack"><article class="value-prop"><h3>Iletisim</h3><p>' + safe(business.address) + '</p><p><a class="contact-link" href="tel:' + safe((business.phone || '').replace(/\s+/g, '')) + '">' + safe(business.phone) + '</a></p><p><a class="contact-link" href="mailto:' + safe(business.email) + '">' + safe(business.email) + '</a></p>' + (business.website ? '<p><a class="contact-link" href="' + safe(business.website) + '">Resmi web sitesi</a></p>' : '') + '</article><article class="value-prop"><h3>Imza Anlari</h3>' + momentList(business.signatureMoments) + '</article></div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Galeri</p><h2 class="section-title">' + safe(business.name) + ' atmosferini tasiyan secili kareler</h2></div><div class="han-gallery-grid">' +
+      galleryCards(enhancements.gallery) +
+      '</div></div></section>' +
       '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">' + safe(business.type === 'hotel' ? 'Oda Kurgusu' : 'Menu ve Servis') + '</p><h2 class="section-title">' + safe(business.name) + ' ana kalemleri</h2><p class="section-text">Bu liste ilgili isletmenin kendi panelinden duzenlenebilir.</p></div><div class="stay-preview-grid han-business-grid">' + collectionCards(business) + '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Teklifler</p><h2 class="section-title">' + safe(business.name) + ' icin imza teklif kurgulari</h2></div><div class="features-grid">' +
+      promoCards(enhancements.offerCards) +
+      '</div></div></section>' +
       '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Yakindaki Deneyimler</p><h2 class="section-title">' + safe(business.name) + ' konaklamasini buyuten Erdek duraklari</h2><p class="section-text">Bu isletmeden hareketle planlanabilecek en guclu rota duraklari, Erdek rehberinden secildi.</p></div><div class="han-destination-grid">' + destinationCards(nearby) + '</div></div></section>' +
-      '<section class="section section-dark"><div class="container contact-grid"><article class="contact-card"><p class="section-kicker">Bilgi Kaynaklari</p><div class="footer-links">' + (business.sources.length ? business.sources.map(function (source) { return '<a href="' + safe(source.url) + '">' + safe(source.label) + '</a>'; }).join('') : '<a href="#">Bu birim icin kaynak bilgisi panelden genisletilebilir</a>') + '</div></article><article class="contact-card"><p class="section-kicker">Panel Erisimi</p><h3>Ayrik admin paneli hazir</h3><p>Bu isletme icin ayri bir panel olusturuldu; tanitim metinleri, oda veya menu kalemleri ve metrikler bu panelden bagimsiz yonetilebilir.</p><div class="footer-links"><a href="./panel-' + safe(panelSlug(business.id)) + '.html">Panele Git</a><a href="' + Shell.pageHref('booking') + '?business=' + encodeURIComponent(business.id) + '">Talep Olustur</a></div></article></div></section>');
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Sik Sorulan Sorular</p><h2 class="section-title">' + safe(business.name) + ' hakkinda hizli cevaplar</h2></div><div class="contact-grid">' +
+      faqCards(enhancements.faq) +
+      '</div></div></section>' +
+      '<section class="section section-dark"><div class="container contact-grid"><article class="contact-card"><p class="section-kicker">Bilgi Kaynaklari</p><div class="footer-links">' + (business.sources.length ? business.sources.map(function (source) { return '<a href="' + safe(source.url) + '">' + safe(source.label) + '</a>'; }).join('') : '<a href="' + Shell.pageHref('corporate') + '">Bu birim icin kaynak ve kurumsal notlari incele</a>') + '</div></article><article class="contact-card"><p class="section-kicker">Panel Erisimi</p><h3>Ayrik admin paneli hazir</h3><p>Bu isletme icin ayri bir panel olusturuldu; tanitim metinleri, oda veya menu kalemleri ve metrikler bu panelden bagimsiz yonetilebilir.</p><div class="footer-links"><a href="./panel-' + safe(panelSlug(business.id)) + '.html">Panele Git</a><a href="' + Shell.pageHref('booking') + '?business=' + encodeURIComponent(business.id) + '">Talep Olustur</a></div></article></div></section>');
   }
 
   function renderBooking(state) {
@@ -487,7 +893,10 @@
         sideTitle: 'Rezervasyon Yaklasimimiz',
         sideText: state.group.directBookingPromise
       }) +
-      '<section class="section section-light"><div class="container story-grid"><article class="booking-shell"><div class="booking-shell-header"><h3>Merkezi talep formu</h3><p>Konaklama, masa veya genel bilgi talepleri tek formdan alinip secilen isletmeye gore siniflandirilir. Tarih secimleri, misafir bilgileri ve operasyon notlari ayni ekrana toplandi.</p></div><form id="groupInquiryForm" class="form-grid two"><label class="field"><span>Isletme</span><select id="inquiryBusiness">' + state.businesses.map(function (item) { return '<option value="' + safe(item.id) + '">' + safe(item.name) + '</option>'; }).join('') + '</select></label><label class="field"><span>Talep Tipi</span><select id="inquiryType"><option value="konaklama">Konaklama</option><option value="masa">Masa / servis</option><option value="bilgi">Genel bilgi</option></select></label><label class="field"><span>Giris Tarihi</span><input id="inquiryCheckIn" type="date" /></label><label class="field"><span>Cikis Tarihi</span><input id="inquiryCheckOut" type="date" /></label><label class="field"><span>Yetiskin</span><input id="inquiryAdults" type="number" min="1" value="2" /></label><label class="field"><span>Cocuk</span><input id="inquiryChildren" type="number" min="0" value="0" /></label><label class="field"><span>Ad Soyad</span><input id="inquiryName" type="text" required /></label><label class="field"><span>Telefon</span><input id="inquiryPhone" type="text" required /></label><label class="field"><span>E-Posta</span><input id="inquiryEmail" type="email" /></label><label class="field"><span>Donus Tercihi</span><select id="inquiryChannel"><option value="telefon">Telefon</option><option value="whatsapp">WhatsApp</option><option value="eposta">E-Posta</option></select></label><label class="field field-span-2"><span>Not</span><textarea id="inquiryNote" rows="5" placeholder="Oda tercihi, varis saati, cocuk yaslari veya ozel notlarinizi yazabilirsiniz."></textarea></label><div class="booking-step-actions field-span-2"><button class="button button-primary" type="submit">Talebi Kaydet</button><span class="price-note" id="inquiryStatus"></span></div></form></article><div class="value-stack"><article class="value-prop"><h3>Biz nasil ilerliyoruz?</h3>' + momentList(['Talep ilgili isletmeye gore etiketlenir', 'Tarih ve kapasite uygunlugu hizla kontrol edilir', 'Sectiginiz iletisim kanalindan geri donus planlanir']) + '</article><article class="value-prop"><h3>WhatsApp ve telefon destegi</h3><p>Hizli iletisim icin dogrudan WhatsApp hattimizi veya telefon numaramizi da kullanabilirsiniz.</p><div class="footer-links"><a href="https://wa.me/905376963030">WhatsApp ile yaz</a><a href="tel:905376963030">+90 537 696 30 30</a></div></article><article class="value-prop"><h3>Gezi planina ihtiyaciniz varsa</h3><p>Erdekte gecireceginiz haftayi planlamak icin destinasyon rehberimizi inceleyebilir, rotaya uygun otel secimini daha kolay yapabilirsiniz.</p><div class="footer-links"><a href="' + Shell.pageHref('guide') + '">Erdek Rehberini Ac</a></div></article></div></div></section>');
+      '<section class="section section-light"><div class="container story-grid"><article class="booking-shell"><div class="booking-shell-header"><h3>Merkezi talep formu</h3><p>Konaklama, masa veya genel bilgi talepleri tek formdan alinip secilen isletmeye gore siniflandirilir. Tarih secimleri, misafir bilgileri ve operasyon notlari ayni ekrana toplandi.</p></div><form id="groupInquiryForm" class="form-grid two"><label class="field"><span>Isletme</span><select id="inquiryBusiness">' + state.businesses.map(function (item) { return '<option value="' + safe(item.id) + '">' + safe(item.name) + '</option>'; }).join('') + '</select></label><label class="field"><span>Talep Tipi</span><select id="inquiryType"><option value="konaklama">Konaklama</option><option value="masa">Masa / servis</option><option value="bilgi">Genel bilgi</option></select></label><label class="field"><span>Giris Tarihi</span><input id="inquiryCheckIn" type="date" /></label><label class="field"><span>Cikis Tarihi</span><input id="inquiryCheckOut" type="date" /></label><label class="field"><span>Yetiskin</span><input id="inquiryAdults" type="number" min="1" value="2" /></label><label class="field"><span>Cocuk</span><input id="inquiryChildren" type="number" min="0" value="0" /></label><label class="field"><span>Ad Soyad</span><input id="inquiryName" type="text" required /></label><label class="field"><span>Telefon</span><input id="inquiryPhone" type="text" required /></label><label class="field"><span>E-Posta</span><input id="inquiryEmail" type="email" /></label><label class="field"><span>Donus Tercihi</span><select id="inquiryChannel"><option value="telefon">Telefon</option><option value="whatsapp">WhatsApp</option><option value="eposta">E-Posta</option></select></label><label class="field field-span-2"><span>Not</span><textarea id="inquiryNote" rows="5" placeholder="Oda tercihi, varis saati, cocuk yaslari veya ozel notlarinizi yazabilirsiniz."></textarea></label><div class="booking-step-actions field-span-2"><button class="button button-primary" type="submit">Talebi Kaydet</button><span class="price-note" id="inquiryStatus"></span></div></form></article><div class="value-stack"><article class="value-prop"><h3>Biz nasil ilerliyoruz?</h3>' + momentList(['Talep ilgili isletmeye gore etiketlenir', 'Tarih ve kapasite uygunlugu hizla kontrol edilir', 'Sectiginiz iletisim kanalindan geri donus planlanir']) + '</article><article class="value-prop"><h3>WhatsApp ve telefon destegi</h3><p>Hizli iletisim icin dogrudan WhatsApp hattimizi veya telefon numaramizi da kullanabilirsiniz.</p><div class="footer-links"><a href="https://wa.me/905376963030">WhatsApp ile yaz</a><a href="tel:905376963030">+90 537 696 30 30</a></div></article><article class="value-prop"><h3>Gezi planina ihtiyaciniz varsa</h3><p>Erdekte gecireceginiz haftayi planlamak icin destinasyon rehberimizi inceleyebilir, rotaya uygun otel secimini daha kolay yapabilirsiniz.</p><div class="footer-links"><a href="' + Shell.pageHref('guide') + '">Erdek Rehberini Ac</a></div></article></div></div></section>' +
+      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Guven ve Hazirlik</p><h2 class="section-title">Rezervasyon oncesi en cok sorulan uc konu</h2></div><div class="contact-grid">' +
+      faqCards(groupFaq(state)) +
+      '</div></div></section>');
   }
 
   function renderAdminHub(state) {
@@ -514,7 +923,14 @@
         sideTitle: 'Panel Gecisleri',
         sideText: 'Her isletme kendi sayfasinda ayrik sekilde yonetilir. Grup hub, ortak bilgiler ve gelen talepler icin merkez gorevi gorur.'
       }) +
-      '<section class="section section-light"><div class="container">' + flashBanner(flash) + '<div class="han-admin-grid"><article class="booking-shell han-settings-card"><div class="booking-shell-header"><h3>Grup Bilgileri</h3><p>Ust marka, iletisim, manifesto ve dogrudan rezervasyon mesajlari burada yonetilir.</p></div><form id="groupSettingsForm" class="form-grid two"><label class="field"><span>Grup Adi</span><input name="name" type="text" value="' + safe(state.group.name) + '" required /></label><label class="field"><span>Telefon</span><input name="phone" type="text" value="' + safe(state.group.phone) + '" required /></label><label class="field"><span>WhatsApp</span><input name="whatsapp" type="text" value="' + safe(state.group.whatsapp) + '" required /></label><label class="field"><span>E-Posta</span><input name="email" type="email" value="' + safe(state.group.email) + '" /></label><label class="field"><span>Sehir</span><input name="city" type="text" value="' + safe(state.group.city) + '" /></label><label class="field field-span-2"><span>Adres</span><input name="address" type="text" value="' + safe(state.group.address) + '" /></label><label class="field field-span-2"><span>Slogan</span><input name="tagline" type="text" value="' + safe(state.group.tagline) + '" /></label><label class="field field-span-2"><span>Aciklama</span><textarea name="description" rows="4">' + safe(state.group.description) + '</textarea></label><label class="field field-span-2"><span>Manifesto</span><textarea name="manifesto" rows="4">' + safe(state.group.manifesto || '') + '</textarea></label><label class="field field-span-2"><span>Dogrudan Rezervasyon Mesaji</span><textarea name="directBookingPromise" rows="3">' + safe(state.group.directBookingPromise || '') + '</textarea></label><label class="field field-span-2"><span>Rezervasyon Notu</span><textarea name="reservationNote" rows="3">' + safe(state.group.reservationNote) + '</textarea></label><label class="field field-span-2"><span>One Cikanlar</span><textarea name="highlights" rows="5">' + safe(joinLines(state.group.highlights)) + '</textarea></label><div class="booking-step-actions field-span-2"><button class="button button-primary" type="submit">Grup Bilgilerini Kaydet</button><button class="button button-secondary" type="button" data-admin-logout>Oturumu Kapat</button><span class="price-note" id="groupSettingsStatus"></span></div></form></article><article class="contact-card han-panel-links"><p class="section-kicker">Panel Gecisleri</p><h3>Her isletme icin ayri yonetim sayfasi</h3><p>Oteller, Smile Foodhouse ve pub icin ayrik paneller burada listelenir.</p><div class="han-mini-links">' + businessLinks(state) + '</div></article></div></div></section>' +
+      '<section class="section section-light"><div class="container">' + flashBanner(flash) + '<div class="han-admin-grid"><article class="booking-shell han-settings-card"><div class="booking-shell-header"><h3>Grup Bilgileri</h3><p>Ust marka, iletisim, manifesto ve dogrudan rezervasyon mesajlari burada yonetilir.</p></div><form id="groupSettingsForm" class="form-grid two"><label class="field"><span>Grup Adi</span><input name="name" type="text" value="' + safe(state.group.name) + '" required /></label><label class="field"><span>Telefon</span><input name="phone" type="text" value="' + safe(state.group.phone) + '" required /></label><label class="field"><span>WhatsApp</span><input name="whatsapp" type="text" value="' + safe(state.group.whatsapp) + '" required /></label><label class="field"><span>E-Posta</span><input name="email" type="email" value="' + safe(state.group.email) + '" /></label><label class="field"><span>Sehir</span><input name="city" type="text" value="' + safe(state.group.city) + '" /></label><label class="field field-span-2"><span>Adres</span><input name="address" type="text" value="' + safe(state.group.address) + '" /></label><label class="field field-span-2"><span>Slogan</span><input name="tagline" type="text" value="' + safe(state.group.tagline) + '" /></label><label class="field field-span-2"><span>Aciklama</span><textarea name="description" rows="4">' + safe(state.group.description) + '</textarea></label><label class="field field-span-2"><span>Manifesto</span><textarea name="manifesto" rows="4">' + safe(state.group.manifesto || '') + '</textarea></label><label class="field field-span-2"><span>Dogrudan Rezervasyon Mesaji</span><textarea name="directBookingPromise" rows="3">' + safe(state.group.directBookingPromise || '') + '</textarea></label><label class="field field-span-2"><span>Rezervasyon Notu</span><textarea name="reservationNote" rows="3">' + safe(state.group.reservationNote) + '</textarea></label><label class="field field-span-2"><span>One Cikanlar</span><textarea name="highlights" rows="5">' + safe(joinLines(state.group.highlights)) + '</textarea></label>' +
+      rowEditor('groupTrust', 'groupTrust', groupTrustStats(state)) +
+      rowEditor('groupPillars', 'pillars', groupPillars(state)) +
+      rowEditor('groupOffers', 'offers', groupOffers(state)) +
+      rowEditor('groupTestimonials', 'testimonials', groupTestimonials(state)) +
+      rowEditor('groupFaq', 'faq', groupFaq(state)) +
+      rowEditor('groupAccess', 'access', groupAccess(state)) +
+      '<div class="booking-step-actions field-span-2"><button class="button button-primary" type="submit">Grup Bilgilerini Kaydet</button><button class="button button-secondary" type="button" data-admin-logout>Oturumu Kapat</button><span class="price-note" id="groupSettingsStatus"></span></div></form></article><article class="contact-card han-panel-links"><p class="section-kicker">Panel Gecisleri</p><h3>Her isletme icin ayri yonetim sayfasi</h3><p>Oteller, Smile Foodhouse ve pub icin ayrik paneller burada listelenir.</p><div class="han-mini-links">' + businessLinks(state) + '</div></article></div></div></section>' +
       inquiryList(state.inquiries, 'Tum merkezi talepler', 'Henuz merkezi talep kaydi bulunmuyor.'));
   }
 
@@ -532,6 +948,7 @@
     var relatedInquiries = (state.inquiries || []).filter(function (item) { return item.businessId === business.id; });
     var collectionKey = business.type === 'hotel' ? 'hotelCollection' : 'venueCollection';
     var collectionItems = business.type === 'hotel' ? business.rooms : business.offerings;
+    var enhancements = businessEnhancements(state, business);
 
     return publicShell(state, null,
       hero(state, {
@@ -548,9 +965,12 @@
         sideTitle: 'Ayrik marka yonetimi',
         sideText: 'Bu panelde yaptiginiz degisiklikler sadece ilgili isletmenin vitrin sayfasini ve talep akislarini etkiler.'
       }) +
-      '<section class="section section-light"><div class="container">' + flashBanner(flash) + '<div class="han-admin-grid"><article class="booking-shell han-settings-card"><div class="booking-shell-header"><h3>' + safe(business.name) + ' ayarlari</h3><p>Tanitim dili, hikaye katmani, gorseller, kaynaklar ve urun kalemleri bu panelden yonetilir.</p></div><form id="businessPanelForm" class="form-grid two"><label class="field"><span>Isletme Adi</span><input name="name" type="text" value="' + safe(business.name) + '" required /></label><label class="field"><span>Kisa Ad</span><input name="shortName" type="text" value="' + safe(business.shortName) + '" /></label><label class="field field-span-2"><span>Hero Etiketi</span><input name="heroTag" type="text" value="' + safe(business.heroTag) + '" /></label><label class="field field-span-2"><span>Tagline</span><input name="tagline" type="text" value="' + safe(business.tagline) + '" /></label><label class="field"><span>Lokasyon</span><input name="location" type="text" value="' + safe(business.location) + '" /></label><label class="field"><span>Vurgu Rengi</span><input name="accent" type="text" value="' + safe(business.accent) + '" /></label><label class="field field-span-2"><span>Adres</span><input name="address" type="text" value="' + safe(business.address) + '" /></label><label class="field"><span>Telefon</span><input name="phone" type="text" value="' + safe(business.phone) + '" /></label><label class="field"><span>E-Posta</span><input name="email" type="email" value="' + safe(business.email) + '" /></label><label class="field field-span-2"><span>Web Sitesi</span><input name="website" type="text" value="' + safe(business.website) + '" /></label><label class="field field-span-2"><span>Kapak Gradient</span><input name="cover" type="text" value="' + safe(business.cover) + '" /></label><label class="field field-span-2"><span>Foto URL</span><input name="photo" type="text" value="' + safe(business.photo || '') + '" /></label><label class="field field-span-2"><span>Foto Alt Metni</span><input name="photoAlt" type="text" value="' + safe(business.photoAlt || '') + '" /></label><label class="field field-span-2"><span>Kisa Ozet</span><textarea name="summary" rows="4">' + safe(business.summary) + '</textarea></label><label class="field field-span-2"><span>Uzun Aciklama</span><textarea name="description" rows="5">' + safe(business.description) + '</textarea></label><label class="field field-span-2"><span>Hikaye Basligi</span><input name="storyTitle" type="text" value="' + safe(business.storyTitle || '') + '" /></label><label class="field field-span-2"><span>Hikaye Metni</span><textarea name="story" rows="5">' + safe(business.story || '') + '</textarea></label><label class="field field-span-2"><span>Editoryal Not</span><textarea name="editorial" rows="4">' + safe(business.editorial || '') + '</textarea></label><label class="field field-span-2"><span>Imza Anlari</span><textarea name="signatureMoments" rows="5">' + safe(joinLines(business.signatureMoments || [])) + '</textarea></label><label class="field field-span-2"><span>Yakin Rota ID' + "'" + 'leri</span><textarea name="nearby" rows="4" placeholder="zeytinliada, kyzikos, cugra-kurbagali">' + safe(joinLines(business.nearby || [])) + '</textarea></label><label class="field field-span-2"><span>One Cikanlar</span><textarea name="highlights" rows="5">' + safe(joinLines(business.highlights)) + '</textarea></label><label class="field field-span-2"><span>Operasyon Notlari</span><textarea name="features" rows="5">' + safe(joinLines(business.features)) + '</textarea></label>' +
+      '<section class="section section-light"><div class="container">' + flashBanner(flash) + '<div class="han-admin-grid"><article class="booking-shell han-settings-card"><div class="booking-shell-header"><h3>' + safe(business.name) + ' ayarlari</h3><p>Tanitim dili, hikaye katmani, gorseller, kaynaklar ve urun kalemleri bu panelden yonetilir.</p></div><form id="businessPanelForm" class="form-grid two"><label class="field"><span>Isletme Adi</span><input name="name" type="text" value="' + safe(business.name) + '" required /></label><label class="field"><span>Kisa Ad</span><input name="shortName" type="text" value="' + safe(business.shortName) + '" /></label><label class="field field-span-2"><span>Hero Etiketi</span><input name="heroTag" type="text" value="' + safe(business.heroTag) + '" /></label><label class="field field-span-2"><span>Tagline</span><input name="tagline" type="text" value="' + safe(business.tagline) + '" /></label><label class="field"><span>Lokasyon</span><input name="location" type="text" value="' + safe(business.location) + '" /></label><label class="field"><span>Vurgu Rengi</span><input name="accent" type="text" value="' + safe(business.accent) + '" /></label><label class="field field-span-2"><span>Adres</span><input name="address" type="text" value="' + safe(business.address) + '" /></label><label class="field"><span>Telefon</span><input name="phone" type="text" value="' + safe(business.phone) + '" /></label><label class="field"><span>E-Posta</span><input name="email" type="email" value="' + safe(business.email) + '" /></label><label class="field field-span-2"><span>Web Sitesi</span><input name="website" type="text" value="' + safe(business.website) + '" /></label><label class="field field-span-2"><span>Kapak Gradient</span><input name="cover" type="text" value="' + safe(business.cover) + '" /></label><label class="field field-span-2"><span>Foto URL</span><input name="photo" type="text" value="' + safe(business.photo || '') + '" /></label><label class="field field-span-2"><span>Foto Alt Metni</span><input name="photoAlt" type="text" value="' + safe(business.photoAlt || '') + '" /></label><label class="field field-span-2"><span>Kisa Ozet</span><textarea name="summary" rows="4">' + safe(business.summary) + '</textarea></label><label class="field field-span-2"><span>Uzun Aciklama</span><textarea name="description" rows="5">' + safe(business.description) + '</textarea></label><label class="field field-span-2"><span>Hikaye Basligi</span><input name="storyTitle" type="text" value="' + safe(business.storyTitle || '') + '" /></label><label class="field field-span-2"><span>Hikaye Metni</span><textarea name="story" rows="5">' + safe(business.story || '') + '</textarea></label><label class="field field-span-2"><span>Editoryal Not</span><textarea name="editorial" rows="4">' + safe(business.editorial || '') + '</textarea></label><label class="field field-span-2"><span>Imza Anlari</span><textarea name="signatureMoments" rows="5">' + safe(joinLines(business.signatureMoments || [])) + '</textarea></label><label class="field field-span-2"><span>Hedef Misafir Profilleri</span><textarea name="audience" rows="4">' + safe(joinLines(enhancements.audience)) + '</textarea></label><label class="field field-span-2"><span>Yakin Rota ID' + "'" + 'leri</span><textarea name="nearby" rows="4" placeholder="zeytinliada, kyzikos, cugra-kurbagali">' + safe(joinLines(business.nearby || [])) + '</textarea></label><label class="field field-span-2"><span>One Cikanlar</span><textarea name="highlights" rows="5">' + safe(joinLines(business.highlights)) + '</textarea></label><label class="field field-span-2"><span>Operasyon Notlari</span><textarea name="features" rows="5">' + safe(joinLines(business.features)) + '</textarea></label>' +
       rowEditor('stats', 'stats', business.stats) +
       rowEditor('collection', collectionKey, collectionItems) +
+      rowEditor('businessOffers', 'offers', enhancements.offerCards) +
+      rowEditor('businessGallery', 'gallery', enhancements.gallery) +
+      rowEditor('businessFaq', 'faq', enhancements.faq) +
       rowEditor('sources', 'sources', business.sources) +
       '<div class="booking-step-actions field-span-2"><button class="button button-primary" type="submit">Paneli Kaydet</button><a class="button button-secondary" href="./admin.html">Huba Don</a><button class="button button-ghost" type="button" data-admin-logout>Oturumu Kapat</button><span class="price-note" id="panelStatus"></span></div></form></article><article class="contact-card han-panel-links"><p class="section-kicker">Hizli Gecis</p><h3>Diger paneller</h3><div class="han-mini-links">' + businessLinks(state) + '</div><div class="footer-links"><a href="' + Shell.businessHref(business) + '">Detay sayfasini ac</a><a href="' + Shell.pageHref('booking') + '?business=' + encodeURIComponent(business.id) + '">Bu isletme icin talep olustur</a></div></article></div></div></section>' +
       inquiryList(relatedInquiries, business.name + ' icin gelen talepler', 'Bu isletme icin henuz talep kaydi bulunmuyor.'));
@@ -656,7 +1076,13 @@
         manifesto: form.elements.manifesto.value.trim(),
         directBookingPromise: form.elements.directBookingPromise.value.trim(),
         reservationNote: form.elements.reservationNote.value.trim(),
-        highlights: splitLines(form.elements.highlights.value)
+        highlights: splitLines(form.elements.highlights.value),
+        trustStats: collectRows('groupTrust'),
+        pillars: collectRows('groupPillars'),
+        offers: collectRows('groupOffers'),
+        testimonials: collectRows('groupTestimonials'),
+        faq: collectRows('groupFaq'),
+        access: collectRows('groupAccess')
       });
       setFlash('Grup bilgileri kaydedildi.');
       mount();
@@ -688,11 +1114,15 @@
         story: form.elements.story.value.trim(),
         editorial: form.elements.editorial.value.trim(),
         signatureMoments: splitLines(form.elements.signatureMoments.value),
+        audience: splitLines(form.elements.audience.value),
         nearby: splitLines(form.elements.nearby.value),
         highlights: splitLines(form.elements.highlights.value),
         features: splitLines(form.elements.features.value),
         stats: collectRows('stats'),
-        sources: collectRows('sources')
+        sources: collectRows('sources'),
+        gallery: collectRows('businessGallery'),
+        faq: collectRows('businessFaq'),
+        offerCards: collectRows('businessOffers')
       };
 
       if (business.type === 'hotel') {
@@ -819,6 +1249,8 @@
       ? Shell.pageHref('hotels')
       : currentPage === 'guide'
       ? Shell.pageHref('guide')
+      : currentPage === 'corporate'
+      ? Shell.pageHref('corporate')
       : currentPage === 'venues'
       ? Shell.pageHref('venues')
       : currentPage === 'booking'
@@ -846,6 +1278,21 @@
     if (currentPage === 'hotels') {
       title = state.group.name + ' | Oteller';
       description = 'Han Otelcilik catisi altindaki Mavi Inci Park Otel, Gulplaj Hotel ve Villa Ece Pansiyon bilgileri.';
+    } else if (currentPage === 'corporate') {
+      title = state.group.name + ' | Kurumsal Standartlar';
+      description = 'Han Otelcilik kurumsal hizmet standartlari, dogrudan rezervasyon avantaji ve merkezi operasyon yaklasimi.';
+      schema = {
+        '@context': 'https://schema.org',
+        '@type': 'AboutPage',
+        name: state.group.name + ' Kurumsal Standartlar',
+        description: state.group.directBookingPromise,
+        about: {
+          '@type': 'Organization',
+          name: state.group.name,
+          telephone: state.group.phone,
+          email: state.group.email
+        }
+      };
     } else if (currentPage === 'guide') {
       title = state.group.name + ' | ' + state.guide.title;
       description = 'Erdek tarihi lokasyonlari, sahil duraklari ve 7 gunluk gezi plani ile hazirlanan kurumsal destinasyon rehberi.';
@@ -917,6 +1364,8 @@
       html = renderHome(state);
     } else if (currentPage === 'hotels') {
       html = renderHotels(state);
+    } else if (currentPage === 'corporate') {
+      html = renderCorporate(state);
     } else if (currentPage === 'guide') {
       html = renderGuide(state);
     } else if (currentPage === 'venues') {

@@ -42,6 +42,7 @@ jobs:
           mkdir -p dist
           cp index.html dist/
           cp odalar.html dist/
+          cp kurumsal.html dist/
           cp erdek-rehberi.html dist/
           cp deneyimler.html dist/
           cp rezervasyon.html dist/
