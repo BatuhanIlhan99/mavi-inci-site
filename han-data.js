@@ -268,6 +268,9 @@
     };
     var current = defaults.businesses[3];
 
+    next.name = current.name;
+    next.shortName = current.shortName;
+
     Object.keys(legacy).forEach(function (key) {
       if (!next[key] || next[key] === legacy[key]) {
         next[key] = current[key];
@@ -280,6 +283,14 @@
 
     if (JSON.stringify(next.stats || []) === JSON.stringify(legacy.stats || [])) {
       next.stats = current.stats.slice();
+    }
+
+    if (typeof next.summary === 'string') {
+      next.summary = next.summary.replace(/Han Fast Food/g, current.name);
+    }
+
+    if (typeof next.description === 'string') {
+      next.description = next.description.replace(/Han Fast Food/g, current.name);
     }
 
     return next;
@@ -331,7 +342,11 @@
   function loadState() {
     try {
       var raw = window.localStorage.getItem(STORAGE_KEY);
-      return hydrateState(raw ? JSON.parse(raw) : defaults);
+      var next = hydrateState(raw ? JSON.parse(raw) : defaults);
+      if (raw) {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      }
+      return next;
     } catch (error) {
       return hydrateState(defaults);
     }
