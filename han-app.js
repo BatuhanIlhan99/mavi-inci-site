@@ -722,81 +722,94 @@
   }
 
   function renderHome(state) {
-    var hotel = primaryHotel(state);
-    var moodboard = [
-      { image: hotel.photo, alt: hotel.photoAlt || hotel.name }
-    ].concat((state.guide.destinations || []).slice(0, 3).map(function (item) {
+    var hotels = Data.listHotels(state);
+    var venues = Data.listVenues(state);
+    var featuredHotel = primaryHotel(state);
+    var moodboard = hotels.map(function (item) {
+      return { image: item.photo, alt: item.photoAlt || item.name };
+    }).concat((state.guide.destinations || []).slice(0, 3).map(function (item) {
       return { image: item.image, alt: item.imageAlt || item.name };
     }));
 
     return publicShell(state, 'home',
       hero(state, {
-        chip: 'Mavi Inci Park Otel',
-        kicker: 'Erdegin Kalbinde',
-        title: 'Konfor ve guvenin kesisim noktasi',
-        text: '13 ozel odamizda; profesyonel hizmet, merkezi konum ve butik otel sicakligini bir arada sunuyoruz. Mavi Inci Park Otel, hem tatil hem is seyahati planlayan misafirler icin ozenli bir konaklama deneyimi vadeder.',
-        primaryLabel: 'Odalarimizi Incele',
+        chip: 'Han Otelcilik',
+        kicker: 'Erdekte Butunsel Konaklama',
+        title: 'Uc otel, bir fast food restorani ve bir pub ile kurgulanan Erdek deneyimi',
+        text: state.group.manifesto,
+        primaryLabel: 'Otelleri Incele',
         primaryHref: Shell.pageHref('hotels'),
-        secondaryLabel: 'Hemen Rezervasyon Yap',
-        secondaryHref: Shell.pageHref('booking'),
+        secondaryLabel: 'Erdek Rehberi',
+        secondaryHref: Shell.pageHref('guide'),
         statsHtml: statCards([
-          { label: 'Oda Sayisi', value: '13 oda' },
-          { label: 'Konum', value: 'Erdek merkez' },
-          { label: 'Hizmet', value: '7/24 guvenlik' }
+          { label: 'Toplam Isletme', value: String(state.businesses.length) },
+          { label: 'Konaklama Markasi', value: String(hotels.length) },
+          { label: 'Yeme Icme Birimi', value: String(venues.length) }
         ]),
         sideTitle: 'Dogrudan Rezervasyon Avantaji',
-        sideText: 'Hizli geri donus, net fiyatlandirma ve dogrudan iletisim ile rezervasyon surecini daha guvenli ve daha kolay hale getiriyoruz.',
-        sidePhone: hotel.phone,
-        sideEmail: hotel.email,
-        sideLocation: hotel.location
+        sideText: state.group.directBookingPromise,
+        sidePhone: state.group.phone,
+        sideEmail: state.group.email,
+        sideLocation: state.group.city
       }) +
-      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">One Cikan Hizmetlerimiz</p><h2 class="section-title">Mavi Inci deneyimini guclendiren temel avantajlar</h2><p class="section-text">Kurumsal netlik ile butik konforu bir araya getiren ana hizmet basliklarimizi ilk ekranda acikca sunuyoruz.</p></div><div class="features-grid">' +
-      infoCards(HOME_QUICK_FEATURES) +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Guven Katmani</p><h2 class="section-title">Tek merkezden yonetilen, net ve profesyonel bir misafir yolculugu</h2><p class="section-text">Karar vermeyi kolaylastiran en kritik guven unsurlarini ilk ekranda acik sekilde sunuyoruz.</p></div><div class="features-grid">' +
+      trustCards(groupTrustStats(state)) +
       '</div></div></section>' +
-      '<section class="section section-dark"><div class="container story-grid"><article class="story-card"><p class="section-kicker">Mavi Inci Park Otel</p><h2>Butik olcekte, profesyonel cizgide konaklama</h2><p class="story-copy">Mavi Inci Park Otel; Erdegin merkezinde yer alan, 13 odali butik yapisini modern hizmet anlayisiyla destekleyen bir sehir otelidir. Hedefimiz; misafirlerimizin hem tatil planlarinda hem de is seyahatlerinde guven, duzen ve konfor duygusunu ayni anda hissedebilmesidir.</p><p class="han-editorial-note">Kisa sureli konaklamalardan yaz tatili planlarina kadar her misafir yolculugunu daha sade, daha sicak ve daha profesyonel hale getiriyoruz.</p><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('corporate') + '">Kurumsal Sayfayi Ac</a><a class="button button-secondary" href="' + Shell.pageHref('contact') + '">Iletisim Bilgileri</a></div></article><div class="value-stack"><article class="value-prop"><h3>Neden tercih ediliyor?</h3>' + momentList(hotel.highlights) + '</article><article class="value-prop"><h3>Hizli Iletisim</h3><p><a class="contact-link" href="tel:' + safe((hotel.phone || '').replace(/\s+/g, '')) + '">' + safe(hotel.phone) + '</a></p><p><a class="contact-link" href="mailto:' + safe(hotel.email) + '">' + safe(hotel.email) + '</a></p><p><a class="contact-link" href="https://wa.me/905376963030">WhatsApp ile hizli ulasin</a></p></article></div></div></section>' +
-      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Oda Tiplerimiz</p><h2 class="section-title">Farkli konaklama ihtiyaclarina uygun 5 ayri oda kategorisi</h2><p class="section-text">Standart odalardan premium deneyim sunan ozel kategorilere kadar tum odalarimizda konfor, temizlik ve islevsellik on plandadir.</p></div><div class="features-grid">' +
-      hotelRoomCards({ id: hotel.id, rooms: (hotel.rooms || []).slice(0, 3) }) +
-      '</div><div class="hero-actions han-section-actions"><a class="button button-primary" href="' + Shell.pageHref('hotels') + '">Tum Oda Tiplerini Goster</a><a class="button button-secondary" href="' + Shell.pageHref('booking') + '?business=' + encodeURIComponent(hotel.id) + '">Rezervasyon Talebi Olustur</a></div></div></section>' +
-      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Erdek Rehberi</p><h2 class="section-title">Konaklamanizi guclendiren sehir ve sahil rotalari</h2><p class="section-text">Mavi Inci Park Otelde konaklarken Erdegin tarihi, sahili ve gezi duraklarini tek bir rehberden planlayabilirsiniz.</p></div><div class="han-gallery-grid">' +
+      '<section class="section section-dark"><div class="container story-grid"><article class="story-card"><p class="section-kicker">One Cikan Otel</p><h2>' + safe(featuredHotel.name) + '</h2><p class="story-copy">' + safe(featuredHotel.story) + '</p><p class="han-editorial-note">' + safe(featuredHotel.editorial) + '</p><div class="hero-actions"><a class="button button-primary" href="' + Shell.businessHref(featuredHotel) + '">Otel Detayini Ac</a><a class="button button-secondary" href="' + Shell.pageHref('booking') + '?business=' + encodeURIComponent(featuredHotel.id) + '">Bu Otel Icin Talep</a></div></article><div class="value-stack"><article class="value-prop"><h3>Neden one cikiyor?</h3>' + momentList(featuredHotel.highlights) + '</article><article class="value-prop"><h3>Oda dagilimi</h3>' + momentList((featuredHotel.rooms || []).map(function (item) { return item.name + ' | ' + item.meta; })) + '</article></div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Uc Otel</p><h2 class="section-title">Han Otelcilik portfoyundeki uc ayri konaklama tonu</h2><p class="section-text">Mavi Inci Park Otel, Gulplaj Hotel ve Villa Ece Pansiyon; farkli misafir tiplerine seslenen uc ayri konaklama deneyimi sunar.</p></div><div class="stay-preview-grid han-business-grid">' +
+      hotels.map(function (business) { return Shell.renderBusinessCard(business, { actionLabel: 'Otel Detayi', secondaryLabel: 'Bu Otel Icin Talep' }); }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Yeme Icme Markalari</p><h2 class="section-title">Smile Foodhouse ve pub ile tam gun deneyim</h2><p class="section-text">Konaklama portfoyumuzu tamamlayan hizli servis ve aksam ritmi odakli iki yeme icme birimi de ana vitrinde korunuyor.</p></div><div class="stay-preview-grid han-business-grid">' +
+      venues.map(function (business) { return Shell.renderBusinessCard(business, { actionLabel: 'Birimi Incele', secondaryLabel: 'Bu Birime Talep' }); }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Kampanyalar</p><h2 class="section-title">Direkt rezervasyonu guclendiren teklif katmani</h2><p class="section-text">Kampanya dilini fiyat odakli degil, karar kolaylastirici ve segment odakli bir yapida kuruyoruz.</p></div><div class="features-grid">' +
+      promoCards(groupOffers(state)) +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Erdek Rehberi</p><h2 class="section-title">Konaklamanizi guclendiren sehir ve sahil rotalari</h2><p class="section-text">Han Otelcilik, misafirin yalnizca oda degil; iyi planlanmis bir Erdek deneyimi satin almasini hedefler.</p></div><div class="han-gallery-grid">' +
       galleryCards(moodboard) +
       '</div><div class="hero-actions han-section-actions"><a class="button button-primary" href="' + Shell.pageHref('guide') + '">Erdek Rehberini Kesfet</a><a class="button button-secondary" href="' + Shell.pageHref('contact') + '">Bize Ulasin</a></div></div></section>' +
-      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Misafir Guveni</p><h2 class="section-title">Dogrudan guven uyandiran net bir konaklama deneyimi</h2><p class="section-text">Misafir yorumlari, hizli iletisim ve seffaf bilgi akisi; rezervasyon kararini kolaylastiran temel unsurlardir.</p></div><div class="contact-grid">' +
+      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Misafir Guveni</p><h2 class="section-title">Dogrudan guven uyandiran net bir grup deneyimi</h2><p class="section-text">Misafir yorumlari, hizli iletisim ve seffaf bilgi akisi; rezervasyon kararini kolaylastiran temel unsurlardir.</p></div><div class="contact-grid">' +
       quoteCards(groupTestimonials(state)) +
       '</div></div></section>' +
-      '<section class="section section-light"><div class="container"><article class="contact-card han-cta-banner"><div><p class="section-kicker">Rezervasyon Cagrisi</p><h2>Erdekte guven veren, merkezi ve konforlu bir konaklama icin yerinizi ayirtin</h2><p class="lead text-muted">Mavi Inci Park Otel ile hem tatil hem is seyahati planlariniz icin size uygun odayi birlikte belirleyelim.</p></div><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '?business=' + encodeURIComponent(hotel.id) + '">Hemen Rezervasyon Yap</a><a class="button button-secondary" href="' + Shell.pageHref('contact') + '">Iletisime Gecin</a></div></article></div></section>');
+      '<section class="section section-light"><div class="container"><article class="contact-card han-cta-banner"><div><p class="section-kicker">Rezervasyon Cagrisi</p><h2>Erdekte size en uygun isletmeyi birlikte belirleyelim</h2><p class="lead text-muted">Uc otel, bir fast food restorani ve bir pub arasindan ihtiyaciniza en uygun akisi merkezi rezervasyon hattimizla planlayabilirsiniz.</p></div><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '">Merkezi Talep Formu</a><a class="button button-secondary" href="' + Shell.pageHref('contact') + '">Iletisime Gecin</a></div></article></div></section>');
   }
 
   function renderHotels(state) {
-    var hotel = primaryHotel(state);
+    var hotels = Data.listHotels(state);
     return publicShell(state, 'hotels',
       hero(state, {
-        chip: 'Mavi Inci Park Otel / Odalar',
-        kicker: 'Odalarimiz',
-        title: 'Her konaklama senaryosu icin ozenle kurgulanmis oda secenekleri',
-        text: 'Standart, buyuk, deniz manzarali deluxe, Sultan Keyfi ve tek kisilik oda tiplerimiz; konfor, islevsellik ve profesyonel hizmet standardi ekseninde hazirlandi.',
-        primaryLabel: 'Hemen Rezervasyon Yap',
-        primaryHref: Shell.pageHref('booking') + '?business=' + encodeURIComponent(hotel.id),
-        secondaryLabel: 'Kurumsal Sayfa',
-        secondaryHref: Shell.pageHref('corporate'),
-        statsHtml: statCards([
-          { label: 'Toplam Oda', value: '13 oda' },
-          { label: 'Kategori', value: '5 oda tipi' },
-          { label: 'Misafir Profili', value: 'Tatil + is seyahati' }
-        ]),
-        sideTitle: 'Oda Yaklasimimiz',
-        sideText: 'Mavi Inci Park Otelde her oda; rahat bir dinlenme, duzenli bir kullanim ve guven veren bir konaklama hissi sunacak sekilde ele alinmistir.',
-        sidePhone: hotel.phone,
-        sideEmail: hotel.email,
-        sideLocation: hotel.location
+        chip: 'Han Otelcilik / Oteller',
+        kicker: 'Konaklama Portfoyu',
+        title: 'Erdek portfoyumuzdaki uc farkli konaklama hikayesi',
+        text: 'Mavi Inci Park Otel, Gulplaj Hotel ve Villa Ece Pansiyon; farkli misafir tiplerine seslenen uc ayri konaklama tonu olarak kurgulandi.',
+        primaryLabel: 'Merkezi Talep Formu',
+        primaryHref: Shell.pageHref('booking'),
+        secondaryLabel: 'Erdek Rehberi',
+        secondaryHref: Shell.pageHref('guide'),
+        statsHtml: statCards(hotels.map(function (item) { return { label: item.shortName, value: item.heroTag }; })),
+        sideTitle: 'Portfoy Ozetimiz',
+        sideText: 'Uc farkli otel; merkez ritmi, klasik sahil hafizasi ve daha sakin aile pansiyonu karakteriyle ayri ayrisiyor.',
+        sidePhone: state.group.phone,
+        sideEmail: state.group.email,
+        sideLocation: state.group.city
       }) +
-      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Oda Katalogu</p><h2 class="section-title">Ihtiyaciniza uygun oda tipini secin</h2><p class="section-text">Oda kartlarimizda sadece teknik ozellikleri degil, konaklamayi daha degerli hale getiren deneyim dilini de one cikariyoruz.</p></div><div class="features-grid">' +
-      hotelRoomCards(hotel) +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Karsilastirma</p><h2 class="section-title">Uc farkli otel tonunu ayni ekranda karsilastirin</h2><p class="section-text">Misafir profiline gore hizli karar verebilmek icin konum tonu, vaat ve uygun segment bilgilerini tablo halinde topladik.</p></div>' +
+      compareTable(hotels, state) +
+      '</div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Otellerimiz</p><h2 class="section-title">Her biri ayri karakter tasiyan uc konaklama markasi</h2><p class="section-text">Mavi Inci Park Otel one cikan merkez oteli olarak vitrine alinirken, Gulplaj Hotel ve Villa Ece Pansiyon da ayri deneyim katmanlariyla korunuyor.</p></div><div class="stay-preview-grid han-business-grid">' +
+      hotels.map(function (business) { return Shell.renderBusinessCard(business, { actionLabel: 'Otel Detayi', secondaryLabel: 'Bu Otel Icin Talep' }); }).join('') +
       '</div></div></section>' +
-      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Odada Sizi Neler Bekliyor?</p><h2 class="section-title">Konforu destekleyen detaylar</h2><p class="section-text">Mavi Inci Park Otel odalari; islevsel, temiz ve guven veren bir konaklama ortamini destekleyen detaylarla tamamlanir.</p></div><div class="features-grid">' +
-      infoCards(ROOM_EXPERIENCE_FEATURES) +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Kim Hangi Oteli Secmeli?</p><h2 class="section-title">Segment bazli hizli yonlendirme</h2><p class="section-text">Her otelin guclu oldugu misafir tipi tek bakista anlasilsin diye ek karar katmani ekledik.</p></div><div class="features-grid">' +
+      hotels.map(function (business) {
+        return '<article class="feature-card han-fit-card"><div class="feature-icon">HT</div><h3>' + safe(business.name) + '</h3>' + momentList(businessEnhancements(state, business).audience) + '<div class="hero-actions"><a class="button button-soft" href="' + Shell.businessHref(business) + '">Detayi Ac</a></div></article>';
+      }).join('') +
       '</div></div></section>' +
-      '<section class="section section-light"><div class="container story-grid"><article class="story-card"><p class="section-kicker">Oda Anlatimi</p><h2>Ev rahatligini otel profesyonelligi ile birlestiren duzen</h2><p class="story-copy">Her oda kategorimiz; farkli misafir beklentilerine cevap verecek sekilde planlandi. Bazilari daha genis yasam alani sunarken, bazilari daha ozel bir konaklama hissi veya daha verimli bir sehir oteli kurgusu saglar.</p><p class="han-editorial-note">Temizlik, duzen, ergonomik kullanim ve sakin atmosfer; tum oda tiplerimizde ortak kalite vaadidir.</p></article><div class="value-stack"><article class="value-prop"><h3>Kimler icin uygun?</h3>' + momentList(['Tatil ciftleri ve aileler', 'Kisa sureli is seyahatleri', 'Merkezi konumda rahat bir oda arayan misafirler']) + '</article><article class="value-prop"><h3>Rezervasyon Icin</h3><p>Oda tipinizi secip rezervasyon formu uzerinden dogrudan talep olusturabilirsiniz.</p><div class="footer-links"><a href="' + Shell.pageHref('booking') + '?business=' + encodeURIComponent(hotel.id) + '">Rezervasyon Formunu Ac</a><a href="' + Shell.pageHref('contact') + '">Iletisime Gecin</a></div></article></div></div></section>' +
-      '<section class="section section-dark"><div class="container"><article class="contact-card han-cta-banner"><div><p class="section-kicker">Oda Rezervasyonu</p><h2>Mavi Inci Park Otelde size en uygun odayi birlikte planlayalim</h2><p class="lead text-muted">Konfor, merkezi konum ve guven veren hizmet standardi ile Erdek konaklamanizi bir adim yukariya tasiyin.</p></div><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '?business=' + encodeURIComponent(hotel.id) + '">Rezervasyon Yap</a><a class="button button-secondary" href="' + Shell.pageHref('corporate') + '">Kurumsal Bilgiler</a></div></article></div></section>');
+      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Hikaye Katmani</p><h2 class="section-title">Her otel kendi misafir tipine gore konumlanir</h2></div><div class="han-editorial-grid">' +
+      hotels.map(function (business) {
+        return '<article class="story-card han-editorial-card"><p class="section-kicker">' + safe(business.name) + '</p><h3>' + safe(business.storyTitle) + '</h3><p class="story-copy">' + safe(business.story) + '</p>' + momentList(business.signatureMoments) + '</article>';
+      }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><article class="contact-card han-cta-banner"><div><p class="section-kicker">Merkezi Rezervasyon</p><h2>Uc otel arasindan size en uygun olanini birlikte belirleyelim</h2><p class="lead text-muted">Tarih, misafir profili ve konaklama beklentinize gore dogru otele yonlenmeniz icin merkezi talep formumuz hazir.</p></div><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '">Merkezi Talep Formu</a><a class="button button-secondary" href="' + Shell.pageHref('contact') + '">Iletisime Gecin</a></div></article></div></section>');
   }
 
   function renderVenues(state) {
@@ -842,11 +855,11 @@
 
     return publicShell(state, 'guide',
       hero(state, {
-        chip: 'Mavi Inci Park Otel / Erdek Rehberi',
+        chip: 'Han Otelcilik / Erdek Rehberi',
         kicker: 'Destinasyon Rehberi',
         title: state.guide.title,
         text: state.guide.introText,
-        primaryLabel: 'Rezervasyon Formu',
+        primaryLabel: 'Merkezi Talep Formu',
         primaryHref: Shell.pageHref('booking'),
         secondaryLabel: 'Otelleri Incele',
         secondaryHref: Shell.pageHref('hotels'),
@@ -857,9 +870,9 @@
         ]),
         sideTitle: 'Neden bu rehber?',
         sideText: 'Konaklama karari, iyi bir destinasyon kurgusu ile birlikte anlam kazanir. Bu sayfa, misafirin Erdek tatilini bastan sona planlayabilmesi icin olusturuldu.',
-        sidePhone: primaryHotel(state).phone,
-        sideEmail: primaryHotel(state).email,
-        sideLocation: primaryHotel(state).location
+        sidePhone: state.group.phone,
+        sideEmail: state.group.email,
+        sideLocation: state.group.city
       }) +
       '<section class="section section-light"><div class="container story-grid"><article class="story-card"><p class="section-kicker">Editoryal Giris</p><h2>' + safe(state.guide.introTitle) + '</h2><p class="story-copy">' + safe(state.guide.introText) + '</p><p class="han-editorial-note">Tarihi alanlar, sahil hafizasi ve tekne rotalari ayni rehberde birlestirilerek misafirin yalnizca oda degil, tam bir Erdek deneyimi satin almasi hedeflendi.</p><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '">Merkezi Talep Formu</a><a class="button button-secondary" href="' + Shell.pageHref('hotels') + '">Konaklama Portfoyu</a></div></article><div class="value-stack"><article class="value-prop"><h3>Bu sayfada ne var?</h3>' + momentList(['Tarihi ve fotografik duraklar', 'Hafta bazli gezi planlamasi', 'Otele gore rota onerisi', 'Kaynakli destinasyon notlari']) + '</article><article class="value-prop"><h3>Kimler icin ideal?</h3><p>Erdege ilk kez gelenler, sahil ile tarihi ayni tatilde birlestirmek isteyenler ve ailece planlama yapmak isteyen misafirler icin hazirlandi.</p></article></div></div></section>' +
       '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Mutlaka Gorulmeli</p><h2 class="section-title">Erdegin tarihi, sahili ve ada ritmini bir araya getiren secili duraklar</h2><p class="section-text">Her kartta, lokasyonun hikayesi, en iyi ziyaret zamani ve resmi ya da yerel kaynaga giden referans baglantisi yer alir.</p></div><div class="han-destination-grid">' +
@@ -883,38 +896,55 @@
   }
 
   function renderCorporate(state) {
-    var maviInci = Data.getBusinessById(state, 'mavi-inci-park-otel') || Data.listHotels(state)[0];
-    var photo = maviInci && maviInci.photo ? maviInci.photo : state.guide.destinations[0].image;
-    var photoAlt = maviInci && maviInci.photoAlt ? maviInci.photoAlt : 'Mavi Inci Park Otel';
-
     return publicShell(state, 'corporate',
-      '<section class="page-hero han-corporate-hero"><div class="han-corporate-hero-media"><img src="' + safe(photo) + '" alt="' + safe(photoAlt) + '" loading="eager" /></div><div class="han-corporate-hero-overlay"></div><div class="container han-corporate-hero-grid"><div class="han-corporate-hero-copy"><p class="kicker">Mavi Inci Park Otel</p><h1 class="hero-title">Erdekin Kalbinde, Guven ve Konforun Adresi</h1><p class="lead han-corporate-lead">Mavi Inci Park Otel, geleneksel misafirperverligi modern hizmet anlayisiyla bulusturuyor.</p><p class="hero-text">Prestijli bir kurumsal durus ile sahil kasabasi sicakligini bulusturan yapimiz; hem dinlenmek isteyen tatil misafirlerine hem de planli, guvenli ve rahat bir konaklama arayan kurumsal ziyaretcilere hitap eder.</p><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '?business=mavi-inci-park-otel">Hemen Rezervasyon Yapin</a><a class="button button-secondary" href="https://wa.me/905376963030">WhatsApp ile Ulasin</a></div></div><aside class="contact-card han-corporate-summary"><p class="section-kicker">Kurumsal Ozet</p><h3>Mavi Inci Park Otel</h3><p class="text-muted">Erdek merkezde, denize ve gunluk yasam aksina yakin; guven verici, profesyonel ve butik olcekte bir konaklama deneyimi.</p><div class="summary-line"><span>Konum</span><strong>' + safe(maviInci ? maviInci.location : state.group.city) + '</strong></div><div class="summary-line"><span>Telefon</span><strong>' + safe(maviInci ? maviInci.phone : state.group.phone) + '</strong></div><div class="summary-line"><span>E-Posta</span><strong>' + safe(maviInci ? maviInci.email : state.group.email) + '</strong></div></aside></div></section>' +
-      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Hakkimizda</p><h2 class="section-title">Degerlerimizle Insa Edilen Bir Konaklama Deneyimi</h2><p class="section-text lead text-muted">Mavi Inci Park Otel, Erdek deneyimini guven, konfor ve ozenli hizmet ekseninde yeniden yorumlar.</p></div><div class="story-grid"><article class="story-card"><p class="story-copy lead">Mavi Inci Park Otel olarak, Erdegin essiz dogasi ve tarihi dokusu icinde, misafirlerimize sadece bir konaklama degil; huzur ve guven dolu bir deneyim sunmak amaciyla yola ciktik.</p><p class="text-muted">Kuruldugumuz gunden bu yana once misafir ilkesini merkeze aliyor; butik otel sicakligini kurumsal bir yonetim anlayisiyla birlestiriyoruz. Hem is seyahatlerinizde ihtiyaciniz olan profesyonel ortami hem de tatil planlarinizda aradiginiz konforu tek bir cati altinda sunuyoruz.</p><p class="text-muted mb-0">Sehrin kalbindeki konumumuz, modern mimarimiz ve guler yuzlu ekibimizle Mavi Incide her detayi sizin icin dusunuyoruz. Bizim icin her misafir, ozenle agirlanmasi gereken bir inci degerindedir.</p></article><div class="value-stack"><article class="value-prop"><h3>Temel Degerlerimiz</h3>' + momentList(['Misafir odakli butik hizmet anlayisi', 'Kurumsal duzende net, zamaninda ve guvenilir iletisim', 'Tatil ve is seyahati ihtiyacina birlikte cevap veren esnek yapi']) + '</article><article class="value-prop"><h3>Iletisim ve Rezervasyon</h3><p class="mb-2">' + safe(maviInci ? maviInci.address : state.group.address) + '</p><p class="mb-2"><a class="contact-link" href="tel:' + safe(((maviInci ? maviInci.phone : state.group.phone) || '').replace(/\s+/g, '')) + '">' + safe(maviInci ? maviInci.phone : state.group.phone) + '</a></p><p class="mb-0"><a class="contact-link" href="mailto:' + safe(maviInci ? maviInci.email : state.group.email) + '">' + safe(maviInci ? maviInci.email : state.group.email) + '</a></p></article></div></div></div></section>' +
-      '<section class="section section-dark py-5"><div class="container"><div class="section-header"><p class="section-kicker">Misyon ve Vizyon</p><h2 class="section-title">Mavi Incinin hizmet anlayisini belirleyen iki temel ilke</h2><p class="section-text text-muted">Kurumsal kimligimizi ve misafir deneyimimizi sekillendiren temel bakis acimizi burada ozetliyoruz.</p></div><div class="row g-4 align-items-stretch">' +
+      hero(state, {
+        chip: 'Han Otelcilik / Kurumsal',
+        kicker: 'Kurumsal Standartlar',
+        title: 'Erdegin kalbinde, butik zarafet ile kurumsal guveni bir araya getiren konaklama anlayisi',
+        text: 'Han Otelcilik; Erdek merkezli otelleri, yeme icme markalari ve merkezi operasyon yapisi ile hem tatil hem is seyahati planlayan misafirler icin profesyonel, davetkar ve tutarli bir deneyim sunar.',
+        primaryLabel: 'Merkezi Talep Formu',
+        primaryHref: Shell.pageHref('booking'),
+        secondaryLabel: 'Otelleri Incele',
+        secondaryHref: Shell.pageHref('hotels'),
+        statsHtml: statCards(groupTrustStats(state)),
+        sideTitle: 'Kurumsal Soz',
+        sideText: state.group.directBookingPromise,
+        sidePhone: state.group.phone,
+        sideEmail: state.group.email,
+        sideLocation: state.group.city
+      }) +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Hakkimizda</p><h2 class="section-title">Erdegin kalbinde, profesyonel ve davetkar bir konaklama vizyonu</h2><p class="section-text lead text-muted">Han Otelcilik olarak Erdek merkezli portfoyumuzu; misafirperverlik, konfor ve guven duygusunu ayni cati altinda bulusturacak sekilde yonetiyoruz.</p></div><div class="story-grid"><article class="story-card"><h3>Butik zarafet, kurumsal disiplin</h3><p class="story-copy lead">Erdegin sahil ritmini, modern butik otel anlayisi ile birlestiriyor; kisa hafta ici konaklamalardan uzun yaz tatillerine kadar her planda tutarli bir misafir deneyimi sunuyoruz.</p><p class="text-muted">Merkezi konum avantajimiz, net iletisim dilimiz ve ozenli operasyon anlayisimiz sayesinde hem tatil odakli misafirler hem de is seyahati planlayan ziyaretciler icin guven veren bir alternatif olusturuyoruz. Her temas noktasinda amacimiz; sade, zarif ve profesyonel bir hizmet standardi sunmaktir.</p><p class="text-muted mb-0">Misafirlerimizin yalnizca bir oda ayirtmasini degil; Erdek deneyimini rahat, planli ve keyifli sekilde yasamasini hedefliyoruz.</p></article><div class="value-stack"><article class="value-prop"><h3>Kurumsal omurga</h3>' + momentList(state.group.highlights) + '</article><article class="value-prop"><h3>Iletisim</h3><p class="mb-2">' + safe(state.group.address) + '</p><p class="mb-2"><a class="contact-link" href="tel:' + safe((state.group.phone || '').replace(/\s+/g, '')) + '">' + safe(state.group.phone) + '</a></p><p class="mb-0"><a class="contact-link" href="mailto:' + safe(state.group.email) + '">' + safe(state.group.email) + '</a></p></article></div></div></div></section>' +
+      '<section class="section section-dark py-5"><div class="container"><div class="section-header"><p class="section-kicker">Misyon ve Vizyon</p><h2 class="section-title">Hizmet anlayisimizi belirleyen iki temel eksen</h2><p class="section-text text-muted">Kurumsal kimligimizi guclendiren misyon ve vizyon yapisi, sayfanin tum dilini ve hizmet standardini yonlendirir.</p></div><div class="row g-4 align-items-stretch">' +
       CORPORATE_MISSION_VISION.map(function (item) {
         return '<div class="col-lg-6"><article class="contact-card han-corporate-card h-100"><div class="han-corporate-icon"><i class="' + safe(item.icon) + '" aria-hidden="true"></i></div><h3>' + safe(item.title) + '</h3><p class="lead">' + safe(item.lead) + '</p><p class="text-muted mb-0">' + safe(item.text) + '</p></article></div>';
       }).join('') +
       '</div></div></section>' +
-      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Neden Mavi Inci?</p><h2 class="section-title">Sizi dusunen detaylar</h2><p class="section-text lead text-muted">Kurumsal netlik ve butik konforu bir araya getiren temel farklarimizi acik bir yapiyla sunuyoruz.</p></div><div class="row g-4 align-items-stretch">' +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Neden Biz?</p><h2 class="section-title">Misafir deneyimini guclendiren hizmet standartlari</h2><p class="section-text lead text-muted">Resepsiyon desteginden hijyen hassasiyetine, merkezi konumdan baglanti altyapisina kadar temel beklentileri premium bir cati altinda topluyoruz.</p></div><div class="row g-4 align-items-stretch">' +
       CORPORATE_FEATURES.map(function (item) {
-        return '<div class="col-md-6 col-xl-3"><article class="feature-card han-standard-card h-100"><div class="han-corporate-icon"><i class="' + safe(item.icon) + '" aria-hidden="true"></i></div><h3>' + safe(item.title) + '</h3><p class="text-muted mb-0">' + safe(item.text) + '</p></article></div>';
+        return '<div class="col-md-6 col-xl-4"><article class="feature-card han-standard-card h-100"><div class="han-corporate-icon"><i class="' + safe(item.icon) + '" aria-hidden="true"></i></div><h3>' + safe(item.title) + '</h3><p class="text-muted mb-0">' + safe(item.text) + '</p></article></div>';
       }).join('') +
       '</div></div></section>' +
-      '<section class="section section-dark py-5"><div class="container"><article class="contact-card han-trust-strip"><div><p class="section-kicker">Kurumsal Degerler ve Belgeler</p><h2>Kurumsal misafirlerimiz icin guvenilir bir is ortagiyiz</h2><p class="text-muted mb-0">Seffaf yonetim anlayisimiz ve yasal gerekliliklere tam uyumumuzla, is seyahati planlayan misafirlerimiz icin guven veren bir konaklama zemini sunuyoruz.</p></div><div class="row g-3 han-document-row">' +
+      '<section class="section section-dark py-5"><div class="container"><div class="section-header"><p class="section-kicker">Kalite ve Guven</p><h2 class="section-title">Belgelerimiz ve kalite standartlarimiz icin hazir alan</h2><p class="section-text text-muted">Kurumsal kimligi destekleyen belge, protokol ve kalite basliklari bu alanda profesyonel bir hiyerarsi ile sunulacak sekilde kurgulandi.</p></div><div class="row g-4 align-items-stretch">' +
       CORPORATE_DOCUMENTS.map(function (item) {
-        return '<div class="col-md-4"><article class="han-document-card h-100"><div class="han-corporate-icon"><i class="' + safe(item.icon) + '" aria-hidden="true"></i></div><h3>' + safe(item.title) + '</h3><p class="text-muted">' + safe(item.text) + '</p><span class="han-document-placeholder">Placeholder</span></article></div>';
+        return '<div class="col-md-6 col-xl-4"><article class="contact-card han-document-card h-100"><div class="han-corporate-icon"><i class="' + safe(item.icon) + '" aria-hidden="true"></i></div><h3>' + safe(item.title) + '</h3><p class="text-muted">' + safe(item.text) + '</p><span class="han-document-placeholder">Placeholder alan</span></article></div>';
       }).join('') +
-      '</div></article></div></section>' +
-      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Kurumsal Standartlar</p><h2 class="section-title">Dogrudan rezervasyon ve profesyonel konaklama deneyimini guclendiren yapi</h2><p class="section-text">Misafirin karar surecini kolaylastiran ve kurumsal algiyi destekleyen operasyon katmanlarini burada topluyoruz.</p></div><div class="features-grid">' +
+      '</div></div></section>' +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Operasyon Standartlari</p><h2 class="section-title">Markanin karar verdiren temel hizmet standartlari</h2><p class="section-text">Bu maddeler, sitenin metin dilini ve rezervasyon akisini profesyonel gosteren kurumsal cekirdegi olusturur.</p></div><div class="features-grid">' +
       infoCards(CORPORATE_STANDARDS) +
       '</div></div></section>' +
-      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Dogrudan Rezervasyon Avantajlari</p><h2 class="section-title">Araci yerine dogrudan iletisim kurmanin profesyonel faydalari</h2><p class="section-text">Net bilgi, hizli geri donus ve dogru yonlendirme sayesinde rezervasyon sureci daha sade ve daha guven veren bir yapida ilerler.</p></div><div class="features-grid">' +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Dogrudan Rezervasyon Avantajlari</p><h2 class="section-title">Araci yerine dogrudan iletisim kurmanin profesyonel faydalari</h2><p class="section-text">Teklif, uygunluk, tarih ve isletme secimini tek merkezde topladigimiz icin misafir daha hizli ve daha net bilgi alir.</p></div><div class="features-grid">' +
       promoCards(DIRECT_BOOKING_STEPS) +
       '</div></div></section>' +
-      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Gizlilik ve Hazirlik</p><h2 class="section-title">Kurumsal guveni tamamlayan destek katmanlari</h2><p class="section-text">Uluslararasi hazirlik, veri hassasiyeti ve seffaf operasyon dili, Mavi Inci Park Otelin kurumsal yuzunu destekler.</p></div><div class="features-grid">' +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Gizlilik ve Hazirlik</p><h2 class="section-title">Kurumsal guveni destekleyen tamamlayici notlar</h2><p class="section-text">Uluslararasi hazirlik, veri hassasiyeti ve seffaf operasyon dili premium bir marka algisinin vazgecilmez parcalaridir.</p></div><div class="features-grid">' +
       infoCards(LEGAL_AND_SERVICE_NOTES) +
       '</div></div></section>' +
-      '<section class="section section-dark py-5"><div class="container"><article class="contact-card han-cta-banner"><div><p class="section-kicker">Rezervasyon Cagrisi</p><h2>Unutulmaz bir Erdek deneyimi icin yerinizi ayirtin</h2><p class="lead text-muted">Hem is hem tatil rezervasyonlariniz icin size ozel tekliflerimizi kesfedin.</p></div><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '?business=mavi-inci-park-otel">Hemen Rezervasyon Yapin</a><a class="button button-secondary" href="' + Shell.businessHref(maviInci) + '">Otel Detayini Incele</a></div></article></div></section>');
+      '<section class="section section-dark py-5"><div class="container"><div class="section-header"><p class="section-kicker">Portfoy Baglantilari</p><h2 class="section-title">Kurumsal omurgayi tasiyan isletmeler</h2><p class="section-text">Her isletme kendi sahnesini oynar; ancak hepsi ortak bir hizmet diline ve merkezi operasyon mantigina baglidir.</p></div><div class="stay-preview-grid han-business-grid">' +
+      state.businesses.map(function (business) { return Shell.renderBusinessCard(business, { actionLabel: 'Detayi Ac', secondaryLabel: 'Bu Isletmeye Talep' }); }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light py-5"><div class="container"><div class="section-header"><p class="section-kicker">Sik Sorulan Konular</p><h2 class="section-title">Kurumsal surecimiz hakkinda hizli cevaplar</h2></div><div class="contact-grid">' +
+      faqCards(groupFaq(state)) +
+      '</div></div></section>' +
+      '<section class="section section-dark py-5"><div class="container"><article class="contact-card han-cta-banner"><div><p class="section-kicker">Rezervasyon Cagrisi</p><h2>Erdekte profesyonel, konforlu ve davetkar bir konaklama icin yerinizi simdiden ayirtin</h2><p class="lead text-muted">Tatil, is seyahati veya kisa hafta ici planiniz icin size en uygun isletmeyi birlikte belirleyelim.</p></div><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '">Hemen Rezervasyon Yapin</a><a class="button button-secondary" href="https://wa.me/905376963030">WhatsApp ile Ulasin</a></div></article></div></section>');
   }
 
   function renderBusiness(state, business) {
@@ -961,59 +991,63 @@
   }
 
   function renderContact(state) {
-    var hotel = primaryHotel(state);
+    var featuredHotel = primaryHotel(state);
     return publicShell(state, 'contact',
       hero(state, {
-        chip: 'Mavi Inci Park Otel / Iletisim',
+        chip: 'Han Otelcilik / Iletisim',
         kicker: 'Iletisim',
-        title: 'Rezervasyon oncesi ve sonrasinda her zaman ulasilabilir bir ekip',
-        text: 'Adres, telefon, e-posta ve rota bilgilerini tek yerde toplayarak hem bireysel hem kurumsal misafirlerimiz icin net bir iletisim akisi sunuyoruz.',
-        primaryLabel: 'Hemen Rezervasyon Yap',
-        primaryHref: Shell.pageHref('booking') + '?business=' + encodeURIComponent(hotel.id),
+        title: 'Uc otel ve yeme icme markalarini tek merkezden yoneten erisilebilir ekip',
+        text: 'Han Otelcilik; merkezi telefon, e-posta ve WhatsApp hatti uzerinden talepleri ilgili isletmeye yonlendirir. Tum iletisim noktalarini tek ekranda topluyoruz.',
+        primaryLabel: 'Merkezi Talep Formu',
+        primaryHref: Shell.pageHref('booking'),
         secondaryLabel: 'WhatsApp ile Yaz',
         secondaryHref: 'https://wa.me/905376963030',
         statsHtml: statCards([
-          { label: 'Adres', value: 'Erdek merkez' },
-          { label: 'Telefon', value: hotel.phone },
-          { label: 'E-Posta', value: hotel.email }
+          { label: 'Merkezi Hat', value: state.group.phone },
+          { label: 'E-Posta', value: state.group.email },
+          { label: 'Portfoy', value: String(Data.listHotels(state).length) + ' otel + ' + String(Data.listVenues(state).length) + ' birim' }
         ]),
-        sideTitle: 'Kurumsal Ulasim',
-        sideText: 'Mavi Inci Park Otel ile dogrudan iletisime gecerek fiyat, tarih, oda tipi ve grup talepleri icin hizli bilgi alabilirsiniz.',
-        sidePhone: hotel.phone,
-        sideEmail: hotel.email,
-        sideLocation: hotel.location
+        sideTitle: 'Merkezi Ulasim',
+        sideText: 'Hangi otele veya birime yoneleceginizi netlestiremiyorsaniz, merkezi ekibimiz talebinizi dogru isletmeye yonlendirmek icin ilk temas noktasi olur.',
+        sidePhone: state.group.phone,
+        sideEmail: state.group.email,
+        sideLocation: state.group.city
       }) +
-      '<section class="section section-light"><div class="container story-grid"><article class="story-card"><p class="section-kicker">Acik Iletisim Bilgileri</p><h2>Misafirlerimiz icin net, guvenilir ve kolay ulasilabilir iletisim</h2><p class="story-copy">Mavi Inci Park Otel; rezervasyon, on bilgi alma, grup konaklamasi ve ozel talepler icin dogrudan iletisime acik bir operasyon dili benimser. Misafirlerimizin otel ile dogrudan temas kurabilmesini, guven ve seffaflik acisindan onemsiyoruz.</p><div class="footer-links"><a href="tel:' + safe((hotel.phone || '').replace(/\s+/g, '')) + '">' + safe(hotel.phone) + '</a><a href="mailto:' + safe(hotel.email) + '">' + safe(hotel.email) + '</a><a href="https://wa.me/905376963030">WhatsApp Hatti</a></div></article><div class="value-stack"><article class="value-prop"><h3>Adres</h3><p>' + safe(hotel.address) + '</p><p>' + safe(hotel.location) + '</p></article><article class="value-prop"><h3>Calisma ve Donus Duzeni</h3>' + momentList(['Dogrudan rezervasyon taleplerine hizli geri donus', 'Telefon, e-posta ve WhatsApp uzerinden iletisim', 'Kurumsal ve bireysel konaklamalar icin destek']) + '</article></div></div></section>' +
-      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Konum</p><h2 class="section-title">Mavi Inci Park Otele kolay ulasim</h2><p class="section-text">Erdek merkezdeki konumumuz sayesinde sahile, gunluk yasam noktalarina ve temel ulasim akslarina kolayca erisebilirsiniz.</p></div><div class="han-map-shell"><iframe title="Mavi Inci Park Otel konumu" src="https://www.google.com/maps?q=Yali%20Mah.%20Neyyire%20Sitki%20Cad.%20No%3A5%2C%20Erdek%20Balikesir&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div></section>' +
+      '<section class="section section-light"><div class="container story-grid"><article class="story-card"><p class="section-kicker">Merkezi Iletisim Bilgileri</p><h2>Her isletmeye ulasan tek hat, net ve guvenilir iletisim</h2><p class="story-copy">Han Otelcilik, Mavi Inci Park Otel, Gulplaj Hotel, Villa Ece Pansiyon, Smile Foodhouse ve pub taleplerini tek merkezde toplar. Böylece misafirlerimiz hangi markayla ilgilendiklerinden emin olmasalar bile dogru yone hızlıca ulasabilir.</p><div class="footer-links"><a href="tel:' + safe((state.group.phone || '').replace(/\s+/g, '')) + '">' + safe(state.group.phone) + '</a><a href="mailto:' + safe(state.group.email) + '">' + safe(state.group.email) + '</a><a href="https://wa.me/905376963030">WhatsApp Hatti</a></div></article><div class="value-stack"><article class="value-prop"><h3>Merkez Ofis</h3><p>' + safe(state.group.address) + '</p><p>' + safe(state.group.city) + '</p></article><article class="value-prop"><h3>Calisma ve Donus Duzeni</h3>' + momentList(['Talepler merkezi hatta toplanir', 'Konaklama veya yeme icme birimine gore yonlendirilir', 'Telefon, e-posta ve WhatsApp uzerinden geri donus planlanir']) + '</article></div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Isletme Rehberi</p><h2 class="section-title">Tum markalarin iletisim bilgileri tek yerde</h2><p class="section-text">Uc otel ve iki yeme icme biriminin iletisim bilgilerini merkezi ekiple birlikte ayni sayfada sunuyoruz.</p></div><div class="contact-grid">' +
+      state.businesses.map(function (business) {
+        return '<article class="contact-card"><p class="section-kicker">' + safe(business.type === 'hotel' ? 'Otel' : business.type === 'fastfood' ? 'Fast Food' : 'Pub') + '</p><h3>' + safe(business.name) + '</h3><p class="text-muted">' + safe(business.address) + '</p><div class="footer-links"><a href="tel:' + safe((business.phone || '').replace(/\s+/g, '')) + '">' + safe(business.phone) + '</a><a href="mailto:' + safe(business.email) + '">' + safe(business.email) + '</a><a href="' + Shell.businessHref(business) + '">Detay Sayfasi</a></div></article>';
+      }).join('') +
+      '</div></div></section>' +
+      '<section class="section section-light"><div class="container"><div class="section-header"><p class="section-kicker">Konum</p><h2 class="section-title">Han Otelcilik portfoyune Erdek merkezden kolay ulasim</h2><p class="section-text">Otellerimiz ve yeme icme markalarimiz Erdek merkez ve sahil ritmi etrafinda konumlandigi icin tek bir merkezden yonlendirilebilir durumdadir.</p></div><div class="han-map-shell"><iframe title="Han Otelcilik Erdek konumu" src="https://www.google.com/maps?q=Erdek%20Balikesir&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div></section>' +
       '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Yasal Bilgilendirme</p><h2 class="section-title">Kurumsal ve hukuki bilgilendirme alanlari</h2><p class="section-text">Bu alanlar, yasal metinlerinizi ve rezervasyon sureci kosullarinizi profesyonel bir yapida sunabilmeniz icin placeholder olarak hazirlandi.</p></div><div class="contact-grid"><article class="contact-card" id="kvkk-placeholder"><p class="section-kicker">Placeholder</p><h3>KVKK Aydinlatma Metni</h3><p>Kisisel verilerin islenmesi ve misafir iletisim sureclerine dair metin bu bolume eklenebilir.</p></article><article class="contact-card" id="iptal-iade-placeholder"><p class="section-kicker">Placeholder</p><h3>Iptal ve Iade Kosullari</h3><p>Rezervasyon iptal, degisiklik ve iade kosullarina dair resmi aciklamalar icin alan ayrildi.</p></article><article class="contact-card" id="mesafeli-satis-placeholder"><p class="section-kicker">Placeholder</p><h3>Mesafeli Satis ve Hizmet Kosullari</h3><p>Online rezervasyon ve hizmet kosullarina yonelik kurumsal metinler burada konumlandirilabilir.</p></article></div></div></section>' +
-      '<section class="section section-light"><div class="container"><article class="contact-card han-cta-banner"><div><p class="section-kicker">Rezervasyon Destegi</p><h2>Mavi Inci Park Otelde konaklamanizi bir telefon kadar yakina getirin</h2><p class="lead text-muted">Fiyat, uygunluk, oda tipi ve grup talepleri icin hemen bizimle iletisime gecin veya rezervasyon formunu doldurun.</p></div><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + '?business=' + encodeURIComponent(hotel.id) + '">Rezervasyon Formu</a><a class="button button-secondary" href="tel:' + safe((hotel.phone || '').replace(/\s+/g, '')) + '">Telefonla Ulasin</a></div></article></div></section>');
+      '<section class="section section-light"><div class="container"><article class="contact-card han-cta-banner"><div><p class="section-kicker">Rezervasyon Destegi</p><h2>Han Otelcilik portfoyunden size en uygun isletmeye yonlenin</h2><p class="lead text-muted">Otel, restoran veya pub fark etmeksizin tum taleplerinizi merkezi form ve iletisim hatti ile yonetebilirsiniz.</p></div><div class="hero-actions"><a class="button button-primary" href="' + Shell.pageHref('booking') + (featuredHotel ? '?business=' + encodeURIComponent(featuredHotel.id) : '') + '">Merkezi Talep Formu</a><a class="button button-secondary" href="tel:' + safe((state.group.phone || '').replace(/\s+/g, '')) + '">Telefonla Ulasin</a></div></article></div></section>');
   }
 
   function renderBooking(state) {
-    var hotel = primaryHotel(state);
     return publicShell(state, 'booking',
       hero(state, {
-        chip: 'Mavi Inci Park Otel / Rezervasyon',
-        kicker: 'Rezervasyon',
-        title: 'Dogrudan rezervasyon ile daha guvenli ve daha net bir planlama',
-        text: 'Rezervasyon formumuzu; tarih, oda tipi, misafir sayisi ve iletisim beklentilerinizi tek ekranda kolayca iletebilmeniz icin yeniden kurguladik.',
+        chip: 'Han Otelcilik / Talep',
+        kicker: 'Merkezi Talep Formu',
+        title: 'Secilen isletmeye yonlenen profesyonel grup talep akisi',
+        text: 'Bu form; otel secimi, konaklama tarihleri, misafir bilgileri ve ozel notlari tek merkezde toplar. Operasyon ekibi uygun isletmeye yonlenerek kisa surede geri donus yapar.',
         primaryLabel: 'WhatsApp ile Yaz',
         primaryHref: 'https://wa.me/905376963030',
-        secondaryLabel: 'Iletisim Bilgileri',
-        secondaryHref: Shell.pageHref('contact'),
+        secondaryLabel: 'Erdek Rehberi',
+        secondaryHref: Shell.pageHref('guide'),
         statsHtml: statCards([
-          { label: 'Otel', value: 'Mavi Inci Park Otel' },
-          { label: 'Oda Tipi', value: '5 kategori' },
-          { label: 'Iletisim', value: hotel.phone }
+          { label: 'Otel', value: String(Data.listHotels(state).length) },
+          { label: 'Yeme Icme Birimi', value: String(Data.listVenues(state).length) },
+          { label: 'Merkezi Hat', value: state.group.phone }
         ]),
         sideTitle: 'Rezervasyon Yaklasimimiz',
-        sideText: 'Dogrudan iletisim, net tarih akisi, seffaf bilgi ve kisa surede geri donus. Misafirlerimizin karar surecini mumkun oldugunca sade hale getiriyoruz.',
-        sidePhone: hotel.phone,
-        sideEmail: hotel.email,
-        sideLocation: hotel.location
+        sideText: state.group.directBookingPromise,
+        sidePhone: state.group.phone,
+        sideEmail: state.group.email,
+        sideLocation: state.group.city
       }) +
-      '<section class="section section-light"><div class="container story-grid"><article class="booking-shell"><div class="booking-shell-header"><h3>Rezervasyon formu</h3><p>Mavi Inci Park Otel icin tarih, oda tipi ve misafir bilgilerinizi tek formdan iletebilir; hem tatil hem is seyahati planlariniz icin hizli geri donus alabilirsiniz.</p></div><form id="groupInquiryForm" class="form-grid two"><label class="field"><span>Otel</span><select id="inquiryBusiness"><option value="' + safe(hotel.id) + '">' + safe(hotel.name) + '</option></select></label><label class="field"><span>Talep Tipi</span><select id="inquiryType"><option value="konaklama">Konaklama</option><option value="bilgi">Genel bilgi</option></select></label><label class="field"><span>Giris Tarihi</span><input id="inquiryCheckIn" type="date" /></label><label class="field"><span>Cikis Tarihi</span><input id="inquiryCheckOut" type="date" /></label><label class="field"><span>Oda Tipi</span><select id="inquiryRoomType"><option value="">Oda tipi secin</option>' + (hotel.rooms || []).map(function (item) { return '<option value="' + safe(item.name) + '">' + safe(item.name) + '</option>'; }).join('') + '</select></label><label class="field"><span>Yetiskin</span><input id="inquiryAdults" type="number" min="1" value="2" /></label><label class="field"><span>Cocuk</span><input id="inquiryChildren" type="number" min="0" value="0" /></label><label class="field"><span>Ad Soyad</span><input id="inquiryName" type="text" required /></label><label class="field"><span>Telefon</span><input id="inquiryPhone" type="text" required /></label><label class="field"><span>E-Posta</span><input id="inquiryEmail" type="email" /></label><label class="field"><span>Donus Tercihi</span><select id="inquiryChannel"><option value="telefon">Telefon</option><option value="whatsapp">WhatsApp</option><option value="eposta">E-Posta</option></select></label><label class="field field-span-2"><span>Not</span><textarea id="inquiryNote" rows="5" placeholder="Varis saatiniz, oda tercihiniz veya ozel taleplerinizi yazabilirsiniz."></textarea></label><div class="booking-step-actions field-span-2"><button class="button button-primary" type="submit">Rezervasyon Talebini Gonder</button><span class="price-note" id="inquiryStatus"></span></div></form></article><div class="value-stack"><article class="value-prop"><h3>Rezervasyon neden daha kolay?</h3>' + momentList(['Otel ve oda tipi secimi ayni ekranda yapilir', 'Tarih uygunlugu hizli kontrol edilir', 'Telefon, WhatsApp veya e-posta ile geri donus tercih edilebilir']) + '</article><article class="value-prop"><h3>Dogrudan iletisim</h3><p>Araci yerine dogrudan iletisim, daha net fiyat bilgisi ve daha guvenli bir planlama saglar.</p><div class="footer-links"><a href="https://wa.me/905376963030">WhatsApp ile yaz</a><a href="tel:905376963030">+90 537 696 30 30</a></div></article><article class="value-prop"><h3>Kurumsal konaklamalar</h3><p>Is seyahati, hafta ici planlar ve kurumsal misafir talepleri icin de ayni form uzerinden destek alabilirsiniz.</p><div class="footer-links"><a href="' + Shell.pageHref('corporate') + '">Kurumsal Bilgileri Incele</a></div></article></div></div></section>' +
-      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Guven ve Hazirlik</p><h2 class="section-title">Rezervasyon oncesi en cok sorulan konular</h2></div><div class="contact-grid">' +
+      '<section class="section section-light"><div class="container story-grid"><article class="booking-shell"><div class="booking-shell-header"><h3>Merkezi talep formu</h3><p>Konaklama, masa veya genel bilgi talepleri tek formdan alinir ve secilen isletmeye gore siniflandirilir. Tarih secimleri, misafir bilgileri ve operasyon notlari ayni ekrana toplandi.</p></div><form id="groupInquiryForm" class="form-grid two"><label class="field"><span>Isletme</span><select id="inquiryBusiness">' + state.businesses.map(function (item) { return '<option value="' + safe(item.id) + '">' + safe(item.name) + '</option>'; }).join('') + '</select></label><label class="field"><span>Talep Tipi</span><select id="inquiryType"><option value="konaklama">Konaklama</option><option value="masa">Masa / servis</option><option value="bilgi">Genel bilgi</option></select></label><label class="field"><span>Giris Tarihi</span><input id="inquiryCheckIn" type="date" /></label><label class="field"><span>Cikis Tarihi</span><input id="inquiryCheckOut" type="date" /></label><label class="field"><span>Oda Tipi</span><select id="inquiryRoomType"><option value="">Oda tipi secin</option></select></label><label class="field"><span>Yetiskin</span><input id="inquiryAdults" type="number" min="1" value="2" /></label><label class="field"><span>Cocuk</span><input id="inquiryChildren" type="number" min="0" value="0" /></label><label class="field"><span>Ad Soyad</span><input id="inquiryName" type="text" required /></label><label class="field"><span>Telefon</span><input id="inquiryPhone" type="text" required /></label><label class="field"><span>E-Posta</span><input id="inquiryEmail" type="email" /></label><label class="field"><span>Donus Tercihi</span><select id="inquiryChannel"><option value="telefon">Telefon</option><option value="whatsapp">WhatsApp</option><option value="eposta">E-Posta</option></select></label><label class="field field-span-2"><span>Not</span><textarea id="inquiryNote" rows="5" placeholder="Oda tercihi, varis saati, cocuk yaslari veya ozel notlarinizi yazabilirsiniz."></textarea></label><div class="booking-step-actions field-span-2"><button class="button button-primary" type="submit">Talebi Kaydet</button><span class="price-note" id="inquiryStatus"></span></div></form></article><div class="value-stack"><article class="value-prop"><h3>Biz nasil ilerliyoruz?</h3>' + momentList(['Talep ilgili isletmeye gore etiketlenir', 'Tarih ve kapasite uygunlugu hizla kontrol edilir', 'Sectiginiz iletisim kanalindan geri donus planlanir']) + '</article><article class="value-prop"><h3>WhatsApp ve telefon destegi</h3><p>Hizli iletisim icin dogrudan WhatsApp hattimizi veya telefon numaramizi da kullanabilirsiniz.</p><div class="footer-links"><a href="https://wa.me/905376963030">WhatsApp ile yaz</a><a href="tel:905376963030">+90 537 696 30 30</a></div></article><article class="value-prop"><h3>Gezi planina ihtiyaciniz varsa</h3><p>Erdekte gecireceginiz haftayi planlamak icin destinasyon rehberimizi inceleyebilir, rotaya uygun otel secimini daha kolay yapabilirsiniz.</p><div class="footer-links"><a href="' + Shell.pageHref('guide') + '">Erdek Rehberini Ac</a></div></article></div></div></section>' +
+      '<section class="section section-dark"><div class="container"><div class="section-header"><p class="section-kicker">Guven ve Hazirlik</p><h2 class="section-title">Rezervasyon oncesi en cok sorulan uc konu</h2></div><div class="contact-grid">' +
       faqCards(groupFaq(state)) +
       '</div></div></section>');
   }
@@ -1283,16 +1317,39 @@
     function syncInquiryMode() {
       var selected = Data.getBusinessById(state, businessField.value);
       var isHotel = selected && selected.type === 'hotel';
-      var needsDates = isHotel || typeField.value === 'konaklama';
-      if (isHotel) {
-        typeField.value = 'konaklama';
-      } else if (typeField.value === 'konaklama') {
+      var wantsStay = typeField.value === 'konaklama';
+      if (!isHotel && wantsStay) {
         typeField.value = 'masa';
+        wantsStay = false;
       }
+      var needsDates = wantsStay;
       checkInField.disabled = !needsDates;
       checkOutField.disabled = !needsDates;
       checkInField.required = needsDates;
       checkOutField.required = needsDates;
+      if (roomTypeField) {
+        if (isHotel) {
+          var rooms = selected.rooms || [];
+          var currentRoom = roomTypeField.value;
+          roomTypeField.innerHTML = '<option value="">Oda tipi secin</option>' + rooms.map(function (item) {
+            return '<option value="' + safe(item.name) + '">' + safe(item.name) + '</option>';
+          }).join('');
+          roomTypeField.disabled = false;
+          roomTypeField.required = wantsStay;
+          if (preferredRoom && rooms.some(function (item) { return item.name === preferredRoom; })) {
+            roomTypeField.value = preferredRoom;
+          } else if (currentRoom && rooms.some(function (item) { return item.name === currentRoom; })) {
+            roomTypeField.value = currentRoom;
+          } else {
+            roomTypeField.value = '';
+          }
+        } else {
+          roomTypeField.innerHTML = '<option value="">Yalnizca oteller icin</option>';
+          roomTypeField.value = '';
+          roomTypeField.disabled = true;
+          roomTypeField.required = false;
+        }
+      }
     }
 
     businessField.addEventListener('change', syncInquiryMode);
@@ -1356,7 +1413,7 @@
       }
 
       Data.addInquiry(payload);
-      console.log('Mavi Inci Park Otel talep JSON:', JSON.stringify(payload, null, 2));
+      console.log('Han Otelcilik talep JSON:', JSON.stringify(payload, null, 2));
       status.textContent = 'Talep kaydedildi ve ilgili panele yonlendirildi.';
       form.reset();
       document.getElementById('inquiryAdults').value = '2';
@@ -1394,52 +1451,54 @@
       ? Shell.businessHref(business)
       : Shell.pageHref('home');
 
-    var primary = primaryHotel(state) || {};
-    var title = 'Mavi Inci Park Otel | Erdek butik sehir oteli';
-    var description = 'Mavi Inci Park Otel; Erdek merkezde konfor, guven ve profesyonel hizmet odakli butik konaklama deneyimi sunar.';
+    var title = state.group.name + ' | Erdek konaklama ve yeme icme grubu';
+    var description = state.group.description;
     var schema = {
       '@context': 'https://schema.org',
-      '@type': 'Hotel',
-      name: primary.name || 'Mavi Inci Park Otel',
-      description: primary.description || description,
-      telephone: primary.phone || state.group.phone,
-      email: primary.email || state.group.email,
-      address: primary.address || state.group.address,
-      areaServed: primary.location || state.group.city
+      '@type': 'Organization',
+      name: state.group.name,
+      telephone: state.group.phone,
+      email: state.group.email,
+      address: state.group.address,
+      areaServed: state.group.city
     };
 
     if (currentPage === 'hotels') {
-      title = 'Mavi Inci Park Otel | Odalarimiz';
-      description = 'Mavi Inci Park Otel oda tipleri; standart, buyuk, deluxe, Sultan Keyfi ve tek kisilik oda secenekleriyle Erdek konaklamanizi guclendirir.';
+      title = state.group.name + ' | Oteller';
+      description = 'Han Otelcilik catisi altindaki Mavi Inci Park Otel, Gulplaj Hotel ve Villa Ece Pansiyon bilgileri.';
     } else if (currentPage === 'contact') {
-      title = 'Mavi Inci Park Otel | Iletisim';
-      description = 'Mavi Inci Park Otel acik adresi, telefon, e-posta, harita ve kurumsal iletisim bilgileri.';
+      title = state.group.name + ' | Iletisim';
+      description = 'Han Otelcilik merkezi iletisim bilgileri, otel ve yeme icme birimleri, harita ve hukuki bilgilendirme alanlari.';
       schema = {
         '@context': 'https://schema.org',
-        '@type': 'Hotel',
-        name: 'Mavi Inci Park Otel',
-        telephone: '+90 537 696 30 30',
-        email: 'rezervasyon@maviinciparkotel.com',
-        address: 'Yali Mah. Neyyire Sitki Cad. No:5, Erdek / Balikesir',
+        '@type': 'ContactPage',
+        name: 'Han Otelcilik Iletisim',
+        description: 'Han Otelcilik merkezi iletisim ve isletme rehberi',
+        about: {
+          '@type': 'Organization',
+          name: state.group.name,
+          telephone: state.group.phone,
+          email: state.group.email
+        },
         url: baseUrl
       };
     } else if (currentPage === 'corporate') {
-      title = 'Mavi Inci Park Otel | Erdek Butik Otel ve Kurumsal Konaklama';
-      description = 'Mavi Inci Park Otel icin Erdek butik otel, kurumsal konaklama, guven, konfor ve profesyonel hizmet odakli kurumsal sayfa.';
+      title = state.group.name + ' | Kurumsal Standartlar';
+      description = 'Han Otelcilik kurumsal standartlari, hizmet ilkeleri, gizlilik notlari ve dogrudan rezervasyon avantajlari.';
       schema = {
         '@context': 'https://schema.org',
         '@type': 'AboutPage',
-        name: 'Mavi Inci Park Otel Kurumsal Sayfa',
-        description: 'Erdek merkezde butik otel deneyimi, kurumsal konaklama uygunlugu ve dogrudan rezervasyon avantajlari.',
+        name: 'Han Otelcilik Kurumsal Sayfa',
+        description: 'Erdek merkezli konaklama ve yeme icme grubunun kurumsal standartlari.',
         about: {
-          '@type': 'Hotel',
-          name: 'Mavi Inci Park Otel',
-          telephone: '+90 537 696 30 30',
-          email: 'rezervasyon@maviinciparkotel.com'
+          '@type': 'Organization',
+          name: state.group.name,
+          telephone: state.group.phone,
+          email: state.group.email
         }
       };
     } else if (currentPage === 'guide') {
-      title = 'Mavi Inci Park Otel | ' + state.guide.title;
+      title = state.group.name + ' | ' + state.guide.title;
       description = 'Erdek tarihi lokasyonlari, sahil duraklari ve 7 gunluk gezi plani ile hazirlanan kurumsal destinasyon rehberi.';
       schema = {
         '@context': 'https://schema.org',
@@ -1459,16 +1518,16 @@
         }
       };
     } else if (currentPage === 'venues') {
-      title = 'Mavi Inci Park Otel | Deneyim ve Yeme Icme';
-      description = 'Han Otelcilik catisindaki fast food restoran ve pub operasyonlari.';
+      title = state.group.name + ' | Fast Food ve Pub';
+      description = 'Han Otelcilik catisindaki Smile Foodhouse ve pub operasyonlari.';
     } else if (currentPage === 'booking') {
-      title = 'Mavi Inci Park Otel | Rezervasyon';
-      description = 'Mavi Inci Park Otel rezervasyon formu; tarih, oda tipi ve misafir bilgilerinizi dogrudan iletebilmeniz icin hazirlandi.';
+      title = state.group.name + ' | Merkezi talep formu';
+      description = 'Secilen isletmeye yonlenen merkezi talep ve rezervasyon formu.';
     } else if (currentPage === 'admin') {
       title = state.group.name + ' | Admin Hub';
       description = 'Han Otelcilik merkezi admin hubi ve panel gecis sayfasi.';
     } else if (business) {
-      title = business.name + ' | ' + state.group.name;
+      title = business.name + ' | Han Otelcilik';
       description = business.summary;
       schema = {
         '@context': 'https://schema.org',
